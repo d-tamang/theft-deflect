@@ -8,20 +8,20 @@ const PinSchema = new Schema({
     },
     lat: {
         type: Number,
-        require: true,
+        required: true,
     },
     long: {
         type: Number,
-        require: true,
+        required: true,
     },
     category: {
         type: String,
-        require: true,
+        required: true,
     },
     description: {
         type: String,
-        require: true
+        required: true
     }
 });
 
-module.exports = Pin = mongoose.model('pin', PinSchema);
+module.exports = Pin = mongoose.model('Pin', PinSchema);

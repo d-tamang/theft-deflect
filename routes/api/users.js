@@ -18,27 +18,27 @@ router.post('/register', (req, res) => {
     }
 
     User.findOne({ email: req.body.email })
-    .then( user => {
-        if (user) {
-            return res.status(400).json({email: "A user is already registered with that email"})
-        } else {
-            const newUser = new User({
-                handle: req.body.handle,
-                email: req.body.email,
-                password: req.body.password
-            })
-
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-                    newUser.save()
-                        .then((user) => res.json(user))
-                        .catch( err => console.log(err))
+        .then(user => {
+            if (user) {
+                return res.status(400).json({ email: "A user is already registered with that email" })
+            } else {
+                const newUser = new User({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password
                 })
-            })
-        }
-    })
+
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if (err) throw err;
+                        newUser.password = hash;
+                        newUser.save()
+                            .then((user) => res.json(user))
+                            .catch(err => console.log(err))
+                    })
+                })
+            }
+        })
 })
 
 router.post('/login', (req, res) => {
@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors)
     }
-    
+
     const email = req.body.email;
     const password = req.body.password;
 
@@ -62,7 +62,7 @@ router.post('/login', (req, res) => {
                     if (isMatch) {
                         const payload = {
                             id: user.id,
-                            handle: user.handle,
+                            username: user.username,
                             email: user.email
                         }
                         jwt.sign(
@@ -77,7 +77,7 @@ router.post('/login', (req, res) => {
                             }
                         )
                     } else {
-                        return res.status(400).json({password: "Incorrect password"});
+                        return res.status(400).json({ password: "Incorrect password" });
                     }
                 })
         })
