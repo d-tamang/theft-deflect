@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        // nothing for now
+        pins: Object.values(state.entities.pins)
     }
 }
 

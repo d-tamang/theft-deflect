@@ -11,9 +11,31 @@ class Map extends React.Component {
         }
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
+        this.changeGradient = this.changeGradient.bind(this);
     }
 
-    handleClickOutside = (event) => {
+    componentDidMount(){
+
+        // san francisco
+        const center = { lat: 37.777652, lng: -122.437503 };
+        const zoom = 12;
+        this.map = new window.google.maps.Map(document.getElementById("map"), {
+            center,
+            zoom,
+        });
+
+        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+            data: this.heatMapData()
+        });
+
+        document
+            .getElementById("change-gradient")
+            .addEventListener("click", () => this.changeGradient());
+
+        this.heatmap.setMap(this.map);
+    }
+
+    handleClickOutsideForm = (event) => {
         if (this.logContainer.current && !this.logContainer.current.contains(event.target)) {
             this.setState({
                 formOpen: false,
@@ -22,33 +44,7 @@ class Map extends React.Component {
         }
     }
 
-    errors(Status){
-        if (Status === Status.LOADING) return <h3>{Status} ..</h3>;
-        if (Status === Status.FAILURE) return <h3>{Status} ...</h3>;
-        return null;
-    };
-
-    heatMapData(){
-        return [
-            {location: new window.google.maps.LatLng(37.782, -122.447), weight: 0.5},
-            new window.google.maps.LatLng(37.782, -122.445),
-            {location: new window.google.maps.LatLng(37.782, -122.443), weight: 2},
-            {location: new window.google.maps.LatLng(37.782, -122.441), weight: 3},
-            {location: new window.google.maps.LatLng(37.782, -122.439), weight: 2},
-            new window.google.maps.LatLng(37.782, -122.437),
-            {location: new window.google.maps.LatLng(37.782, -122.435), weight: 0.5},
-        
-            {location: new window.google.maps.LatLng(37.785, -122.447), weight: 3},
-            {location: new window.google.maps.LatLng(37.785, -122.445), weight: 2},
-            new window.google.maps.LatLng(37.785, -122.443),
-            {location: new window.google.maps.LatLng(37.785, -122.441), weight: 0.5},
-            new window.google.maps.LatLng(37.785, -122.439),
-            {location: new window.google.maps.LatLng(37.785, -122.437), weight: 2},
-            {location: new window.google.maps.LatLng(37.785, -122.435), weight: 3}
-        ];
-    }
-
-    changeGradient(heatmap) {
+    changeGradient() {
         const gradient = [
           "rgba(0, 255, 255, 0)",
           "rgba(0, 255, 255, 1)",
@@ -66,7 +62,7 @@ class Map extends React.Component {
           "rgba(255, 0, 0, 1)",
         ];
       
-        heatmap.set("gradient", heatmap.get("gradient") ? null : gradient);
+        this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
     }
 
     placeMarker(location) {
@@ -82,7 +78,7 @@ class Map extends React.Component {
             lat: location.lat(),
             lng: location.lng(),
         })
-        document.addEventListener("mousedown", this.handleClickOutside);
+        document.addEventListener("mousedown", this.handleClickOutsideForm);
         window.google.maps.event.removeListener(this.map_key);
         this.map_key = null;
     }
@@ -95,27 +91,6 @@ class Map extends React.Component {
         if(this.marker){
             this.marker.setMap(null);
         }
-    }
-    
-    componentDidMount(){
-
-        // san francisco
-        const center = { lat: 37.777652, lng: -122.437503 };
-        const zoom = 12;
-        this.map = new window.google.maps.Map(document.getElementById("map"), {
-            center,
-            zoom,
-        });
-
-        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-            data: this.heatMapData()
-        });
-
-        document
-            .getElementById("change-gradient")
-            .addEventListener("click", (heatmap) => this.changeGradient(heatmap));
-
-        this.heatmap.setMap(this.map);
     }
 
     render(){
@@ -138,6 +113,33 @@ class Map extends React.Component {
             </div>
         )
     }
+
+
+    heatMapData(){
+        return [
+            {location: new window.google.maps.LatLng(37.782, -122.447), weight: 0.5},
+            new window.google.maps.LatLng(37.782, -122.445),
+            {location: new window.google.maps.LatLng(37.782, -122.443), weight: 2},
+            {location: new window.google.maps.LatLng(37.782, -122.441), weight: 3},
+            {location: new window.google.maps.LatLng(37.782, -122.439), weight: 2},
+            new window.google.maps.LatLng(37.782, -122.437),
+            {location: new window.google.maps.LatLng(37.782, -122.435), weight: 0.5},
+        
+            {location: new window.google.maps.LatLng(37.785, -122.447), weight: 3},
+            {location: new window.google.maps.LatLng(37.785, -122.445), weight: 2},
+            new window.google.maps.LatLng(37.785, -122.443),
+            {location: new window.google.maps.LatLng(37.785, -122.441), weight: 0.5},
+            new window.google.maps.LatLng(37.785, -122.439),
+            {location: new window.google.maps.LatLng(37.785, -122.437), weight: 2},
+            {location: new window.google.maps.LatLng(37.785, -122.435), weight: 3}
+        ];
+    }
+
+    errors(Status){
+        if (Status === Status.LOADING) return <h3>{Status} ..</h3>;
+        if (Status === Status.FAILURE) return <h3>{Status} ...</h3>;
+        return null;
+    };
 
 }
 

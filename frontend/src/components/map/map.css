@@ -5,4 +5,6 @@
 
 .pinForm {
     background: yellow;
+    position: absolute;
+    z-index: 10;
 }
