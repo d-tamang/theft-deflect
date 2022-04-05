@@ -5,10 +5,14 @@
 }
 
 .navbar-item {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
+    font-family: sans-serif; */
+    position: relative;
+    overflow: hidden;
+    padding-top: 2%;
 }
 
 .logo {
@@ -16,10 +20,17 @@
     text-decoration: none;
     color: #38877a;
     font-size: 30px;
+    font-weight: 600;
+    float: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .nav_links {
     list-style: none;
+    float: right;
 }
 
 .nav_links li {
@@ -40,7 +51,7 @@
     cursor: pointer;
     transition: all 0.2s ease 0s;
     color: white;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .navbar-button:hover {
