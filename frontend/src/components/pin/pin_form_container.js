@@ -4,7 +4,7 @@ import PinForm from './pin_form';
 
 const mapStateToProps = (state) => {
     return {
-        errors: state.errors.pins,   
+        errors: Object.values(state.errors.pins),
     }
 }
 

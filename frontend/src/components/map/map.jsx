@@ -12,6 +12,8 @@ class Map extends React.Component {
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
         this.changeGradient = this.changeGradient.bind(this);
+
+        this.props.fetchPins();
     }
 
     componentDidMount(){
@@ -24,15 +26,26 @@ class Map extends React.Component {
             zoom,
         });
 
-        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-            data: this.heatMapData()
-        });
-
         document
             .getElementById("change-gradient")
             .addEventListener("click", () => this.changeGradient());
 
-        this.heatmap.setMap(this.map);
+        console.log(this.props.pins)
+
+        // this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+        //     data: this.heatMapData()
+        // });
+
+        // this.heatmap.setMap(this.map);
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps){
+        if (nextProps) {
+            this.setState({ formOpen: false });
+            if(this.marker){
+                this.marker.setMap(null);
+            }
+        }
     }
 
     handleClickOutsideForm = (event) => {
@@ -65,6 +78,21 @@ class Map extends React.Component {
         this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
     }
 
+    setHeatMap(){
+
+        let pins = [];
+        if (!this.props.pins) return;
+        this.props.pins.map( pin => {
+            pins.push(new window.google.maps.LatLng(pin.lat, pin.long))
+        })
+
+        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+            data: pins
+        });
+
+        this.heatmap.setMap(this.map);
+    }
+
     placeMarker(location) {
         this.marker = new window.google.maps.Marker({
             position: location, 
@@ -94,7 +122,8 @@ class Map extends React.Component {
     }
 
     render(){
-
+        if(!this.props.pins) return null;
+        this.setHeatMap();
         return(
             <div>
                 {this.state.formOpen && (
