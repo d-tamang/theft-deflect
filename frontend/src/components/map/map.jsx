@@ -4,6 +4,8 @@ import './map.css';
 class Map extends React.Component {
     constructor(props){
         super(props);
+        this.toggleReportListener = this.toggleReportListener.bind(this);
+        this.placeMarker = this.placeMarker.bind(this);
     }
 
     errors(Status){
@@ -53,17 +55,37 @@ class Map extends React.Component {
         heatmap.set("gradient", heatmap.get("gradient") ? null : gradient);
     }
 
+    placeMarker(location) {
+        this.marker = new window.google.maps.Marker({
+            position: location, 
+            map: this.map
+        });
+        console.log(location.lat())
+        console.log(location.lng())
+        
+        window.google.maps.event.removeListener(this.map_key);
+    }
+
+    toggleReportListener(e){
+        this.map_key = window.google.maps.event.addListener(this.map, 'click', (event) => {
+            this.placeMarker(event.latLng);
+        });
+        if(this.marker){
+            this.marker.setMap(null);
+        }
+    }
+
     componentDidMount(){
 
         // san francisco
         const center = { lat: 37.777652, lng: -122.437503 };
         const zoom = 12;
-        let map = new window.google.maps.Map(document.getElementById("map"), {
+        this.map = new window.google.maps.Map(document.getElementById("map"), {
             center,
             zoom,
         });
 
-        let heatmap = new window.google.maps.visualization.HeatmapLayer({
+        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
             data: this.heatMapData()
         });
 
@@ -71,7 +93,7 @@ class Map extends React.Component {
             .getElementById("change-gradient")
             .addEventListener("click", (heatmap) => this.changeGradient(heatmap));
 
-        heatmap.setMap(map);
+        this.heatmap.setMap(this.map);
     }
 
     render(){
@@ -83,6 +105,7 @@ class Map extends React.Component {
                     <button id="change-gradient">Change gradient</button>
                     <button id="change-radius">Change radius</button>
                     <button id="change-opacity">Change opacity</button>
+                    <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
                 </div>
                 <div id="map" />
             </div>
