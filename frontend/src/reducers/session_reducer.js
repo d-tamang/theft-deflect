@@ -25,7 +25,7 @@ const sessionReducer = (state = initialState, action) => {
     case RECEIVE_USER_SIGN_IN:
       return {
         ...state,
-        isSignedIn: true
+        isAuthenticated: true
       }
     default:
       return state;
