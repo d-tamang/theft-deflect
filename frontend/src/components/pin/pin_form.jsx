@@ -23,7 +23,10 @@ class PinForm extends React.Component {
           description: this.state.description
         };
     
-        this.props.createPin(pin)
+        this.props.createPin(pin).then(
+            () => {},
+            () => { this.setState({ errors: this.props.errors }) }
+        )
         this.setState({
             lat: '',
             long: '',
@@ -38,12 +41,29 @@ class PinForm extends React.Component {
         });
       }
 
+      renderErrors(){
+        if(!this.state.errors) return;
+        return(
+            <ul className='review-form-error-list'>
+                <div>We're sorry, but we have encountered the following issue(s):</div>
+                {this.props.errors.map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        )
+      }
+
     render() {
         return (
             <div className="pinForm">
+                <div>
+                    {this.renderErrors()}
+                </div>
                 <form onSubmit={this.handleSubmit}>
                     <div>
-                        <label>Lat
+                        {/* <label>Lat
                             <input type="text"
                                 value={this.state.lat}
                                 onChange={this.update('lat')}
@@ -55,7 +75,7 @@ class PinForm extends React.Component {
                                 value={this.state.long}
                                 onChange={this.update('long')}
                             />
-                        </label>
+                        </label> */}
 
                         <label>Category
                             <input type="text"
