@@ -30,7 +30,6 @@ class Map extends React.Component {
             .getElementById("change-gradient")
             .addEventListener("click", () => this.changeGradient());
 
-        console.log(this.props.pins)
 
         // this.heatmap = new window.google.maps.visualization.HeatmapLayer({
         //     data: this.heatMapData()
@@ -79,9 +78,10 @@ class Map extends React.Component {
     }
 
     setHeatMap(){
-
+        console.log('inside setHeatMap')
         let pins = [];
         if (!this.props.pins) return;
+        console.log('after return')
         this.props.pins.map( pin => {
             pins.push(new window.google.maps.LatLng(pin.lat, pin.long))
         })
