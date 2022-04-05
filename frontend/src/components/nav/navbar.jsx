@@ -14,8 +14,8 @@ class NavBar extends React.Component {
   showLinks() {
     if (this.props.loggedIn) {
       return <div>
-        <Link exact to="/">Home</Link>
-        <Link exact to="/account">My Account</Link>
+        <Link to="/">Home</Link>
+        <Link to="/account">My Account</Link>
         <button onClick={(e) => this.logoutUser(e)}>LOGOUT</button>
       </div>
     } else {
