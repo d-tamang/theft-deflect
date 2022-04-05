@@ -4,54 +4,47 @@ import { withRouter } from 'react-router-dom';
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       password: '',
       errors: {}
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
-      this.props.history.push('/pins');
+    if (nextProps.loggedIn) {
+      this.props.closeModal();
     }
 
     this.setState({ errors: nextProps.errors })
   }
 
-  // Handle field updates (called in the render method)
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
   }
 
-  // Handle form submission
   handleSubmit(e) {
     e.preventDefault();
-
     let user = {
       email: this.state.email,
       password: this.state.password
     };
-
     this.props.login(user);
   }
 
-  // Render the session errors if there are any
   renderErrors() {
     return (
-      <ul>
+      <div>
         {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
+          <div key={`error-${i}`}>
             {this.state.errors[error]}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     );
   }
 
@@ -72,8 +65,10 @@ class LoginForm extends React.Component {
               placeholder="Password"
             />
             <br />
-            <input type="submit" value="Submit" />
             {this.renderErrors()}
+            <button>LOG IN</button>
+            <div>Don't have an account?</div>
+            <div>{this.props.otherForm}</div>
           </div>
         </form>
       </div>

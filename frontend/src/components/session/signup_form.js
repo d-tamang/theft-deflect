@@ -11,17 +11,14 @@ class SignupForm extends React.Component {
       password2: '',
       errors: {}
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push('/login');
+    if (nextProps.loggedIn) {
+      this.props.closeModal();
     }
-
-    this.setState({ errors: nextProps.errors })
+    this.setState({errors: nextProps.errors})
   }
 
   update(field) {
@@ -38,38 +35,37 @@ class SignupForm extends React.Component {
       password: this.state.password,
       password2: this.state.password2
     };
-
-    this.props.signup(user, this.props.history);
+    this.props.signup(user);
   }
 
   renderErrors() {
     return (
-      <ul>
+      <div>
         {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
+          <div key={`error-${i}`}>
             {this.state.errors[error]}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     );
   }
 
   render() {
     return (
-      <div className="signup-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="signup-form">
-            <br />
-            <input type="text"
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-            />
+      <div className="login-form-container">
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <div className="login-form">
             <br />
             <input type="text"
               value={this.state.username}
               onChange={this.update('username')}
               placeholder="Username"
+            />
+            <br />
+            <input type="text"
+              value={this.state.email}
+              onChange={this.update('email')}
+              placeholder="Email"
             />
             <br />
             <input type="password"
@@ -84,8 +80,10 @@ class SignupForm extends React.Component {
               placeholder="Confirm Password"
             />
             <br />
-            <input type="submit" value="Submit" />
             {this.renderErrors()}
+            <button>REGISTER</button>
+            <div>Already have an account?</div>
+            <div>{this.props.otherForm}</div>
           </div>
         </form>
       </div>
