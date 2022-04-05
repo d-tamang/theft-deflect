@@ -4,10 +4,15 @@ const validText = require('./valid-text');
 module.exports = function validatePinInput(data) {
     let errors = {};
 
+    data.category = validText(data.category) ? data.category : '';
     data.description = validText(data.description) ? data.description : '';
 
-    if (!Validator.isLength(data.description, { min: 2, max: 100 })) {
-        errors.description = 'Description must be between 2 and 100 characters';
+    if (Validator.isEmpty(data.category)) {
+        errors.category = "Category field is required";
+    }
+
+    if (Validator.isEmpty(data.description)) {
+        errors.description = "Description field is required";
     }
 
     return {
