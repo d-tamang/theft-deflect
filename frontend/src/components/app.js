@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import MapContainer from './map/map_container';
+import { Wrapper } from "@googlemaps/react-wrapper";
 
 const App = () => (
   <div>
@@ -12,7 +13,10 @@ const App = () => (
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
     </Switch>
-    <MapContainer />
+
+    <Wrapper apiKey={"AIzaSyDhm27MhVA89tLn0zM3WdLTl06Yt3FZZWI&libraries=visualization"}>
+      <MapContainer />
+    </Wrapper>
   </div>
 );
 
