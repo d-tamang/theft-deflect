@@ -3,8 +3,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch } from 'react-router-dom';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import MapContainer from './map/map_container';
-import { Wrapper } from "@googlemaps/react-wrapper";
+import MapWrapper from './map/map_wrapper';
 
 const App = () => (
   <div>
@@ -14,9 +13,8 @@ const App = () => (
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
     </Switch>
 
-    <Wrapper apiKey={"AIzaSyDhm27MhVA89tLn0zM3WdLTl06Yt3FZZWI&libraries=visualization"}>
-      <MapContainer />
-    </Wrapper>
+    <MapWrapper />
+
   </div>
 );
 
