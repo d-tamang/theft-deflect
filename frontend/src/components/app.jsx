@@ -6,10 +6,10 @@ import NavBarContainer from './nav/navbar_container';
 import MapWrapper from './map/map_wrapper';
 import PinFormContainer from './pin/pin_form_container';
 import AccountContainer from './nav/account_container';
-import './app.css'
+import './app.css';
 
 const App = () => (
-  <div>
+  <div className="app">
     <Modal />
     <NavBarContainer />
     <Switch>

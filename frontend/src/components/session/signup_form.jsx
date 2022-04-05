@@ -52,9 +52,9 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className="login-form-container">
+      <div className="session-form-box">
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <div className="login-form">
+          <div className="session-form">
             <br />
             <input type="text"
               value={this.state.username}
@@ -74,15 +74,15 @@ class SignupForm extends React.Component {
               placeholder="Password"
             />
             <br />
-            <input type="password"
+            <div><input type="password"
               value={this.state.password2}
               onChange={this.update('password2')}
               placeholder="Confirm Password"
-            />
+            /></div>
             <br />
             {this.renderErrors()}
-            <button>REGISTER</button>
-            <div>Already have an account?</div>
+            <button className="session-btn">REGISTER</button>
+            <div className="session-question">Already have an account?</div>
             <div>{this.props.otherForm}</div>
           </div>
         </form>
