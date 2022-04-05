@@ -6,6 +6,15 @@
   left: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 10;
+  font-family: sans-serif;
+}
+
+button {
+  font-family: sans-serif;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 .modal-child {
@@ -15,32 +24,51 @@
   transform: translate(-50%, -50%);
   background-color: #fff;
   margin: auto;
-  padding-top: 30px;
-  width: 25%;
-  height: 50%;
+  padding: 25px;
+  width: 40%;
+  height: 60%;
   border-radius: 12px;
 }
 
-.login-form-box {
+.session-form-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.login-form input {
-  width: 200px;
+.session-form input {
+  width: 60%;
   border: none;
   border-bottom: 1px solid black;
-  padding: 12px 12px;
+  padding: 4%;
   margin: 8px;
+  background-color: #e1eff3;
 }
 
-.login-btn {
-  width: 225px;
-  padding: 12px 12px;
+.session-btn {
+  width: 65%;
+  padding: 4%;
   background-color: #38877a;
   color: white;
   border-style: hidden;
   margin: 5px;
+  border-radius: 10px;
+}
+
+.session-question {
+  margin-top: 20px;
+}
+
+#login-email-box {
+  margin-top: 15%;
+}
+
+.other-btn {
+  border: 1px solid #333;
+  background-color: #fff;
+  width: 30%;
+  padding: 3%;
+  margin-top: 10px;
+  border-radius: 10px;
 }

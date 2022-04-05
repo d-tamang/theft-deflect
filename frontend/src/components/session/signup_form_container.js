@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { signup, login } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
@@ -16,7 +15,7 @@ const mapDispatchToProps = dispatch => {
     signup: (user) => dispatch(signup(user)),
     login: (user) => dispatch(login(user)),
     otherForm: (
-      <button onClick={() => dispatch(openModal('login'))}>
+      <button className="other-btn" onClick={() => dispatch(openModal('login'))}>
         LOG IN
       </button>
     ),
