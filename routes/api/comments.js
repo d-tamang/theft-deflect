@@ -29,6 +29,7 @@ router.post('/',
 
         const newComment = new Comment({
             user: req.user.id,
+            pin: req.pin.id,
             text: req.body.text
         })
 
