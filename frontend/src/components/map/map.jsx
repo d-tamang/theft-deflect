@@ -1,11 +1,25 @@
 import React from 'react';
 import './map.css';
+import PinFormContainer from '../pin/pin_form_container';
 
 class Map extends React.Component {
     constructor(props){
         super(props);
+        this.logContainer = React.createRef();
+        this.state = {
+            formOpen: false
+        }
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
+    }
+
+    handleClickOutside = (event) => {
+        if (this.logContainer.current && !this.logContainer.current.contains(event.target)) {
+            this.setState({
+                formOpen: false,
+            });
+            this.marker.setMap(null);
+        }
     }
 
     errors(Status){
@@ -63,10 +77,18 @@ class Map extends React.Component {
         console.log(location.lat())
         console.log(location.lng())
         
+        this.setState({
+            formOpen: true,
+            lat: location.lat(),
+            lng: location.lng(),
+        })
+        document.addEventListener("mousedown", this.handleClickOutside);
         window.google.maps.event.removeListener(this.map_key);
+        this.map_key = null;
     }
 
     toggleReportListener(e){
+        if (this.map_key) return;
         this.map_key = window.google.maps.event.addListener(this.map, 'click', (event) => {
             this.placeMarker(event.latLng);
         });
@@ -74,7 +96,7 @@ class Map extends React.Component {
             this.marker.setMap(null);
         }
     }
-
+    
     componentDidMount(){
 
         // san francisco
@@ -100,6 +122,11 @@ class Map extends React.Component {
 
         return(
             <div>
+                {this.state.formOpen && (
+                    <div ref={this.logContainer} className='pinForm'>
+                        <PinFormContainer lat={this.state.lat} long={this.state.lng}/>
+                    </div>
+                )}
                 <div id="floating-panel">
                     <button id="toggle-heatmap">Toggle Heatmap</button>
                     <button id="change-gradient">Change gradient</button>

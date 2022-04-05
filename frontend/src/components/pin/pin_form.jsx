@@ -1,12 +1,12 @@
 import React from "react";
-
+import './pin.css';
 class PinForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            lat: '',
-            long: '',
+            lat: this.props.lat,
+            long: this.props.long,
             category: '',
             description: '',
         }
@@ -23,7 +23,7 @@ class PinForm extends React.Component {
           description: this.state.description
         };
     
-        this.props.createPin(pin); 
+        this.props.createPin(pin)
         this.setState({
             lat: '',
             long: '',
@@ -40,7 +40,7 @@ class PinForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="pinForm">
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>Lat

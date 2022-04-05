@@ -11,7 +11,7 @@ const App = () => (
     <Modal />
     <NavBarContainer />
     <Switch>
-      <ProtectedRoute exact path="/new_pin" component={PinFormContainer} />
+      <ProtectedRoute exact path="/pins" component={PinFormContainer} />
       <Route exact path="/" component={MapWrapper} />
       <Redirect to="/" />
     </Switch>
