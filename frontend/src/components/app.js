@@ -3,7 +3,7 @@ import { AuthRoute } from '../util/route_util';
 import { Route, Switch } from 'react-router-dom';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import MapContainer from './map/map_container';
+import MapWrapper from './map/map_wrapper';
 import PinFormContainer from './pin/pin_form_container';
 
 const App = () => (
