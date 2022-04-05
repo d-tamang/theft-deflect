@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Inter-Light";
+  src: url("../fonts/Inter-Light.ttf") format("ttf");
+    /* url("./fonts/") format("ttf"); */
+}
+
+.app {
+  font-family: "Inter-Light";
+}
+
+button:hover {
+  cursor: pointer;
+}

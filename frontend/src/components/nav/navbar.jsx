@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -12,7 +13,11 @@ class NavBar extends React.Component {
 
   showLinks() {
     if (this.props.loggedIn) {
-      return <div><button onClick={(e) => this.logoutUser(e)}>LOGOUT</button></div>
+      return <div>
+        <Link exact to="/">Home</Link>
+        <Link exact to="/account">My Account</Link>
+        <button onClick={(e) => this.logoutUser(e)}>LOGOUT</button>
+      </div>
     } else {
       return <div>
         <button onClick={() => this.props.openModal('login')}>LOG IN</button>

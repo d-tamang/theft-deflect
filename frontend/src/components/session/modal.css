@@ -15,9 +15,32 @@
   transform: translate(-50%, -50%);
   background-color: #fff;
   margin: auto;
-  padding: 30px 30px;
-  width: 40%;
-  height: 40%;
-  text-align: center;
+  padding-top: 30px;
+  width: 25%;
+  height: 50%;
   border-radius: 12px;
+}
+
+.login-form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-form input {
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 12px 12px;
+  margin: 8px;
+}
+
+.login-btn {
+  width: 225px;
+  padding: 12px 12px;
+  background-color: #38877a;
+  color: white;
+  border-style: hidden;
+  margin: 5px;
 }

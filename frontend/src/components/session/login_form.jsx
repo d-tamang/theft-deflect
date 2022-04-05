@@ -50,9 +50,9 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login-form-box">
         <form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="login-form">
             <input type="text"
               value={this.state.email}
               onChange={this.update('email')}
@@ -66,7 +66,8 @@ class LoginForm extends React.Component {
             />
             <br />
             {this.renderErrors()}
-            <button>LOG IN</button>
+            <div><button className="login-btn">LOG IN</button></div>
+            <div><button className="login-btn">DEMO LOG IN</button></div>
             <div>Don't have an account?</div>
             <div>{this.props.otherForm}</div>
           </div>
