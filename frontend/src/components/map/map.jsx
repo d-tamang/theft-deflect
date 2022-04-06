@@ -39,9 +39,9 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
-        // this.map.addListener('click', (e) => {
-        //     console.log(e)
-        // })
+        this.map.addListener('click', (e) => {
+            this.closeAllInfoWindows();
+        })
 
         this.props.fetchPins()
             .then(() => this.generateMarkers())
