@@ -209,6 +209,13 @@ class Map extends React.Component {
     render(){
         this.generateNewSeeds();
 
+        let incidentButton;
+        if (this.props.loggedIn) {
+            incidentButton = <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
+        } else {
+            incidentButton = <button id="add-incident" onClick={() => this.props.openModal('login')}>Report Incident</button>
+        }
+        
         return(
             <div>
                 {this.state.formOpen && (
@@ -232,7 +239,8 @@ class Map extends React.Component {
                         <button onClick={() => this.changeOpacity(-0.05)}>-</button>
                         <button onClick={() => this.changeOpacity(0.05)}>+</button>
                     </div>
-                    <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
+                    {/* <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button> */}
+                    {incidentButton}
                 </div>
                 <div id="map" />
             </div>

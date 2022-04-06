@@ -10,7 +10,7 @@ class PinForm extends React.Component {
             category: 'BreakIn',
             description: '',
         }
-        console.log(this.state.category)
+
         this.changeCategory = this.changeCategory.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -42,7 +42,6 @@ class PinForm extends React.Component {
     }
 
     changeCategory(e) {
-        console.log(e.target.value)
         this.setState({category: e.target.value})
     }
 
