@@ -23,11 +23,10 @@ button:hover{
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  margin: auto;
   padding: 25px;
-  width: 40%;
-  height: 60%;
-  border-radius: 12px;
+  min-width: 30%;
+  min-height: 50%;
+  border-radius: 15px;
 }
 
 .session-form-box {
@@ -42,7 +41,7 @@ button:hover{
   border: none;
   border-bottom: 1px solid black;
   padding: 4%;
-  margin: 8px;
+  margin: 2%;
   background-color: #e1eff3;
 }
 
@@ -52,23 +51,23 @@ button:hover{
   background-color: #38877a;
   color: white;
   border-style: hidden;
-  margin: 5px;
+  margin: 2%;
   border-radius: 10px;
 }
 
 .session-question {
-  margin-top: 20px;
+  margin-top: 5%;
 }
 
 #login-email-box {
-  margin-top: 15%;
+  margin-top: 5%;
 }
 
 .other-btn {
   border: 1px solid #333;
   background-color: #fff;
-  width: 30%;
-  padding: 3%;
-  margin-top: 10px;
+  width: 25%;
+  padding: 2%;
+  margin-top: 2%;
   border-radius: 10px;
 }

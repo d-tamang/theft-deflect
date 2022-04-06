@@ -7,7 +7,7 @@ class Account extends React.Component {
   
   render() {
     return (
-      <div>account page</div>
+      <div>Your Reports</div>
     )
   }
 }

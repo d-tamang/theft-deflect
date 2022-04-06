@@ -48,6 +48,11 @@ class LoginForm extends React.Component {
     );
   }
 
+  demoLogin(e) {
+    e.preventDefault();
+    this.props.login({ email: "demo@demo.com", password: "demodemo" }).then(this.props.closeModal());
+  }
+
   render() {
     return (
       <div className="session-form-box">
@@ -67,7 +72,7 @@ class LoginForm extends React.Component {
             <br />
             {this.renderErrors()}
             <div><button className="session-btn">LOG IN</button></div>
-            <div><button className="session-btn">DEMO LOG IN</button></div>
+            <div><button className="session-btn" onClick={(e) => this.demoLogin(e)}>DEMO LOG IN</button></div>
             <div className="session-question">Don't have an account?</div>
             <div>{this.props.otherForm}</div>
           </div>
