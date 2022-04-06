@@ -17,6 +17,7 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
+        this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
 
@@ -38,12 +39,15 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
+        // this.map.addListener('click', (e) => {
+        //     console.log(e)
+        // })
+
         this.props.fetchPins()
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
             .then(() => this.heatmap.setMap(this.map))
-            .then(() => this.heatmap.set("gradient", gradient))
-
+            .then(() => this.heatmap.set("gradient", gradient));
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -67,7 +71,7 @@ class Map extends React.Component {
         }
     }
 
-    regenerateMap(){
+    generateNewSeeds(){
         // early return if no new pins added or removed
         if(this.props.pins.length === this.markers.length) return;
         this.generateMarkers();
@@ -85,11 +89,12 @@ class Map extends React.Component {
                 position: {lat: newPins[i].lat, lng: newPins[i].long},
                 title: 'Test'
             })
-            let infoWindow = new window.google.maps.InfoWindow({
+            marker.infoWindow = new window.google.maps.InfoWindow({
                 content: newPins[i].description,
             })
             marker.addListener('click', () => {
-                infoWindow.open({
+                this.closeAllInfoWindows();
+                marker.infoWindow.open({
                     anchor: marker,
                     map: this.map,
                     shouldFocus: false,
@@ -97,6 +102,12 @@ class Map extends React.Component {
             })
             this.markers.push(marker);
         }
+    }
+
+    closeAllInfoWindows(){
+        this.markers.forEach( marker => {
+            marker.infoWindow.close();
+        })
     }
 
     setMarkers(){
@@ -127,7 +138,10 @@ class Map extends React.Component {
 
         this.heatmap = new window.google.maps.visualization.HeatmapLayer({
             data: this.HeatMarkers
-        }); 
+        });
+
+        // set settings on new creation of heatmap
+        this.heatmap.set("gradient", gradient);
     }
 
     placeMarker(location) {
@@ -178,13 +192,15 @@ class Map extends React.Component {
     }
 
     changeOpacity(value){
-        if(!this.opacity) this.opacity = 0.6;
+        if (!this.opacity) this.opacity = 0.6;
         this.opacity += value;
+        if (this.opacity < 0) this.opacity = 0;
+        if (this.opacity > 1) this.opacity = 1;
         this.heatmap.set("opacity", this.opacity);
     }
 
     render(){
-        this.regenerateMap();
+        this.generateNewSeeds();
 
         return(
             <div>
