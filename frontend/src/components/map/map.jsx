@@ -9,6 +9,7 @@ class Map extends React.Component {
         this.logContainer = React.createRef();
         this.markers = [];
         this.HeatMarkers = [];
+        this.zoom = 13;
         this.state = {
             formOpen: false,
         }
@@ -57,7 +58,7 @@ class Map extends React.Component {
     changeMapType(){
         if(!this.map) return;
         let zoomLevel = this.map.getZoom();
-        if (zoomLevel > 13) {
+        if (zoomLevel > this.zoom) {
             this.setMarkers();
             this.heatmap.setMap(null);
         } else {
@@ -170,8 +171,19 @@ class Map extends React.Component {
         this.heatmap.set("radius", this.radius);
     }
 
+    changeZoom(value){
+        if(!this.zoom) this.zoom = 13;
+        this.zoom += value;
+        this.changeMapType();
+    }
+
+    changeOpacity(value){
+        if(!this.opacity) this.opacity = 0.6;
+        this.opacity += value;
+        this.heatmap.set("opacity", this.opacity);
+    }
+
     render(){
-        // if(!this.props.pins) return null;
         this.regenerateMap();
 
         return(
@@ -182,13 +194,21 @@ class Map extends React.Component {
                     </div>
                 )}
                 <div id="floating-panel">
-                    <button id="toggle-heatmap">Toggle Heatmap</button>
+                    <div>
+                        <div>Change Zoom </div>
+                        <button onClick={() => this.changeZoom(-1)}>-</button>
+                        <button onClick={() => this.changeZoom(1)}>+</button>
+                    </div>
                     <div>
                         <div>Change Radius </div>
                         <button onClick={() => this.changeRadius(-1)}>-</button>
                         <button onClick={() => this.changeRadius(1)}>+</button>
                     </div>
-                    <button id="change-opacity">Change opacity</button>
+                    <div>
+                        <div>Change Opacity </div>
+                        <button onClick={() => this.changeOpacity(-0.05)}>-</button>
+                        <button onClick={() => this.changeOpacity(0.05)}>+</button>
+                    </div>
                     <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
                 </div>
                 <div id="map" />
