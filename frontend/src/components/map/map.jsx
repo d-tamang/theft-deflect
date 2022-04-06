@@ -9,14 +9,15 @@ class Map extends React.Component {
         this.logContainer = React.createRef();
         this.markers = [];
         this.HeatMarkers = [];
+        this.zoom = 13;
         this.state = {
-            formOpen: false
+            formOpen: false,
         }
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
-        this.changeGradient = this.changeGradient.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
+        this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
 
@@ -30,6 +31,9 @@ class Map extends React.Component {
             zoom,
             disableDefaultUI: true,
             zoomControl: true,
+            zoomControlOptions: {
+                position: window.google.maps.ControlPosition.RIGHT_CENTER,
+            },
         });
         this.map.setOptions({styles: style})
 
@@ -38,14 +42,15 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
+        this.map.addListener('click', (e) => {
+            this.closeAllInfoWindows();
+        })
+
         this.props.fetchPins()
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
-            .then(() => this.heatmap.setMap(this.map));
-
-        document
-            .getElementById("change-gradient")
-            .addEventListener("click", () => this.changeGradient());
+            .then(() => this.heatmap.setMap(this.map))
+            .then(() => this.heatmap.set("gradient", gradient));
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -60,7 +65,7 @@ class Map extends React.Component {
     changeMapType(){
         if(!this.map) return;
         let zoomLevel = this.map.getZoom();
-        if (zoomLevel > 13) {
+        if (zoomLevel > this.zoom) {
             this.setMarkers();
             this.heatmap.setMap(null);
         } else {
@@ -69,7 +74,7 @@ class Map extends React.Component {
         }
     }
 
-    regenerateMap(){
+    generateNewSeeds(){
         // early return if no new pins added or removed
         if(this.props.pins.length === this.markers.length) return;
         this.generateMarkers();
@@ -87,13 +92,16 @@ class Map extends React.Component {
                 position: {lat: newPins[i].lat, lng: newPins[i].long},
                 title: newPins[i].category
             })
-            let date = new Date(parseInt(newPins[i]._id.substring(0, 8), 16) * 1000);
-            let pinDate = date.toString().slice(3, 15);
-            let infoWindow = new window.google.maps.InfoWindow({
-                content: `<div>${pinDate}</div>` + `<a href="http://localhost:3000/#/pins/${newPins[i]._id}">See More</a>`
+            // let date = new Date(parseInt(newPins[i]._id.substring(0, 8), 16) * 1000);
+            // let pinDate = date.toString().slice(3, 15);
+            // let infoWindow = new window.google.maps.InfoWindow({
+            //     content: `<div>${pinDate}</div>` + `<a href="http://localhost:3000/#/pins/${newPins[i]._id}">See More</a>`
+            marker.infoWindow = new window.google.maps.InfoWindow({
+                content: newPins[i].description,
             })
             marker.addListener('click', () => {
-                infoWindow.open({
+                this.closeAllInfoWindows();
+                marker.infoWindow.open({
                     anchor: marker,
                     map: this.map,
                     shouldFocus: false,
@@ -101,6 +109,12 @@ class Map extends React.Component {
             })
             this.markers.push(marker);
         }
+    }
+
+    closeAllInfoWindows(){
+        this.markers.forEach( marker => {
+            marker.infoWindow.close();
+        })
     }
 
     setMarkers(){
@@ -126,15 +140,20 @@ class Map extends React.Component {
         }
 
         if (this.heatmap) {
-            this.heatmap.setMap(null)
+            this.heatmap.setData(this.HeatMarkers)
+        } else {
+            this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+                data: this.HeatMarkers
+            });
         }
 
-        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-            data: this.HeatMarkers
-        }); 
+        // set settings on new creation of heatmap
+        this.heatmap.set("gradient", gradient);
     }
 
     placeMarker(location) {
+        this.map.setOptions({draggableCursor:''}); //changes cursor back to normal on placement
+
         this.marker = new window.google.maps.Marker({
             position: location, 
             map: this.map
@@ -152,6 +171,8 @@ class Map extends React.Component {
 
     toggleReportListener(e){
         if (this.map_key) return;
+        this.map.setOptions({draggableCursor:'crosshair'}); //changes cursor on toggle
+
         this.map_key = window.google.maps.event.addListener(this.map, 'click', (event) => {
             this.placeMarker(event.latLng);
         });
@@ -169,27 +190,61 @@ class Map extends React.Component {
         }
     }
 
-    changeGradient() {
-        this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
+    changeRadius(value){
+        if (!this.radius) this.radius = 10;
+        this.radius += value;
+        this.heatmap.set("radius", this.radius);
+    }
+
+    changeZoom(value){
+        if(!this.zoom) this.zoom = 13;
+        this.zoom += value;
+        this.changeMapType();
+    }
+
+    changeOpacity(value){
+        if (!this.opacity) this.opacity = 0.6;
+        this.opacity += value;
+        if (this.opacity < 0) this.opacity = 0;
+        if (this.opacity > 1) this.opacity = 1;
+        this.heatmap.set("opacity", this.opacity);
     }
 
     render(){
-        // if(!this.props.pins) return null;
-        this.regenerateMap();
+        this.generateNewSeeds();
 
+        let incidentButton;
+        if (this.props.loggedIn) {
+            incidentButton = <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
+        } else {
+            incidentButton = <button id="add-incident" onClick={() => this.props.openModal('login')}>Report Incident</button>
+        }
+        
         return(
             <div>
                 {this.state.formOpen && (
-                    <div ref={this.logContainer} className='pinForm'>
+                    <div ref={this.logContainer} className='pin-form'>
                         <PinFormContainer lat={this.state.lat} long={this.state.lng}/>
                     </div>
                 )}
                 <div id="floating-panel">
-                    <button id="toggle-heatmap">Toggle Heatmap</button>
-                    <button id="change-gradient">Change gradient</button>
-                    <button id="change-radius">Change radius</button>
-                    <button id="change-opacity">Change opacity</button>
-                    <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
+                    <div>
+                        <div>Change Zoom </div>
+                        <button onClick={() => this.changeZoom(-1)}>-</button>
+                        <button onClick={() => this.changeZoom(1)}>+</button>
+                    </div>
+                    <div>
+                        <div>Change Radius </div>
+                        <button onClick={() => this.changeRadius(-1)}>-</button>
+                        <button onClick={() => this.changeRadius(1)}>+</button>
+                    </div>
+                    <div>
+                        <div>Change Opacity </div>
+                        <button onClick={() => this.changeOpacity(-0.05)}>-</button>
+                        <button onClick={() => this.changeOpacity(0.05)}>+</button>
+                    </div>
+                    {/* <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button> */}
+                    {incidentButton}
                 </div>
                 <div id="map" />
             </div>
