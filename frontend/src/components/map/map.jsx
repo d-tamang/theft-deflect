@@ -31,6 +31,9 @@ class Map extends React.Component {
             zoom,
             disableDefaultUI: true,
             zoomControl: true,
+            zoomControlOptions: {
+                position: window.google.maps.ControlPosition.RIGHT_CENTER,
+            },
         });
         this.map.setOptions({styles: style})
 
@@ -145,6 +148,8 @@ class Map extends React.Component {
     }
 
     placeMarker(location) {
+        this.map.setOptions({draggableCursor:''}); //changes cursor back to normal on placement
+
         this.marker = new window.google.maps.Marker({
             position: location, 
             map: this.map
@@ -162,6 +167,8 @@ class Map extends React.Component {
 
     toggleReportListener(e){
         if (this.map_key) return;
+        this.map.setOptions({draggableCursor:'crosshair'}); //changes cursor on toggle
+
         this.map_key = window.google.maps.event.addListener(this.map, 'click', (event) => {
             this.placeMarker(event.latLng);
         });
@@ -205,7 +212,7 @@ class Map extends React.Component {
         return(
             <div>
                 {this.state.formOpen && (
-                    <div ref={this.logContainer} className='pinForm'>
+                    <div ref={this.logContainer} className='pin-form'>
                         <PinFormContainer lat={this.state.lat} long={this.state.lng}/>
                     </div>
                 )}
