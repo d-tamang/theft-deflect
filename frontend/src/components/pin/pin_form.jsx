@@ -74,7 +74,7 @@ class PinForm extends React.Component {
                                 onChange={this.update('long')}
                             />
                         </label> */}
-                        
+
                         <label>Category
                             <input type="text"
                                 value={this.state.category}
