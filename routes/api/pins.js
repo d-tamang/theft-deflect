@@ -42,7 +42,6 @@ router.post('/',
             user: req.user.id,
             lat: req.body.lat,
             long: req.body.long,
-            name: req.body.name,
             category: req.body.category,
             description: req.body.description,
         });

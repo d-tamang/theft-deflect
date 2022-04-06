@@ -3,10 +3,6 @@
   src: local("Inter-Light"), url("../fonts/Inter-Light.ttf"), format("truetype");
 } */
 
-.app {
-  font-family: sans-serif;
-}
-
 button:hover {
   cursor: pointer;
 }
