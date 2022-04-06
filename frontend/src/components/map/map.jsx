@@ -38,6 +38,7 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
+        console.log("sdjflk")
         this.props.fetchPins()
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
@@ -60,17 +61,18 @@ class Map extends React.Component {
     changeMapType(){
         if(!this.map) return;
         let zoomLevel = this.map.getZoom();
-        if (zoomLevel > 13 && this.heatmap.map) {
+        if (zoomLevel > 13) {
             this.setMarkers();
             this.heatmap.setMap(null);
-        } else if (zoomLevel <= 13 && !this.heatmap.map) {
+        } else {
             this.clearMarkers();
             this.setHeatMap();
         }
     }
 
     regenerateMap(){
-        console.log("regenerate");
+        // early return if no new pins added or removed
+        if(this.props.pins.length === this.markers.length) return;
         this.generateMarkers();
         this.generateHeatMap();
         this.changeMapType();
@@ -78,6 +80,8 @@ class Map extends React.Component {
 
     generateMarkers() {
         if (!this.props.pins) return;
+        if (this.props.pins.length === this.markers.length) return;
+        this.clearMarkers();
         this.markers = [];
         this.props.pins.map( pin => {
             let marker = new window.google.maps.Marker({
@@ -112,6 +116,7 @@ class Map extends React.Component {
 
     generateHeatMap(){
         if (!this.props.pins) return;
+        if (this.props.pins.length === this.HeatMarkers.length) return;
         this.HeatMarkers = [];
         this.props.pins.map( pin => {
             this.HeatMarkers.push(new window.google.maps.LatLng(pin.lat, pin.long))
