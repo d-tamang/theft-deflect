@@ -11,10 +11,12 @@
 
 button {
   font-family: sans-serif;
+  transition: all 0.2s ease 0s;
 }
 
 button:hover{
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .modal-child {

@@ -11,10 +11,10 @@ const receivePins = pins => ({
   pins
 });
 
-const receiveUserPins = pins => ({
-  type: RECEIVE_USER_PINS,
-  pins
-});
+// const receiveUserPins = pins => ({
+//   type: RECEIVE_USER_PINS,
+//   pins
+// });
 
 const receiveNewPin = pin => ({
   type: RECEIVE_NEW_PIN,
@@ -37,11 +37,11 @@ export const fetchPins = () => dispatch => (
     .catch(err => dispatch(receivePinErrors(err)))
 );
 
-export const fetchUserPins = id => dispatch => (
-  getUserPins(id)
-    .then(pins => dispatch(receiveUserPins(pins)))
-    .catch(err => dispatch(receivePinErrors(err)))
-);
+// export const fetchUserPins = id => dispatch => (
+//   getUserPins(id)
+//     .then(pins => dispatch(receiveUserPins(pins)))
+//     .catch(err => dispatch(receivePinErrors(err)))
+// );
 
 export const createPin = data => dispatch => (
   postPin(data)

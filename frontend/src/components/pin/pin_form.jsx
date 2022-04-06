@@ -7,6 +7,7 @@ class PinForm extends React.Component {
         this.state = {
             lat: this.props.lat,
             long: this.props.long,
+            name: '',
             category: '',
             description: '',
         }
@@ -17,32 +18,33 @@ class PinForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         let pin = {
-          lat: this.state.lat,
-          long: this.state.long,
-          category: this.state.category,
-          description: this.state.description
+            lat: this.state.lat,
+            long: this.state.long,
+            category: this.state.category,
+            description: this.state.description
         };
-    
+
         this.props.createPin(pin).then(
-            () => { 
-                this.setState({ errors: this.props.errors }) 
+            () => {
+                this.setState({ errors: this.props.errors })
             }
         )
         this.setState({
+            name: '',
             category: '',
             description: '',
         });
     }
-    
+
     update(field) {
         return e => this.setState({
             [field]: e.currentTarget.value
         });
     }
 
-    renderErrors(){
-        if(!this.state.errors) return;
-        return(
+    renderErrors() {
+        if (!this.state.errors) return;
+        return (
             <ul className='review-form-error-list'>
                 {this.props.errors.map((error, i) => (
                     <li key={`error-${i}`}>
@@ -74,6 +76,12 @@ class PinForm extends React.Component {
                                 onChange={this.update('long')}
                             />
                         </label> */}
+                        <label>Name
+                            <input type="text"
+                                value={this.state.name}
+                                onChange={this.update('name')}
+                            />
+                        </label>
 
                         <label>Category
                             <input type="text"
