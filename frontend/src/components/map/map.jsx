@@ -38,11 +38,10 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
-        console.log("sdjflk")
         this.props.fetchPins()
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
-            .then(() => this.setHeatMap());
+            .then(() => this.heatmap.setMap(this.map));
 
         document
             .getElementById("change-gradient")
@@ -66,7 +65,7 @@ class Map extends React.Component {
             this.heatmap.setMap(null);
         } else {
             this.clearMarkers();
-            this.setHeatMap();
+            this.heatmap.setMap(this.map);
         }
     }
 
@@ -81,15 +80,15 @@ class Map extends React.Component {
     generateMarkers() {
         if (!this.props.pins) return;
         if (this.props.pins.length === this.markers.length) return;
-        this.clearMarkers();
-        this.markers = [];
-        this.props.pins.map( pin => {
+        let newPins = this.props.pins;
+        let length = this.markers.length;
+        for(let i = newPins.length-1; i >= length; i--){
             let marker = new window.google.maps.Marker({
-                position: {lat: pin.lat, lng: pin.long},
+                position: {lat: newPins[i].lat, lng: newPins[i].long},
                 title: 'Test'
             })
             let infoWindow = new window.google.maps.InfoWindow({
-                content: pin.description,
+                content: newPins[i].description,
             })
             marker.addListener('click', () => {
                 infoWindow.open({
@@ -99,7 +98,7 @@ class Map extends React.Component {
                 })
             })
             this.markers.push(marker);
-        })
+        }
     }
 
     setMarkers(){
@@ -117,10 +116,12 @@ class Map extends React.Component {
     generateHeatMap(){
         if (!this.props.pins) return;
         if (this.props.pins.length === this.HeatMarkers.length) return;
-        this.HeatMarkers = [];
-        this.props.pins.map( pin => {
-            this.HeatMarkers.push(new window.google.maps.LatLng(pin.lat, pin.long))
-        })
+
+        let newPins = this.props.pins;
+        let length = this.HeatMarkers.length;
+        for(let i = newPins.length-1; i >= length; i--){
+            this.HeatMarkers.push(new window.google.maps.LatLng(newPins[i].lat, newPins[i].long))
+        }
 
         if (this.heatmap) {
             this.heatmap.setMap(null)
@@ -128,11 +129,7 @@ class Map extends React.Component {
 
         this.heatmap = new window.google.maps.visualization.HeatmapLayer({
             data: this.HeatMarkers
-        });        
-    }
-
-    setHeatMap(){
-        this.heatmap.setMap(this.map);
+        }); 
     }
 
     placeMarker(location) {
