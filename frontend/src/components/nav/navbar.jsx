@@ -16,7 +16,7 @@ class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return <div className='navbar-item'>
         <Link exact to="/" className='logo'>TheftDeflect</Link>
-        <ul className='nav_links'>
+        <ul className='nav-links'>
           <li><button className='navbar-button'><Link exact to="/account" className='my-account'>MY ACCOUNT</Link></button></li>
           <li><button className='navbar-button' onClick={(e) => this.logoutUser(e)} >LOGOUT</button></li>
         </ul>
@@ -24,7 +24,7 @@ class NavBar extends React.Component {
     } else {
       return <div className='navbar-item'>
         <Link exact to="/" className='logo'>TheftDeflect</Link>
-        <ul className='nav_links'>
+        <ul className='nav-links'>
           <li><button className='navbar-button' onClick={() => this.props.openModal('login')}>LOG IN</button></li>
           <li><button className='navbar-button' onClick={() => this.props.openModal('signup')}>SIGN UP</button></li>
         </ul>

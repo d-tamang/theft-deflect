@@ -28,12 +28,12 @@
     transform: translate(-50%, -50%);
 }
 
-.nav_links {
+.nav-links {
     list-style: none;
     float: right;
 }
 
-.nav_links li {
+.nav-links li {
     display: inline-block;
     padding: 0px 20px;
 }
