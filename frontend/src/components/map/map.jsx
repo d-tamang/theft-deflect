@@ -13,6 +13,7 @@ class Map extends React.Component {
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
         this.changeGradient = this.changeGradient.bind(this);
+        this.setMarkers = this.setMarkers.bind(this);
 
         this.props.fetchPins();
     }
@@ -22,15 +23,6 @@ class Map extends React.Component {
         // san francisco
         const center = { lat: 37.777652, lng: -122.437503 };
         const zoom = 12;
-        const remove_poi = [
-            {
-              "featureType": "poi",
-              "elementType": "labels",
-              "stylers": [
-                { "visibility": "off" }
-              ]
-            }
-        ]
         this.map = new window.google.maps.Map(document.getElementById("map"), {
             center,
             zoom,
@@ -39,13 +31,6 @@ class Map extends React.Component {
         document
             .getElementById("change-gradient")
             .addEventListener("click", () => this.changeGradient());
-
-
-        // this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-        //     data: this.heatMapData()
-        // });
-
-        // this.heatmap.setMap(this.map);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -105,6 +90,17 @@ class Map extends React.Component {
         this.heatmap.setMap(this.map);
     }
 
+    setMarkers() {
+        if (!this.props.pins) return;
+        this.props.pins.map( pin => {
+            let marker = new window.google.maps.Marker({
+                position: {lat: pin.lat, lng: pin.long},
+                title: 'Test'
+            })
+            marker.setMap(this.map)
+        })
+    }
+
     placeMarker(location) {
         this.marker = new window.google.maps.Marker({
             position: location, 
@@ -133,6 +129,7 @@ class Map extends React.Component {
 
     render(){
         // if(!this.props.pins) return null;
+        this.setMarkers();
         this.setHeatMap();
         return(
             <div>
