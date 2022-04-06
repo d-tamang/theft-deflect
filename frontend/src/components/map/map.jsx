@@ -106,6 +106,7 @@ class Map extends React.Component {
                     map: this.map,
                     shouldFocus: false,
                 })
+                this.setState({ clickedPin : newPins[i]});
             })
             this.markers.push(marker);
         }
@@ -213,6 +214,19 @@ class Map extends React.Component {
     render() {
         this.generateNewSeeds();
 
+        let clickedPin;
+        if(this.state.clickedPin){
+            console.log(this.state.clickedPin)
+            clickedPin = <div>
+                <div>{this.state.clickedPin.category}</div>
+                <div>{this.state.clickedPin.description}</div>
+                <div>{this.state.clickedPin.lat}</div>
+                <div>{this.state.clickedPin.long}</div>
+            </div>
+        } else {
+            clickedPin = <div></div>
+        }
+
         let incidentButton;
         if (this.props.loggedIn) {
             incidentButton = <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
@@ -227,6 +241,9 @@ class Map extends React.Component {
                         <PinFormContainer lat={this.state.lat} long={this.state.lng} />
                     </div>
                 )}
+
+                <div>{clickedPin}</div>
+
                 <div id="floating-panel">
                     <div>
                         <div>Change Zoom </div>
