@@ -136,12 +136,12 @@ class Map extends React.Component {
         }
 
         if (this.heatmap) {
-            this.heatmap.setMap(null)
+            this.heatmap.setData(this.HeatMarkers)
+        } else {
+            this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+                data: this.HeatMarkers
+            });
         }
-
-        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-            data: this.HeatMarkers
-        });
 
         // set settings on new creation of heatmap
         this.heatmap.set("gradient", gradient);
