@@ -1,12 +1,14 @@
 import React from 'react';
 import './map.css';
 import PinFormContainer from '../pin/pin_form_container';
-import style from './map_style'
+import { style, gradient } from './map_style'
 
 class Map extends React.Component {
     constructor(props){
         super(props);
         this.logContainer = React.createRef();
+        this.markers = [];
+        this.HeatMarkers = [];
         this.state = {
             formOpen: false
         }
@@ -15,9 +17,7 @@ class Map extends React.Component {
         this.changeGradient = this.changeGradient.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
-        // this.map = this.map.bind(this)
 
-        this.props.fetchPins();
     }
 
     componentDidMount(){
@@ -35,15 +35,13 @@ class Map extends React.Component {
 
         // adds listener for when zoom is clicked
         this.map.addListener('zoom_changed', () => {
-            let zoomLevel = this.map.getZoom();
-            if (zoomLevel > 13 && this.heatmap.map) {
-                this.setMarkers();
-                this.heatmap.setMap(null);
-            } else if (zoomLevel < 13 && !this.heatmap.map) {
-                this.clearMarkers();
-                this.setHeatMap();
-            }
+            this.changeMapType();
         });
+
+        this.props.fetchPins()
+            .then(() => this.generateMarkers())
+            .then(() => this.generateHeatMap())
+            .then(() => this.setHeatMap());
 
         document
             .getElementById("change-gradient")
@@ -59,55 +57,26 @@ class Map extends React.Component {
         }
     }
 
-    handleClickOutsideForm = (event) => {
-        if (this.logContainer.current && !this.logContainer.current.contains(event.target)) {
-            this.setState({
-                formOpen: false,
-            });
-            this.marker.setMap(null);
+    changeMapType(){
+        if(!this.map) return;
+        let zoomLevel = this.map.getZoom();
+        if (zoomLevel > 13 && this.heatmap.map) {
+            this.setMarkers();
+            this.heatmap.setMap(null);
+        } else if (zoomLevel <= 13 && !this.heatmap.map) {
+            this.clearMarkers();
+            this.setHeatMap();
         }
     }
 
-    changeGradient() {
-        const gradient = [
-          "rgba(0, 255, 255, 0)",
-          "rgba(0, 255, 255, 1)",
-          "rgba(0, 191, 255, 1)",
-          "rgba(0, 127, 255, 1)",
-          "rgba(0, 63, 255, 1)",
-          "rgba(0, 0, 255, 1)",
-          "rgba(0, 0, 223, 1)",
-          "rgba(0, 0, 191, 1)",
-          "rgba(0, 0, 159, 1)",
-          "rgba(0, 0, 127, 1)",
-          "rgba(63, 0, 91, 1)",
-          "rgba(127, 0, 63, 1)",
-          "rgba(191, 0, 31, 1)",
-          "rgba(255, 0, 0, 1)",
-        ];
-      
-        this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
+    regenerateMap(){
+        console.log("regenerate");
+        this.generateMarkers();
+        this.generateHeatMap();
+        this.changeMapType();
     }
 
-    setHeatMap(){
-        let pins = [];
-        if (!this.props.pins) return;
-        this.props.pins.map( pin => {
-            pins.push(new window.google.maps.LatLng(pin.lat, pin.long))
-        })
-
-        if (this.heatmap) {
-            this.heatmap.setMap(null)
-        }
-
-        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-            data: pins
-        });
-        
-        this.heatmap.setMap(this.map);
-    }
-
-    setMarkers() {
+    generateMarkers() {
         if (!this.props.pins) return;
         this.markers = [];
         this.props.pins.map( pin => {
@@ -126,8 +95,13 @@ class Map extends React.Component {
                 })
             })
             this.markers.push(marker);
-            marker.setMap(this.map)
         })
+    }
+
+    setMarkers(){
+        for (let i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(this.map);
+        };
     }
 
     clearMarkers() {
@@ -135,6 +109,26 @@ class Map extends React.Component {
             this.markers[i].setMap(null);
         };
     };
+
+    generateHeatMap(){
+        if (!this.props.pins) return;
+        this.HeatMarkers = [];
+        this.props.pins.map( pin => {
+            this.HeatMarkers.push(new window.google.maps.LatLng(pin.lat, pin.long))
+        })
+
+        if (this.heatmap) {
+            this.heatmap.setMap(null)
+        }
+
+        this.heatmap = new window.google.maps.visualization.HeatmapLayer({
+            data: this.HeatMarkers
+        });        
+    }
+
+    setHeatMap(){
+        this.heatmap.setMap(this.map);
+    }
 
     placeMarker(location) {
         this.marker = new window.google.maps.Marker({
@@ -162,10 +156,23 @@ class Map extends React.Component {
         }
     }
 
+    handleClickOutsideForm = (event) => {
+        if (this.logContainer.current && !this.logContainer.current.contains(event.target)) {
+            this.setState({
+                formOpen: false,
+            });
+            this.marker.setMap(null);
+        }
+    }
+
+    changeGradient() {
+        this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
+    }
+
     render(){
         // if(!this.props.pins) return null;
-        // this.setMarkers();
-        this.setHeatMap();
+        this.regenerateMap();
+
         return(
             <div>
                 {this.state.formOpen && (
@@ -183,27 +190,6 @@ class Map extends React.Component {
                 <div id="map" />
             </div>
         )
-    }
-
-
-    heatMapData(){
-        return [
-            {location: new window.google.maps.LatLng(37.782, -122.447), weight: 0.5},
-            new window.google.maps.LatLng(37.782, -122.445),
-            {location: new window.google.maps.LatLng(37.782, -122.443), weight: 2},
-            {location: new window.google.maps.LatLng(37.782, -122.441), weight: 3},
-            {location: new window.google.maps.LatLng(37.782, -122.439), weight: 2},
-            new window.google.maps.LatLng(37.782, -122.437),
-            {location: new window.google.maps.LatLng(37.782, -122.435), weight: 0.5},
-        
-            {location: new window.google.maps.LatLng(37.785, -122.447), weight: 3},
-            {location: new window.google.maps.LatLng(37.785, -122.445), weight: 2},
-            new window.google.maps.LatLng(37.785, -122.443),
-            {location: new window.google.maps.LatLng(37.785, -122.441), weight: 0.5},
-            new window.google.maps.LatLng(37.785, -122.439),
-            {location: new window.google.maps.LatLng(37.785, -122.437), weight: 2},
-            {location: new window.google.maps.LatLng(37.785, -122.435), weight: 3}
-        ];
     }
 
     errors(Status){
