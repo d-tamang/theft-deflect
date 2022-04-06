@@ -85,10 +85,12 @@ class Map extends React.Component {
         for(let i = newPins.length-1; i >= length; i--){
             let marker = new window.google.maps.Marker({
                 position: {lat: newPins[i].lat, lng: newPins[i].long},
-                title: 'Test'
+                title: newPins[i].category
             })
+            let date = new Date(parseInt(newPins[i]._id.substring(0, 8), 16) * 1000);
+            let pinDate = date.toString().slice(3, 15);
             let infoWindow = new window.google.maps.InfoWindow({
-                content: newPins[i].description,
+                content: `<div>${pinDate}</div>` + `<a href="http://localhost:3000/#/pins/${newPins[i]._id}">See More</a>`
             })
             marker.addListener('click', () => {
                 infoWindow.open({
