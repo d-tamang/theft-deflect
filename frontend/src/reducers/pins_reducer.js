@@ -1,4 +1,4 @@
-import { RECEIVE_PINS, RECEIVE_NEW_PIN, REMOVE_PIN, RECEIVE_PIN_ERRORS } from '../actions/pin_actions';
+import { RECEIVE_PINS, RECEIVE_NEW_PIN, REMOVE_PIN } from '../actions/pin_actions';
 
 const pinsReducer = (state = {}, action) => {
   Object.freeze(state);
