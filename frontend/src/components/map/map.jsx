@@ -10,11 +10,10 @@ class Map extends React.Component {
         this.markers = [];
         this.HeatMarkers = [];
         this.state = {
-            formOpen: false
+            formOpen: false,
         }
         this.toggleReportListener = this.toggleReportListener.bind(this);
         this.placeMarker = this.placeMarker.bind(this);
-        this.changeGradient = this.changeGradient.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
 
@@ -41,11 +40,9 @@ class Map extends React.Component {
         this.props.fetchPins()
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
-            .then(() => this.heatmap.setMap(this.map));
+            .then(() => this.heatmap.setMap(this.map))
+            .then(() => this.heatmap.set("gradient", gradient))
 
-        document
-            .getElementById("change-gradient")
-            .addEventListener("click", () => this.changeGradient());
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -167,8 +164,10 @@ class Map extends React.Component {
         }
     }
 
-    changeGradient() {
-        this.heatmap.set("gradient", this.heatmap.get("gradient") ? null : gradient);
+    changeRadius(value){
+        if (!this.radius) this.radius = 10;
+        this.radius += value;
+        this.heatmap.set("radius", this.radius);
     }
 
     render(){
@@ -184,8 +183,11 @@ class Map extends React.Component {
                 )}
                 <div id="floating-panel">
                     <button id="toggle-heatmap">Toggle Heatmap</button>
-                    <button id="change-gradient">Change gradient</button>
-                    <button id="change-radius">Change radius</button>
+                    <div>
+                        <div>Change Radius </div>
+                        <button onClick={() => this.changeRadius(-1)}>-</button>
+                        <button onClick={() => this.changeRadius(1)}>+</button>
+                    </div>
                     <button id="change-opacity">Change opacity</button>
                     <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button>
                 </div>
