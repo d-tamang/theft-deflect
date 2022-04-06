@@ -1,6 +1,7 @@
 import React from 'react';
 import './map.css';
 import PinFormContainer from '../pin/pin_form_container';
+import style from './map_style'
 
 class Map extends React.Component {
     constructor(props){
@@ -21,11 +22,20 @@ class Map extends React.Component {
         // san francisco
         const center = { lat: 37.777652, lng: -122.437503 };
         const zoom = 12;
+        const remove_poi = [
+            {
+              "featureType": "poi",
+              "elementType": "labels",
+              "stylers": [
+                { "visibility": "off" }
+              ]
+            }
+        ]
         this.map = new window.google.maps.Map(document.getElementById("map"), {
             center,
             zoom,
         });
-
+        this.map.setOptions({styles: style})
         document
             .getElementById("change-gradient")
             .addEventListener("click", () => this.changeGradient());
@@ -78,18 +88,20 @@ class Map extends React.Component {
     }
 
     setHeatMap(){
-        console.log('inside setHeatMap')
         let pins = [];
         if (!this.props.pins) return;
-        console.log('after return')
         this.props.pins.map( pin => {
             pins.push(new window.google.maps.LatLng(pin.lat, pin.long))
         })
 
+        if (this.heatmap) {
+            this.heatmap.setMap(null)
+        }
+
         this.heatmap = new window.google.maps.visualization.HeatmapLayer({
             data: pins
         });
-
+        
         this.heatmap.setMap(this.map);
     }
 
@@ -98,8 +110,6 @@ class Map extends React.Component {
             position: location, 
             map: this.map
         });
-        console.log(location.lat())
-        console.log(location.lng())
         
         this.setState({
             formOpen: true,
@@ -122,7 +132,7 @@ class Map extends React.Component {
     }
 
     render(){
-        if(!this.props.pins) return null;
+        // if(!this.props.pins) return null;
         this.setHeatMap();
         return(
             <div>
