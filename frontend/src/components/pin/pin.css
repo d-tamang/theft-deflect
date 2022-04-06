@@ -1,6 +1,51 @@
-/* .pinForm {
-    background: yellow;
-} */
+.pin-form-container {
+    background: rgb(124, 161, 172);
+    position: absolute;
+    padding: 5vh;
+    height: 35vh;
+    width: 20vw;
+    top: 20vh;
+    left: 35vw;
+    z-index: 10;
+    text-align: center;
+    border-radius: 10px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.pin-form-container > h2 {
+    font-size: 3vh;
+}
+
+.pin-form-container > select {
+    width: 20vw;
+    padding: 0.5vh;
+}
+
+.form-textarea {
+    padding-bottom: 5vh;
+    width: 20vw;
+}
+
+.formLabel {
+    display: flex;
+    font-size: 2vh;
+    /* background: red; */
+    margin-bottom: 1.5vh;
+    margin-top: 1.5vh;
+}
+
+.form-submit {
+    margin-top: 4vh;
+    padding: 1vh;
+    width: 8vw;
+    font-size: 1.5vh;
+}
+
+.pin-form-error-list {
+    list-style-type: none;
+    color: rgb(255, 255, 255);
+}
 
 .pin-show {
     height: 100%;

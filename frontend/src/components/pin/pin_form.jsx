@@ -7,10 +7,11 @@ class PinForm extends React.Component {
         this.state = {
             lat: this.props.lat,
             long: this.props.long,
-            category: '',
+            category: 'BreakIn',
             description: '',
         }
-
+        console.log(this.state.category)
+        this.changeCategory = this.changeCategory.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -40,10 +41,15 @@ class PinForm extends React.Component {
         });
     }
 
+    changeCategory(e) {
+        console.log(e.target.value)
+        this.setState({category: e.target.value})
+    }
+
     renderErrors() {
         if (!this.state.errors) return;
         return (
-            <ul className='review-form-error-list'>
+            <ul className='pin-form-error-list'>
                 {this.props.errors.map((error, i) => (
                     <li key={`error-${i}`}>
                         {error}
@@ -55,40 +61,30 @@ class PinForm extends React.Component {
 
     render() {
         return (
-            <div className="pinForm">
+            <div>
                 <div>
-                    {this.renderErrors()}
                 </div>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        {/* <label>Lat
-                            <input type="text"
-                                value={this.state.lat}
-                                onChange={this.update('lat')}
-                            />
-                        </label>
+                    <div className="pin-form-container">
+                        <h2>Describe Your Incident</h2>
+                        {this.renderErrors()}
 
-                        <label>Long
-                            <input type="text"
-                                value={this.state.long}
-                                onChange={this.update('long')}
-                            />
-                        </label> */}
+                        <label className="formLabel">Category</label>
+                        <select onChange={this.changeCategory} category={this.state.category}>   
+                            <option value={'BreakIn'}>Break In</option>
+                            <option value={'Vandalism'}>Vandalism</option>
+                            <option value={'PartsTheft'}>Parts Theft</option>
+                            <option value={'StolenVehicle'}>Stolen Vehicle</option>
+                        </select>
+                        
 
-                        <label>Category
-                            <input type="text"
-                                value={this.state.category}
-                                onChange={this.update('category')}
-                            />
-                        </label>
-
-                        <label>Description
+                        <label className="formLabel">Description</label>
                             <input type="textarea"
                                 value={this.state.description}
                                 onChange={this.update('description')}
+                                className='form-textarea'
                             />
-                        </label>
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Report" className="form-submit" />
                     </div>
                 </form>
             </div>
