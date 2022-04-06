@@ -14,20 +14,37 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.changeGradient = this.changeGradient.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
+        this.clearMarkers = this.clearMarkers.bind(this);
+        // this.map = this.map.bind(this)
 
         this.props.fetchPins();
     }
 
     componentDidMount(){
 
-        // san francisco
+        // Center is San Francisco
         const center = { lat: 37.777652, lng: -122.437503 };
         const zoom = 12;
         this.map = new window.google.maps.Map(document.getElementById("map"), {
             center,
             zoom,
+            disableDefaultUI: true,
+            zoomControl: true,
         });
         this.map.setOptions({styles: style})
+
+        // adds listener for when zoom is clicked
+        this.map.addListener('zoom_changed', () => {
+            let zoomLevel = this.map.getZoom();
+            if (zoomLevel > 13 && this.heatmap.map) {
+                this.setMarkers();
+                this.heatmap.setMap(null);
+            } else if (zoomLevel < 13 && !this.heatmap.map) {
+                this.clearMarkers();
+                this.setHeatMap();
+            }
+        });
+
         document
             .getElementById("change-gradient")
             .addEventListener("click", () => this.changeGradient());
@@ -92,14 +109,32 @@ class Map extends React.Component {
 
     setMarkers() {
         if (!this.props.pins) return;
+        this.markers = [];
         this.props.pins.map( pin => {
             let marker = new window.google.maps.Marker({
                 position: {lat: pin.lat, lng: pin.long},
                 title: 'Test'
             })
+            let infoWindow = new window.google.maps.InfoWindow({
+                content: pin.description,
+            })
+            marker.addListener('click', () => {
+                infoWindow.open({
+                    anchor: marker,
+                    map: this.map,
+                    shouldFocus: false,
+                })
+            })
+            this.markers.push(marker);
             marker.setMap(this.map)
         })
     }
+
+    clearMarkers() {
+        for (let i = 0; i < this.markers.length; i++) {
+            this.markers[i].setMap(null);
+        };
+    };
 
     placeMarker(location) {
         this.marker = new window.google.maps.Marker({
@@ -129,7 +164,7 @@ class Map extends React.Component {
 
     render(){
         // if(!this.props.pins) return null;
-        this.setMarkers();
+        // this.setMarkers();
         this.setHeatMap();
         return(
             <div>
