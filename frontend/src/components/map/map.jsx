@@ -51,7 +51,7 @@ class Map extends React.Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
-        if (nextProps) {
+        if (nextProps.pins.length !== this.props.pins.length) {
             this.setState({ formOpen: false });
             if(this.marker){
                 this.marker.setMap(null);
