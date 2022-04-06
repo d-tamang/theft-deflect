@@ -8,13 +8,25 @@ html, body{
     height: 95vh;
 }
 
-.pin-form {
-    /* background: yellow;
+#add-incident {
+    background: #fb4b4b;
+    color: #fff;
+    border: none;
     position: absolute;
-    padding: 5vh;
-    height: 20vh;
-    top: 10vh;
-    left: 20vw;
-    z-index: 10; */
-    /* background: transparent; */
+    top: 20vh;
+    right: 1vw;
+    height: 4vh;
+    font-size: 1.3vh;
+    padding-left: 1.5vh;
+    padding-right: 1.5vh;
+    outline: none;
+    transition: ease 400ms;
+    z-index: 11;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#add-incident:hover {
+    background: white;
+    color: red;
 }
