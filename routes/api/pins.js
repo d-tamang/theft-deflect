@@ -11,15 +11,15 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ nopinsfound: 'No pins found' }));
 });
 
-router.get('/user/:user_id', (req, res) => {
-    Pin.find({ user: req.params.user_id })
-        .sort({ date: -1 })
-        .then(pins => res.json(pins))
-        .catch(err =>
-            res.status(404).json({ nopinsfound: 'No pins found from that user' }
-            )
-        );
-});
+// router.get('/user/:user_id', (req, res) => {
+//     Pin.find({ user: req.params.user_id })
+//         .sort({ date: -1 })
+//         .then(pins => res.json(pins))
+//         .catch(err =>
+//             res.status(404).json({ nopinsfound: 'No pins found from that user' }
+//             )
+//         );
+// });
 
 router.get('/:id', (req, res) => {
     Pin.findById(req.params.id)
@@ -42,6 +42,7 @@ router.post('/',
             user: req.user.id,
             lat: req.body.lat,
             long: req.body.long,
+            name: req.body.name,
             category: req.body.category,
             description: req.body.description,
         });

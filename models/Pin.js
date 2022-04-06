@@ -14,6 +14,9 @@ const PinSchema = new Schema({
         type: Number,
         required: true,
     },
+    name: {
+        type: String
+    },
     category: {
         type: String,
         required: true,

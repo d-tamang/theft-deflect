@@ -4,7 +4,7 @@ import { fetchPins } from '../../actions/pin_actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        pins: state.entities.pins,
+        pins: Object.values(state.entities.pins),
     }
 }
 
