@@ -1,24 +1,15 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-item {
+.navbar {
     position: relative;
     overflow: hidden;
-    padding-top: 2%;
 }
 
 .logo {
-    cursor: pointer;
     text-decoration: none;
     color: #38877a;
     font-size: 30px;
-    font-weight: 700;
     float: none;
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: sans-serif;
@@ -40,16 +31,11 @@
 }
 
 .navbar-button {
-    padding: 15px 15px;
+    padding: 12px 12px;
+    width: 110px;
     background-color: #38877a;
     border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease 0s;
+    border-radius: 10px;
     color: white;
     font-size: 12px;
-}
-
-.navbar-button:hover {
-    opacity: 0.9;
 }

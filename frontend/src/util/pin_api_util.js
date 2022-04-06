@@ -4,9 +4,9 @@ export const getPins = () => {
   return axios.get('/api/pins')
 };
 
-export const getUserPins = id => {
-  return axios.get(`/api/pins/user/${id}`)
-};
+// export const getUserPins = id => {
+//   return axios.get(`/api/pins/user/${id}`)
+// };
 
 export const postPin = data => {
   return axios.post('/api/pins/', data)

@@ -1,4 +1,4 @@
-import { RECEIVE_PINS, RECEIVE_USER_PINS, RECEIVE_NEW_PIN, REMOVE_PIN } from '../actions/pin_actions';
+import { RECEIVE_PINS, RECEIVE_NEW_PIN, REMOVE_PIN } from '../actions/pin_actions';
 
 let newState = [];
 
@@ -9,8 +9,6 @@ const pinsReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_PINS:
       return action.pins.data;
-    // case RECEIVE_USER_PINS:
-    //   return newState;
     case RECEIVE_NEW_PIN:
       newState = newState.concat(state)
       newState.push(action.pin.data) 

@@ -14,15 +14,15 @@ class NavBar extends React.Component {
 
   showLinks() {
     if (this.props.loggedIn) {
-      return <div className='navbar-item'>
+      return <div className='navbar'>
         <Link to="/" className='logo'>TheftDeflect</Link>
         <ul className='nav-links'>
           <li><button className='navbar-button'><Link to="/account" className='my-account'>MY ACCOUNT</Link></button></li>
-          <li><button className='navbar-button' onClick={(e) => this.logoutUser(e)} >LOGOUT</button></li>
+          <li><button className='navbar-button' onClick={(e) => this.logoutUser(e)} >LOG OUT</button></li>
         </ul>
       </div>
     } else {
-      return <div className='navbar-item'>
+      return <div className='navbar'>
         <Link to="/" className='logo'>TheftDeflect</Link>
         <ul className='nav-links'>
           <li><button className='navbar-button' onClick={() => this.props.openModal('login')}>LOG IN</button></li>
