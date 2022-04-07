@@ -100,6 +100,7 @@ class PinShow extends React.Component {
     return (
       <div>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
+        {this.categoryImage()}
         <div>{this.showDate()}</div>
 
         {this.state.editMode && (
