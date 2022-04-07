@@ -17,6 +17,7 @@ class NavBar extends React.Component {
       return <div className='navbar'>
         <Link to="/" className='logo'>TheftDeflect</Link>
         <ul className='nav-links'>
+          <li><button className='navbar-button'><Link to="/about" className='about'>ABOUT</Link></button></li>
           <li><button className='navbar-button'><Link to="/account" className='my-account'>MY ACCOUNT</Link></button></li>
           <li><button className='navbar-button' onClick={(e) => this.logoutUser(e)} >LOG OUT</button></li>
         </ul>
@@ -25,6 +26,7 @@ class NavBar extends React.Component {
       return <div className='navbar'>
         <Link to="/" className='logo'>TheftDeflect</Link>
         <ul className='nav-links'>
+          <li><button className='navbar-button'><Link to="/about" className='about'>ABOUT</Link></button></li>
           <li><button className='navbar-button' onClick={() => this.props.openModal('login')}>LOG IN</button></li>
           <li><button className='navbar-button' onClick={() => this.props.openModal('signup')}>SIGN UP</button></li>
         </ul>
