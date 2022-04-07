@@ -1,13 +1,13 @@
 .navbar {
     position: relative;
     overflow: hidden;
-    background: #81bdb3;
-    border-bottom: 2px solid #0c302a;
+    background: rgb(2, 60, 85 );
+    border-bottom: 2px solid #010101;
 }
 
 .logo {
     text-decoration: none;
-    color: #246f63;
+    color: #ffffff;
     font-size: 4vh;
     float: none;
     position: absolute;
@@ -30,19 +30,38 @@
 .my-account {
     text-decoration: none;
     color: white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.my-account:hover {
+    color: rgb(39, 59, 102)
 }
 
 .about {
     text-decoration: none;
     color: white;
+    padding: 1.2vh;
+    padding-left: 2.1vh;
+    padding-right: 3.5vh;
+}
+
+.about:hover {
+    color: rgb(39, 59, 102);
 }
 
 .navbar-button {
     padding: 12px 12px;
     width: 110px;
-    background-color: #38877a;
-    border: none;
+    background-color: rgb(39, 59, 102);
+    border: 1px solid black;
     border-radius: 10px;
     color: white;
     font-size: 12px;
+    font-weight: bold;
+}
+
+.navbar-button:hover {
+    background: white;
+    color: rgb(39, 59, 102);
 }
