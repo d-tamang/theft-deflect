@@ -44,6 +44,7 @@ class Map extends React.Component {
 
         this.map.addListener('click', (e) => {
             this.closeAllInfoWindows();
+            document.getElementById('pin-show-id').style.height = "0%";
         })
 
         this.props.fetchPins()
