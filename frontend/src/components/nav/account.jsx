@@ -29,9 +29,9 @@ class Account extends React.Component {
     } else {
       return userPins.map((pin, i) => (
         <div key={i} className="report">
-          <div>{this.getDate(pin._id)}</div>
-          <div>{pin.category}</div>
-          <div id="description">{pin.description}</div>
+          <div id='report-date'>{this.getDate(pin._id)}</div>
+          <div id='report-category'>{pin.category}</div>
+          <div id="report-description">{pin.description}</div>
           <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><img id="delete-icon"src="/images/deleteicon.png"/></button>
         </div>
       ))
@@ -41,7 +41,7 @@ class Account extends React.Component {
   render() {
     if (!this.props.pins) return null;
     return (
-      <div>
+      <div className='account-show'>
         <div id="account-header">{this.props.currentUser.username}: Your Reports</div>
         <div className="reports-grid">{this.showUserPins()}</div>
       </div>

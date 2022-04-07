@@ -74,6 +74,26 @@ class PinShow extends React.Component {
     this.setState({ editMode: true })
   }
 
+  categoryImage(){
+    if (this.props.pin.category === 'Break In') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else if (this.props.pin.category === 'Parts Theft') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else if (this.props.pin.category === 'Vandalism') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    }
+  }
+
   render() {
     const pin = this.props.pin;
 
