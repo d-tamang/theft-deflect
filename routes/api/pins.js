@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const Pin = require('../../models/Pin');
 const validatepinInput = require('../../validation/pins');
+const User = require('../../models/User')
 
 router.get('/', (req, res) => {
     Pin.find()
@@ -20,6 +21,24 @@ router.get('/', (req, res) => {
 //             )
 //         );
 // });
+
+router.delete('/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const pinId = req.params.id
+        
+        Pin.findByIdAndDelete(pinId)
+            .then((err, pin) =>{
+                    if (err) {
+                        return res.json(err)
+                    } else {
+                        return res.json({msg: 'Pin deleted'})
+                    }
+                }
+            )
+            
+    }
+)
 
 router.get('/:id', (req, res) => {
     Pin.findById(req.params.id)
