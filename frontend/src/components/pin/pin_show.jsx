@@ -7,7 +7,14 @@ class PinShow extends React.Component {
 
     this.state = {
       editMode: false,
+      lat: this.props.pin.lat,
+      long: this.props.pin.long,
+      category: this.props.pin.category,
+      description: this.props.pin.description,
     }
+    this.changeCategory = this.changeCategory.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   showDate() {
@@ -18,6 +25,40 @@ class PinShow extends React.Component {
   closeShow(e) {
     e.preventDefault();
     document.getElementById('pin-show-id').style.height = "0";
+  }
+
+  // update, changeCategory, and handleSubmit are for the edit function
+
+  update(field) {
+    return e => this.setState({
+        [field]: e.currentTarget.value
+    });
+  }
+
+  changeCategory(e) {
+    this.setState({category: e.target.value})
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let pin = {
+        _id: this.props.pin._id,
+        lat: this.state.lat,
+        long: this.state.long,
+        category: this.state.category,
+        description: this.state.description
+    };
+
+    this.props.updatePin(pin).then(
+        () => {
+            this.setState({ errors: this.props.errors })
+        }
+    )
+    this.setState({
+        editMode: false,
+        category: '',
+        description: '',
+    });
   }
 
   deletePin(e, pinId) {
@@ -33,35 +74,42 @@ class PinShow extends React.Component {
 
   render() {
     const pin = this.props.pin;
+    const category = () => {
+      return {
+
+      }
+    }
+
     return (
       <div>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
         <div>{this.showDate()}</div>
 
         {this.state.editMode && (
-          <div>
-            <input type="text" placeholder={pin.category}/>
-          </div>
+          <form onSubmit={this.handleSubmit}>
+            <label>Category</label> <br/>
+            <select onChange={this.changeCategory} category={this.state.category}>   
+                            <option value={'Break In'}>Break In</option>
+                            <option value={'Vandalism'}>Vandalism</option>
+                            <option value={'Parts Theft'}>Parts Theft</option>
+                            <option value={'Stolen Vehicle'}>Stolen Vehicle</option>
+                        </select> <br/>
+            <label>Description</label> <br/>
+            <textarea type="text" value={this.state.description} onChange={this.update('description')} rows='6'/>
+            <button className="form-submit">SUBMIT CHANGES</button>
+          </form>
         )}
+
         {!this.state.editMode && (
-          <div>{pin.category}</div>
-        )}
-        {this.state.editMode && (
           <div>
-            <input type="text" placeholder={pin.description}/>
+            <div>{pin.category}</div>
+            <div>{pin.description}</div>
           </div>
-        )}
-        {!this.state.editMode && (
-          <div>{pin.description}</div>
         )}
         {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>
-          {this.state.editMode && (
-            <button onClick={(e) => this.editPin(e, pin)}>SUBMIT CHANGES</button>
-          )}
           {!this.state.editMode && (
             <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button>
           )}
-          {/* <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button> */}
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
         </div> : <div id="hidden-div"></div>}
         <div>Leave a Comment</div>
