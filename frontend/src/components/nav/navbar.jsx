@@ -15,18 +15,20 @@ class NavBar extends React.Component {
   showLinks() {
     if (this.props.loggedIn) {
       return <div className='navbar'>
-        <Link to="/" className='logo'>TheftDeflect</Link>
+        <div className='logo'>TheftDeflect</div>
         <ul className='nav-links'>
-          <li><button className='navbar-button'><Link to="/about" className='about'>ABOUT</Link></button></li>
-          <li><button className='navbar-button'><Link to="/account" className='my-account'>MY ACCOUNT</Link></button></li>
+          <li><button className='navbar-button'><Link to="/">MAP</Link></button></li>
+          <li><button className='navbar-button'><Link to="/about">ABOUT</Link></button></li>
+          <li><button className='navbar-button'><Link to="/account">MY ACCOUNT</Link></button></li>
           <li><button className='navbar-button' onClick={(e) => this.logoutUser(e)} >LOG OUT</button></li>
         </ul>
       </div>
     } else {
       return <div className='navbar'>
-        <Link to="/" className='logo'>TheftDeflect</Link>
+        <div className='logo'>TheftDeflect</div>
         <ul className='nav-links'>
-          <li><button className='navbar-button'><Link to="/about" className='about'>ABOUT</Link></button></li>
+          <li><button className='navbar-button'><Link to="/">MAP</Link></button></li>
+          <li><button className='navbar-button'><Link to="/about">ABOUT</Link></button></li>
           <li><button className='navbar-button' onClick={() => this.props.openModal('login')}>LOG IN</button></li>
           <li><button className='navbar-button' onClick={() => this.props.openModal('signup')}>SIGN UP</button></li>
         </ul>

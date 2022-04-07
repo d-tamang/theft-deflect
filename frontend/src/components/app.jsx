@@ -8,6 +8,7 @@ import AccountContainer from './nav/account_container';
 import PinShowContainer from './pin/pin_show_container';
 import AboutPage from './nav/about_page';
 import './app.css';
+import './reset.css';
 
 const App = () => (
   <div className="app">

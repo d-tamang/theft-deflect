@@ -83,7 +83,7 @@ class PinForm extends React.Component {
                                 onChange={this.update('description')}
                                 className='form-textarea'
                             />
-                        <input type="submit" value="Report" className="form-submit" />
+                        <button id="form-submit">REPORT</button>
                     </div>
                 </form>
             </div>

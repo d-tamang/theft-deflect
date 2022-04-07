@@ -1,8 +1,26 @@
 /* @font-face {
   font-family: "Inter-Light";
-  src: local("Inter-Light"), url("../fonts/Inter-Light.ttf"), format("truetype");
+  src: url("../fonts/Inter-Light.ttf"), format("truetype");
 } */
 
-button:hover {
+.app {
+  font-family: sans-serif;
+}
+
+button {
+  transition: all 0.2s ease 0s;
+}
+
+button:hover{
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
   cursor: pointer;
 }

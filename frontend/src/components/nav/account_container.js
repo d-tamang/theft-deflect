@@ -3,7 +3,7 @@ import { fetchPins, updatePin, destroyPin } from '../../actions/pin_actions';
 import Account from './account';
 
 const mapStateToProps = state => ({
-  currentUserId: state.session.user.id,
+  currentUser: state.session.user,
   pins: Object.values(state.entities.pins)
 });
 

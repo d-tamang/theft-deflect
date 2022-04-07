@@ -1,20 +1,19 @@
 .navbar {
     position: relative;
     overflow: hidden;
-    background: #81bdb3;
+    background: rgb(135, 170, 180);
     border-bottom: 2px solid #0c302a;
+    padding: 2%;
 }
 
 .logo {
     text-decoration: none;
-    color: #246f63;
     font-size: 4vh;
     float: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: sans-serif;
 }
 
 .nav-links {
@@ -27,20 +26,10 @@
     padding: 0px 20px;
 }
 
-.my-account {
-    text-decoration: none;
-    color: white;
-}
-
-.about {
-    text-decoration: none;
-    color: white;
-}
-
 .navbar-button {
     padding: 12px 12px;
     width: 110px;
-    background-color: #38877a;
+    background-color: #334988;
     border: none;
     border-radius: 10px;
     color: white;

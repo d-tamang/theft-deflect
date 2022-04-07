@@ -17,7 +17,7 @@ class Account extends React.Component {
   showUserPins() {
     let userPins = [];
     for (let pin of this.props.pins) {
-      if (pin.user === this.props.currentUserId ) {
+      if (pin.user === this.props.currentUser.id ) {
         userPins.push(pin);
       }
     }
@@ -37,10 +37,11 @@ class Account extends React.Component {
   }
 
   render() {
+    debugger
     if (!this.props.pins) return null;
     return (
       <div>
-        <div>Your Reports</div>
+        <div>{this.props.currentUser.username}: Your Reports</div>
         {this.showUserPins()}
       </div>
     )
