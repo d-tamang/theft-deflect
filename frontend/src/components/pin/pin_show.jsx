@@ -5,6 +5,7 @@ import CommentIndex from '../comments/comment_index';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
+    this.showContainer = React.createRef();
 
     this.state = {
       editMode: false,
@@ -15,6 +16,7 @@ class PinShow extends React.Component {
     }
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeShow = this.closeShow.bind(this);
 
   }
 
@@ -26,6 +28,7 @@ class PinShow extends React.Component {
   closeShow(e) {
     e.preventDefault();
     document.getElementById('pin-show-id').style.height = "0";
+    this.setState({ editMode: false })
   }
 
   // update, changeCategory, and handleSubmit are for the edit function
@@ -38,6 +41,14 @@ class PinShow extends React.Component {
 
   changeCategory(e) {
     this.setState({ category: e.target.value })
+  }
+
+  handleClickOutsideForm = (event) => {
+    if (this.showContainer.current && !this.showContainer.current.contains(event.target)) {
+        this.setState({
+            editMode: false,
+        });
+    }
   }
 
   handleSubmit(e) {
@@ -71,6 +82,7 @@ class PinShow extends React.Component {
   editPin(e, pin) {
     e.preventDefault();
     this.setState({ editMode: true })
+    document.addEventListener("mousedown", this.handleClickOutsideForm);
   }
 
   categoryImage() {
@@ -97,7 +109,7 @@ class PinShow extends React.Component {
     const pin = this.props.pin;
 
     return (
-      <div>
+      <div ref={this.showContainer}>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
         {this.categoryImage()}
         <div>{this.showDate()}</div>
@@ -105,11 +117,11 @@ class PinShow extends React.Component {
         {this.state.editMode && (
           <form onSubmit={this.handleSubmit}>
             <label>Category</label> <br />
-            <select onChange={this.changeCategory} category={this.state.category}>
-              <option value={'Break In'}>Break In</option>
-              <option value={'Vandalism'}>Vandalism</option>
-              <option value={'Parts Theft'}>Parts Theft</option>
-              <option value={'Stolen Vehicle'}>Stolen Vehicle</option>
+            <select onChange={this.changeCategory} category={this.state.category} value={this.state.category}>
+              <option value={'Break In'} >Break In</option>
+              <option value={'Vandalism'} >Vandalism</option>
+              <option value={'Parts Theft'} >Parts Theft</option>
+              <option value={'Stolen Vehicle'} >Stolen Vehicle</option>
             </select> <br />
             <label>Description</label> <br />
             <textarea type="text" value={this.state.description} onChange={this.update('description')} rows='6' />
