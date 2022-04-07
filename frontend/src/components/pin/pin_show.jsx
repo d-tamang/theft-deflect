@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentForm from '../comments/comment_form';
+import CommentIndex from '../comments/comment_index';
 
 class PinShow extends React.Component {
   constructor(props) {
@@ -112,9 +113,15 @@ class PinShow extends React.Component {
           )}
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
         </div> : <div id="hidden-div"></div>}
+        <CommentIndex
+          pin={this.props.pin}
+          comments={this.props.comments}
+          fetchPinComments={this.props.fetchPinComments}
+        />
         <div>Leave a Comment</div>
         <CommentForm
           currentUser={this.props.currentUser}
+          loggedIn={this.props.loggedIn}
           pin={this.props.pin}
           openModal={this.props.openModal}
           createComment={this.props.createComment}

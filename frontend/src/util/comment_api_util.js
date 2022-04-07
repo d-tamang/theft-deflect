@@ -4,8 +4,8 @@ export const getComments = () => {
     return axios.get('/api/comments')
 };
 
-export const getUserComments = id => {
-    return axios.get(`/api/comments/user/${id}`)
+export const getPinComments = id => {
+    return axios.get(`/api/comments/pins/${id}`)
 };
 
 export const postComment = data => {
