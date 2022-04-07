@@ -1,4 +1,5 @@
 import React from 'react';
+import './account.css'
 
 class Account extends React.Component {
   constructor(props) {
@@ -27,22 +28,22 @@ class Account extends React.Component {
       )
     } else {
       return userPins.map((pin, i) => (
-        <div key={i} className="pin">
-          <div>{pin.category}</div>
-          <div>{pin.description}</div>
+        <div key={i} className="report">
           <div>{this.getDate(pin._id)}</div>
+          <div>{pin.category}</div>
+          <div id="description">{pin.description}</div>
+          <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><img id="delete-icon"src="/images/deleteicon.png"/></button>
         </div>
       ))
     }
   }
 
   render() {
-    debugger
     if (!this.props.pins) return null;
     return (
       <div>
-        <div>{this.props.currentUser.username}: Your Reports</div>
-        {this.showUserPins()}
+        <div id="account-header">{this.props.currentUser.username}: Your Reports</div>
+        <div className="reports-grid">{this.showUserPins()}</div>
       </div>
     )
   }
