@@ -1,5 +1,6 @@
 import React from "react";
 import './pin.css';
+
 class PinForm extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +8,7 @@ class PinForm extends React.Component {
         this.state = {
             lat: this.props.lat,
             long: this.props.long,
-            category: 'BreakIn',
+            category: 'Break In',
             description: '',
         }
 
@@ -70,20 +71,19 @@ class PinForm extends React.Component {
 
                         <label className="formLabel">Category</label>
                         <select onChange={this.changeCategory} category={this.state.category}>   
-                            <option value={'BreakIn'}>Break In</option>
+                            <option value={'Break In'}>Break In</option>
                             <option value={'Vandalism'}>Vandalism</option>
-                            <option value={'PartsTheft'}>Parts Theft</option>
-                            <option value={'StolenVehicle'}>Stolen Vehicle</option>
+                            <option value={'Parts Theft'}>Parts Theft</option>
+                            <option value={'Stolen Vehicle'}>Stolen Vehicle</option>
                         </select>
                         
-
                         <label className="formLabel">Description</label>
                             <input type="textarea"
                                 value={this.state.description}
                                 onChange={this.update('description')}
                                 className='form-textarea'
                             />
-                        <button id="form-submit">REPORT</button>
+                            <button className="form-submit">REPORT</button>
                     </div>
                 </form>
             </div>

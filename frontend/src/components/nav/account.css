@@ -1,0 +1,31 @@
+.account-btn {
+  background-color: #fff;
+  border: none;
+}
+
+#delete-icon {
+  width: 30px;
+  height: 35px;
+}
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 5%;
+  text-align: center;
+  margin-left: 5%;
+}
+
+#account-header {
+  text-align: center;
+  font-size: 30px;
+  margin: 2.5%;
+}
+
+.report {
+  width: 80%;
+}
+
+#description {
+  text-align: left;
+}
