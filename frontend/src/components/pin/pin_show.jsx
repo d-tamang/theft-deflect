@@ -4,6 +4,10 @@ import CommentForm from '../comments/comment_form';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      editMode: false,
+    }
   }
 
   showDate() {
@@ -24,6 +28,7 @@ class PinShow extends React.Component {
 
   editPin(e, pin) {
     e.preventDefault();
+    this.setState({ editMode: true })
   }
 
   render() {
@@ -32,10 +37,31 @@ class PinShow extends React.Component {
       <div>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
         <div>{this.showDate()}</div>
-        <div>{pin.category}</div>
-        <div>{pin.description}</div>
+
+        {this.state.editMode && (
+          <div>
+            <input type="text" placeholder={pin.category}/>
+          </div>
+        )}
+        {!this.state.editMode && (
+          <div>{pin.category}</div>
+        )}
+        {this.state.editMode && (
+          <div>
+            <input type="text" placeholder={pin.description}/>
+          </div>
+        )}
+        {!this.state.editMode && (
+          <div>{pin.description}</div>
+        )}
         {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>
-          <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button>
+          {this.state.editMode && (
+            <button onClick={(e) => this.editPin(e, pin)}>SUBMIT CHANGES</button>
+          )}
+          {!this.state.editMode && (
+            <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button>
+          )}
+          {/* <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button> */}
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
         </div> : <div id="hidden-div"></div>}
         <div>Leave a Comment</div>
