@@ -15,7 +15,7 @@ class NavBar extends React.Component {
   showLinks() {
     if (this.props.loggedIn) {
       return <div className='navbar'>
-        <div className='logo'>TheftDeflect</div>
+        <div className='logo'>Theft Deflect</div>
         <ul className='nav-links'>
           <li><button className='navbar-button'><Link to="/">MAP</Link></button></li>
           <li><button className='navbar-button'><Link to="/about">ABOUT</Link></button></li>

@@ -2,9 +2,10 @@
   font-family: "Inter-Light";
   src: url("../fonts/Inter-Light.ttf"), format("truetype");
 } */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
 .app {
-  font-family: sans-serif;
+  font-family: 'Inter';
 }
 
 button {
