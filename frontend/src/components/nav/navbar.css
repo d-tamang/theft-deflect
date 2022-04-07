@@ -1,13 +1,14 @@
 .navbar {
     position: relative;
     overflow: hidden;
-    background: yellow;
+    background: #81bdb3;
+    border-bottom: 2px solid #0c302a;
 }
 
 .logo {
     text-decoration: none;
-    color: #38877a;
-    font-size: 30px;
+    color: #246f63;
+    font-size: 4vh;
     float: none;
     position: absolute;
     top: 50%;
@@ -27,6 +28,11 @@
 }
 
 .my-account {
+    text-decoration: none;
+    color: white;
+}
+
+.about {
     text-decoration: none;
     color: white;
 }

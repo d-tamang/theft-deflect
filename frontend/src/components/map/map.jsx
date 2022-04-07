@@ -245,6 +245,7 @@ class Map extends React.Component {
                 <div>{clickedPin}</div>
 
                 <div id="floating-panel">
+                    <h4>This will be removed later</h4>
                     <div>
                         <div>Change Zoom </div>
                         <button onClick={() => this.changeZoom(-1)}>-</button>

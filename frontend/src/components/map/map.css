@@ -1,11 +1,12 @@
 html, body{
     margin: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 #map {
-    width: 99.6vw;
-    height: 95vh;
+    width: 99.99vw;
+    height: 96vh;
 }
 
 #add-incident {
@@ -13,10 +14,11 @@ html, body{
     color: #fff;
     border: none;
     position: absolute;
-    top: 20vh;
-    right: 1vw;
-    height: 4vh;
-    font-size: 1.3vh;
+    top: 5vh;
+    left: 88vw;
+    height: 5vh;
+    width: 10vw;
+    font-size: 1.7vh;
     padding-left: 1.5vh;
     padding-right: 1.5vh;
     outline: none;
@@ -29,4 +31,11 @@ html, body{
 #add-incident:hover {
     background: white;
     color: red;
+}
+
+#floating-panel {
+    position: absolute;
+    background: white;
+    z-index: 12;
+    padding: 1vh;
 }
