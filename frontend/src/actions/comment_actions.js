@@ -1,17 +1,17 @@
-import { getComments, getUserComments, postComment, editComment, deleteComment } from "../util/comment_api_util";
+import { getComments, getPinComments, postComment, editComment, deleteComment } from "../util/comment_api_util";
 
-export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
-export const RECEIVE_USER_COMMENTS = "RECEIVE_USER_COMMENTS";
+// export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+export const RECEIVE_PIN_COMMENTS = "RECEIVE_PIN_COMMENTS";
 export const RECEIVE_NEW_COMMENT = "RECEIVE_NEW_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 
-const receiveComments = comments => ({
-    type: RECEIVE_COMMENTS,
-    comments
-});
+// const receiveComments = comments => ({
+//     type: RECEIVE_COMMENTS,
+//     comments
+// });
 
-const receiveUserComments = comments => ({
-    type: RECEIVE_USER_COMMENTS,
+const receivePinComments = comments => ({
+    type: RECEIVE_PIN_COMMENTS,
     comments
 });
 
@@ -25,15 +25,15 @@ const removeComment = comment => ({
     comment
 });
 
-export const fetchComments = () => dispatch => (
-    getComments()
-        .then(comments => dispatch(receiveComments(comments)))
-        .catch(err => console.log(err))
-);
+// export const fetchComments = () => dispatch => (
+//     getComments()
+//         .then(comments => dispatch(receiveComments(comments)))
+//         .catch(err => console.log(err))
+// );
 
-export const fetchUserComments = id => dispatch => (
-    getUserComments(id)
-        .then(comments => dispatch(receiveUserComments(comments)))
+export const fetchPinComments = id => dispatch => (
+    getPinComments(id)
+        .then(comments => dispatch(receivePinComments(comments)))
         .catch(err => console.log(err))
 );
 

@@ -18,7 +18,7 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
-        this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
+        // this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
 
@@ -42,9 +42,9 @@ class Map extends React.Component {
             this.changeMapType();
         });
 
-        this.map.addListener('click', (e) => {
-            this.closeAllInfoWindows();
-        })
+        // this.map.addListener('click', (e) => {
+        //     this.closeAllInfoWindows();
+        // })
 
         this.props.fetchPins()
             .then(() => this.generateMarkers())
@@ -92,11 +92,11 @@ class Map extends React.Component {
                 position: { lat: newPins[i].lat, lng: newPins[i].long },
                 title: newPins[i].category
             })
-            marker.infoWindow = new window.google.maps.InfoWindow({
-                content: newPins[i].category
-            }) // have to leave this here for report incident modal to pop up
+            // marker.infoWindow = new window.google.maps.InfoWindow({
+            //     content: newPins[i].category
+            // }) // have to leave this here for report incident modal to pop up
             marker.addListener('click', () => {
-                this.closeAllInfoWindows();
+                // this.closeAllInfoWindows();
                 // marker.infoWindow.open({
                 //     anchor: marker,
                 //     map: this.map,
@@ -109,11 +109,11 @@ class Map extends React.Component {
         }
     }
 
-    closeAllInfoWindows() {
-        this.markers.forEach(marker => {
-            marker.infoWindow.close();
-        })
-    }
+    // closeAllInfoWindows() {
+    //     this.markers.forEach(marker => {
+    //         marker.infoWindow.close();
+    //     })
+    // }
 
     setMarkers() {
         for (let i = 0; i < this.markers.length; i++) {
