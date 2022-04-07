@@ -155,6 +155,9 @@ class Map extends React.Component {
     placeMarker(location) {
         this.map.setOptions({ draggableCursor: '' }); //changes cursor back to normal on placement
 
+        let button = document.getElementById('add-incident'); //changes text back to original
+        button.innerHTML = 'Report Incident'
+
         this.marker = new window.google.maps.Marker({
             position: location,
             map: this.map
@@ -173,6 +176,9 @@ class Map extends React.Component {
     toggleReportListener(e) {
         if (this.map_key) return;
         this.map.setOptions({ draggableCursor: 'crosshair' }); //changes cursor on toggle
+
+        let button = document.getElementById('add-incident'); //changes text on toggle
+        button.innerHTML = 'Click On Map'
 
         this.map_key = window.google.maps.event.addListener(this.map, 'click', (event) => {
             this.placeMarker(event.latLng);
