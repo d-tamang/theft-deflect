@@ -22,14 +22,13 @@ router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validateCommentInput(req.body);
-
         if (!isValid) {
             return res.status(400).json(errors)
         }
-
+        console.log(req);
         const newComment = new Comment({
-            user: req.user.id,
-            pin: req.pin._id,
+            user: req.body.user,
+            pin: req.body.pin,
             text: req.body.text
         })
 
