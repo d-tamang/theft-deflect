@@ -49,15 +49,30 @@
     color: rgb(255, 255, 255);
 }
 
-.pin-show {
+#pin-show-id {
     height: 0;
-    width: 50%;
+    width: 40%;
     position: fixed;
     z-index: 1;
     top: 0;
-    right: 0;
+    left: 0;
     background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
     border: 1px solid #333;
+}
+
+#hidden-div {
+    display: none;
+}
+
+.close-btn {
+    background-color: #fff;
+    border: none;
+    float: right;
+}
+
+#close-icon {
+    width: 70px;
+    height: 70px;
 }

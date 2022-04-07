@@ -1,7 +1,8 @@
 import React from 'react';
-import './map.css';
 import PinFormContainer from '../pin/pin_form_container';
-import { style, gradient } from './map_style'
+import { style, gradient } from './map_style';
+import PinShowContainer from '../pin/pin_show_container';
+import './map.css';
 
 class Map extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-
         // Center is San Francisco
         const center = { lat: 37.777652, lng: -122.437503 };
         const zoom = 12;
@@ -92,21 +92,18 @@ class Map extends React.Component {
                 position: { lat: newPins[i].lat, lng: newPins[i].long },
                 title: newPins[i].category
             })
-            let date = new Date(parseInt(newPins[i]._id.substring(0, 8), 16) * 1000);
-            let pinDate = date.toString().slice(3, 15);
-            // let infoWindow = new window.google.maps.InfoWindow({
-            //     content: `<div>${pinDate}</div>` + `<a href="http://localhost:3000/#/pins/${newPins[i]._id}">See More</a>`
             marker.infoWindow = new window.google.maps.InfoWindow({
-                content: `<div>${pinDate}</div>` + `<a href="http://localhost:3000/#/pins/${newPins[i]._id}">See More</a>`
-            })
+                content: newPins[i].category
+            }) // have to leave this here for report incident modal to pop up
             marker.addListener('click', () => {
                 this.closeAllInfoWindows();
-                marker.infoWindow.open({
-                    anchor: marker,
-                    map: this.map,
-                    shouldFocus: false,
-                })
+                // marker.infoWindow.open({
+                //     anchor: marker,
+                //     map: this.map,
+                //     shouldFocus: false,
+                // })
                 this.setState({ clickedPin : newPins[i]});
+                document.getElementById('pin-show-id').style.height = "100%";
             })
             this.markers.push(marker);
         }
@@ -173,7 +170,7 @@ class Map extends React.Component {
         this.map_key = null;
     }
 
-    toggleReportListener(e) {
+    toggleReportListener() {
         if (this.map_key) return;
         this.map.setOptions({ draggableCursor: 'crosshair' }); //changes cursor on toggle
 
@@ -224,10 +221,7 @@ class Map extends React.Component {
         if(this.state.clickedPin){
             console.log(this.state.clickedPin)
             clickedPin = <div>
-                <div>{this.state.clickedPin.category}</div>
-                <div>{this.state.clickedPin.description}</div>
-                <div>{this.state.clickedPin.lat}</div>
-                <div>{this.state.clickedPin.long}</div>
+                <PinShowContainer pin={this.state.clickedPin} />
             </div>
         } else {
             clickedPin = <div></div>
@@ -243,13 +237,10 @@ class Map extends React.Component {
         return (
             <div>
                 {this.state.formOpen && (
-                    <div ref={this.logContainer} className='pin-form'>
+                    <div ref={this.logContainer}>
                         <PinFormContainer lat={this.state.lat} long={this.state.lng} />
                     </div>
                 )}
-
-                <div>{clickedPin}</div>
-
                 <div id="floating-panel">
                     <h4>This will be removed later</h4>
                     <div>
@@ -267,10 +258,10 @@ class Map extends React.Component {
                         <button onClick={() => this.changeOpacity(-0.05)}>-</button>
                         <button onClick={() => this.changeOpacity(0.05)}>+</button>
                     </div>
-                    {/* <button id="add-incident" onClick={this.toggleReportListener}>Report Incident</button> */}
                     {incidentButton}
                 </div>
                 <div id="map" />
+                <div id="pin-show-id">{clickedPin}</div>
             </div>
         )
     }
