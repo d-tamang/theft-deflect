@@ -12,7 +12,7 @@
 .reports-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 5%;
+  row-gap: 2%;
   text-align: center;
   margin-left: 5%;
   margin-right: 5%;
@@ -20,16 +20,17 @@
 
 #account-header {
   text-align: center;
-  font-size: 30px;
+  font-size: 35px;
   margin: 2.5%;
+  font-weight: bolder;
 }
 
 .report {
   width: 90%;
-  box-shadow: 2px 2px 5px gray, -2px -2px 5px gray;
   padding: 5%;
   font-family: sans-serif;
   margin-right: 2%;
+  box-shadow: 2px 2px 5px gray, -2px -2px 5px gray;
 }
 
 #report-description {
@@ -39,12 +40,12 @@
 #report-date {
   font-size: 150%;
   font-weight: 700;
+  margin-top: 3%;
 }
 
 #report-category {
   font-size: 120%;
-  margin-top: 2%;
-  /* color: red; */
+  margin-top: 3%;
 }
 
 #report-description {

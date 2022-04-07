@@ -26,6 +26,26 @@ class PinShow extends React.Component {
     e.preventDefault();
   }
 
+  categoryImage(){
+    if (this.props.pin.category === 'Break In') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else if (this.props.pin.category === 'Parts Theft') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else if (this.props.pin.category === 'Vandalism') {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    } else {
+      return (
+        <img src='/images/deleteicon.png' width='100' height='100'></img>
+      )
+    }
+  }
+
   render() {
     const pin = this.props.pin;
     return (
@@ -33,6 +53,7 @@ class PinShow extends React.Component {
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
         <div>{this.showDate()}</div>
         <div>{pin.category}</div>
+        <div>{this.categoryImage()}</div>
         <div>{pin.description}</div>
         {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>
           <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button>
