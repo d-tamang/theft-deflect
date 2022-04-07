@@ -19,7 +19,7 @@
     transition: ease 400ms;
     z-index: 11;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 #add-incident:hover {

@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 .navbar {
+    /* font-family: 'Rubik Glitch'; */
+    font-family: 'Permanent Marker';
     position: relative;
     overflow: hidden;
-    background: rgb(135, 170, 180);
+    /* background: rgb(135, 170, 180); */
+    background-image: linear-gradient(to right, rgb(87, 128, 140) , rgb(123, 172, 185));
     border-bottom: 2px solid #0c302a;
-    padding: 2%;
+    padding: 1%;
+    color: rgb(13, 13, 84);
 }
 
 .logo {
