@@ -13,7 +13,7 @@ const sessionErrorsReducer = (state = _nullErrors, action) => {
     case RECEIVE_CURRENT_USER:
       return _nullErrors;
     default:
-      return state;
+      return [];
   }
 };
 
