@@ -13,10 +13,10 @@ const AboutPage = () => {
           <div>Disnee is a Bay Area native and worked in tech sales post college. Her favorite past time is hanging out with her two chihuahua-terrior dogs.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/disneetamang/"><FaLinkedin /></a>
+              <a href=""><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/d-tamang"><FaGithub /></a>
+              <a href=""><FaGithub /></a>
             </li>
             <li>
               <a href=""><FaAngellist /></a>
@@ -28,10 +28,10 @@ const AboutPage = () => {
           <div><img className="dev-pic" src="/images/justin2.png" /></div>
           <ul className='social-media'>
             <li>
-              <a href="www.linkedin.com/in/justin-nguyen-b851461b2"><FaLinkedin /></a>
+              <a href=""><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/justinneyugn"><FaGithub/></a>
+              <a href=""><FaGithub/></a>
             </li>
             <li>
               <a href=""><FaAngellist /></a>
@@ -43,10 +43,10 @@ const AboutPage = () => {
           <div><img className="dev-pic" src="/images/kenneth2.png" /></div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/kennethquach/"><FaLinkedin /></a>
+              <a href=""><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/kenquack"><FaGithub /></a>
+              <a href=""><FaGithub /></a>
             </li>
             <li>
               <a href=""><FaAngellist /></a>
@@ -58,10 +58,10 @@ const AboutPage = () => {
           <div><img className="dev-pic" src="/images/phillip2.png" /></div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/philliplai/"><FaLinkedin /></a>
+              <a href=""><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/pdlai"><FaGithub/></a>
+              <a href=""><FaGithub/></a>
             </li>
             <li>
               <a href=""><FaAngellist /></a>
