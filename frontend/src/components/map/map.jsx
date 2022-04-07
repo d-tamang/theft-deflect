@@ -9,7 +9,7 @@ class Map extends React.Component {
         super(props);
         this.logContainer = React.createRef();
         this.markers = [];
-        this.HeatMarkers = [];
+        this.heatMarkers = [];
         this.zoom = 13;
         this.state = {
             formOpen: false,
@@ -87,26 +87,39 @@ class Map extends React.Component {
         if (this.props.pins.length === this.markers.length) return;
         let newPins = this.props.pins;
         let length = this.markers.length;
-        for (let i = newPins.length - 1; i >= length; i--) {
-            let marker = new window.google.maps.Marker({
-                position: { lat: newPins[i].lat, lng: newPins[i].long },
-                title: newPins[i].category
+        if(newPins.length < length){
+            this.clearMarkers();
+            this.markers = [];
+            newPins.forEach(newPin => {
+                this.createPin(newPin);
             })
-            marker.infoWindow = new window.google.maps.InfoWindow({
-                content: newPins[i].category
-            }) // have to leave this here for report incident modal to pop up
-            marker.addListener('click', () => {
-                this.closeAllInfoWindows();
-                // marker.infoWindow.open({
-                //     anchor: marker,
-                //     map: this.map,
-                //     shouldFocus: false,
-                // })
-                this.setState({ clickedPin : newPins[i]});
-                document.getElementById('pin-show-id').style.height = "100%";
-            })
-            this.markers.push(marker);
+            return;
         }
+
+        for (let i = newPins.length - 1; i >= length; i--) {
+            this.createPin(newPins[i]);
+        }
+    }
+
+    createPin(newPin){
+        let marker = new window.google.maps.Marker({
+            position: { lat: newPin.lat, lng: newPin.long },
+            title: newPin.category
+        })
+        marker.infoWindow = new window.google.maps.InfoWindow({
+            content: newPin.category
+        }) // have to leave this here for report incident modal to pop up
+        marker.addListener('click', () => {
+            this.closeAllInfoWindows();
+            // marker.infoWindow.open({
+            //     anchor: marker,
+            //     map: this.map,
+            //     shouldFocus: false,
+            // })
+            this.setState({ clickedPin : newPin});
+            document.getElementById('pin-show-id').style.height = "100%";
+        })
+        this.markers.push(marker);
     }
 
     closeAllInfoWindows() {
@@ -129,24 +142,29 @@ class Map extends React.Component {
 
     generateHeatMap() {
         if (!this.props.pins) return;
-        if (this.props.pins.length === this.HeatMarkers.length) return;
+        if (this.props.pins.length === this.heatMarkers.length) return;
 
         let newPins = this.props.pins;
-        let length = this.HeatMarkers.length;
-        for (let i = newPins.length - 1; i >= length; i--) {
-            this.HeatMarkers.push(new window.google.maps.LatLng(newPins[i].lat, newPins[i].long))
+        let length = this.heatMarkers.length;
+        if (newPins.length < length){
+            this.heatMarkers = [];
+            newPins.forEach( newPin => {
+                this.heatMarkers.push(new window.google.maps.LatLng(newPin.lat, newPin.long))
+            })
+        } else {
+            for (let i = newPins.length - 1; i >= length; i--) {
+                this.heatMarkers.push(new window.google.maps.LatLng(newPins[i].lat, newPins[i].long))
+            }
         }
 
         if (this.heatmap) {
-            this.heatmap.setData(this.HeatMarkers)
+            this.heatmap.setData(this.heatMarkers)
         } else {
             this.heatmap = new window.google.maps.visualization.HeatmapLayer({
-                data: this.HeatMarkers
+                data: this.heatMarkers
             });
+            this.heatmap.set("gradient", gradient);
         }
-
-        // set settings on new creation of heatmap
-        this.heatmap.set("gradient", gradient);
     }
 
     placeMarker(location) {
