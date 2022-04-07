@@ -32,34 +32,33 @@ class PinShow extends React.Component {
 
   update(field) {
     return e => this.setState({
-        [field]: e.currentTarget.value
+      [field]: e.currentTarget.value
     });
   }
 
   changeCategory(e) {
-    this.setState({category: e.target.value})
+    this.setState({ category: e.target.value })
   }
 
   handleSubmit(e) {
-    debugger
     e.preventDefault();
     let pin = {
-        _id: this.props.pin._id,
-        lat: this.state.lat,
-        long: this.state.long,
-        category: this.state.category,
-        description: this.state.description
+      _id: this.props.pin._id,
+      lat: this.state.lat,
+      long: this.state.long,
+      category: this.state.category,
+      description: this.state.description
     };
 
     this.props.updatePin(pin).then(
-        () => {
-            this.setState({ errors: this.props.errors })
-        }
+      () => {
+        this.setState({ errors: this.props.errors })
+      }
     )
     this.setState({
-        editMode: false,
-        category: '',
-        description: '',
+      editMode: false,
+      category: '',
+      description: '',
     });
   }
 
@@ -74,7 +73,7 @@ class PinShow extends React.Component {
     this.setState({ editMode: true })
   }
 
-  categoryImage(){
+  categoryImage() {
     if (this.props.pin.category === 'Break In') {
       return (
         <img src='/images/deleteicon.png' width='100' height='100'></img>
@@ -100,19 +99,20 @@ class PinShow extends React.Component {
     return (
       <div>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
+        {this.categoryImage()}
         <div>{this.showDate()}</div>
 
         {this.state.editMode && (
           <form onSubmit={this.handleSubmit}>
-            <label>Category</label> <br/>
-            <select onChange={this.changeCategory} category={this.state.category}>   
-                            <option value={'Break In'}>Break In</option>
-                            <option value={'Vandalism'}>Vandalism</option>
-                            <option value={'Parts Theft'}>Parts Theft</option>
-                            <option value={'Stolen Vehicle'}>Stolen Vehicle</option>
-                        </select> <br/>
-            <label>Description</label> <br/>
-            <textarea type="text" value={this.state.description} onChange={this.update('description')} rows='6'/>
+            <label>Category</label> <br />
+            <select onChange={this.changeCategory} category={this.state.category}>
+              <option value={'Break In'}>Break In</option>
+              <option value={'Vandalism'}>Vandalism</option>
+              <option value={'Parts Theft'}>Parts Theft</option>
+              <option value={'Stolen Vehicle'}>Stolen Vehicle</option>
+            </select> <br />
+            <label>Description</label> <br />
+            <textarea type="text" value={this.state.description} onChange={this.update('description')} rows='6' />
             <button className="form-submit">SUBMIT CHANGES</button>
           </form>
         )}
