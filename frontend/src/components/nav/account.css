@@ -1,6 +1,7 @@
 .account-btn {
   background-color: #fff;
   border: none;
+  margin-top: 10%;
 }
 
 #delete-icon {
@@ -14,6 +15,7 @@
   row-gap: 5%;
   text-align: center;
   margin-left: 5%;
+  margin-right: 5%;
 }
 
 #account-header {
@@ -23,9 +25,29 @@
 }
 
 .report {
-  width: 80%;
+  width: 90%;
+  box-shadow: 2px 2px 5px gray, -2px -2px 5px gray;
+  padding: 5%;
+  font-family: sans-serif;
+  margin-right: 2%;
 }
 
-#description {
-  text-align: left;
+#report-description {
+  text-align: center;
 }
+
+#report-date {
+  font-size: 150%;
+  font-weight: 700;
+}
+
+#report-category {
+  font-size: 120%;
+  margin-top: 2%;
+  /* color: red; */
+}
+
+#report-description {
+  margin-top: 4%;
+}
+
