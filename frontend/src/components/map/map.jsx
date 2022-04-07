@@ -18,7 +18,7 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
-        this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
+        // this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
 
@@ -123,11 +123,11 @@ class Map extends React.Component {
         this.markers.push(marker);
     }
 
-    closeAllInfoWindows() {
-        this.markers.forEach(marker => {
-            marker.infoWindow.close();
-        })
-    }
+    // closeAllInfoWindows() {
+    //     this.markers.forEach(marker => {
+    //         marker.infoWindow.close();
+    //     })
+    // }
 
     setMarkers() {
         for (let i = 0; i < this.markers.length; i++) {

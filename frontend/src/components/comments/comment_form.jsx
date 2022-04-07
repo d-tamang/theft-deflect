@@ -17,9 +17,8 @@ class CommentForm extends React.Component {
   }
 
   handleSubmit(e) {
-    debugger
     e.preventDefault();
-    if (!this.props.currentUser) return this.props.openModal('login');
+    if (!this.props.loggedIn) return this.props.openModal('login');
     this.props.createComment(this.state);
     this.setState({
       text: ''

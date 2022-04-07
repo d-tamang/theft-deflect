@@ -18,6 +18,15 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(400).json(err));
 });
 
+router.get('/pins/:pinId', (req, res) => {
+    Comment.find({pin: req.params.pinId})
+        .then(comments => res.json(comments))
+        .catch(err =>
+            res.status(404).json({ nocommentsfound: 'No comments found from that pin' }
+        )
+    );
+});
+
 router.post('/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
@@ -25,7 +34,6 @@ router.post('/',
         if (!isValid) {
             return res.status(400).json(errors)
         }
-        console.log(req);
         const newComment = new Comment({
             user: req.body.user,
             pin: req.body.pin,
