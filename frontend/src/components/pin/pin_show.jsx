@@ -41,6 +41,7 @@ class PinShow extends React.Component {
   }
 
   handleSubmit(e) {
+    debugger
     e.preventDefault();
     let pin = {
         _id: this.props.pin._id,
@@ -75,11 +76,6 @@ class PinShow extends React.Component {
 
   render() {
     const pin = this.props.pin;
-    const category = () => {
-      return {
-
-      }
-    }
 
     return (
       <div>

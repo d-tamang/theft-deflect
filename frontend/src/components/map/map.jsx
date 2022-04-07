@@ -214,7 +214,7 @@ class Map extends React.Component {
     }
 
     changeRadius(value) {
-        if (!this.radius) this.radius = 10;
+        if (!this.radius) this.radius = 13;
         this.radius += value;
         this.heatmap.set("radius", this.radius);
     }
@@ -260,7 +260,7 @@ class Map extends React.Component {
                         <PinFormContainer lat={this.state.lat} long={this.state.lng} />
                     </div>
                 )}
-                <div id="floating-panel">
+                {/* <div id="floating-panel">
                     <h4>This will be removed later</h4>
                     <div>
                         <div>Change Zoom </div>
@@ -277,8 +277,8 @@ class Map extends React.Component {
                         <button onClick={() => this.changeOpacity(-0.05)}>-</button>
                         <button onClick={() => this.changeOpacity(0.05)}>+</button>
                     </div>
+                </div> */}
                     {incidentButton}
-                </div>
                 <div id="map" />
                 <div id="pin-show-id">{clickedPin}</div>
             </div>
