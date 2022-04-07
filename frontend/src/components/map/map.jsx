@@ -43,7 +43,7 @@ class Map extends React.Component {
         });
 
         this.map.addListener('click', (e) => {
-            this.closeAllInfoWindows();
+            // this.closeAllInfoWindows();
             document.getElementById('pin-show-id').style.height = "0%";
         })
 
@@ -111,7 +111,7 @@ class Map extends React.Component {
             content: newPin.category
         }) // have to leave this here for report incident modal to pop up
         marker.addListener('click', () => {
-            this.closeAllInfoWindows();
+            // this.closeAllInfoWindows();
             // marker.infoWindow.open({
             //     anchor: marker,
             //     map: this.map,
