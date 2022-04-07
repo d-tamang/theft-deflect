@@ -23,7 +23,7 @@ const AboutPage = () => {
             </li>
           </ul>
         </div>
-        <div className="dev-description">
+        <div className="dev-item">
           <div className="dev-name">Justin Nguyen</div>
           <div><img className="dev-pic" src="/images/justin2.png" /></div>
           <ul className='social-media'>
@@ -38,9 +38,10 @@ const AboutPage = () => {
             </li>
           </ul>
         </div>
-        <div className="dev-description">
+        <div className="dev-item">
           <div className="dev-name">Kenneth Quach</div>
           <div><img className="dev-pic" src="/images/kenneth2.png" /></div>
+          <div>Kenneth is a Southern California native with a bachelor's degree in Business Administration. His hobbies include surfing and reading.</div>
           <ul className='social-media'>
             <li>
               <a href="https://www.linkedin.com/in/kennethquach/"><FaLinkedin /></a>
@@ -53,7 +54,7 @@ const AboutPage = () => {
             </li>
           </ul>
         </div>
-        <div className="dev-description">
+        <div className="dev-item">
           <div className="dev-name">Phillip Lai</div>
           <div><img className="dev-pic" src="/images/phillip2.png" /></div>
           <ul className='social-media'>
