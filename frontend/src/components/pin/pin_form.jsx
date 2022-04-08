@@ -1,5 +1,6 @@
 import React from "react";
 import './pin.css';
+import S3 from 'react-aws-s3';
 
 class PinForm extends React.Component {
     constructor(props) {
@@ -14,26 +15,45 @@ class PinForm extends React.Component {
 
         this.changeCategory = this.changeCategory.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFileInput = this.handleFileInput.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        let pin = {
-            lat: this.state.lat,
-            long: this.state.long,
-            category: this.state.category,
-            description: this.state.description
-        };
 
-        this.props.createPin(pin).then(
-            () => {
-                this.setState({ errors: this.props.errors })
-            }
+        this.uploadImage();
+        this.props.createPin(this.state).then(
+            () => { this.setState({ errors: this.props.errors }) }
         )
+
         this.setState({
-            category: '',
+            category: 'Break In',
             description: '',
         });
+    }
+
+    uploadImage(){
+        const config = {
+            bucketName: 'mern-project-pro',
+            dirName: 'testing',
+            region: 'us-west-1',
+            accessKeyId: 'AKIA2WGTCYBOSLZKTE44',
+            secretAccessKey: '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',
+        }
+        const ReactS3Client = new S3(config);
+        ReactS3Client
+            .uploadFile(this.state.imageFile, this.state.imageFile.name)
+            .then(data => {
+                this.setState({ imageUrl: data.location })
+                console.log(data)
+            })
+            .catch(err => {
+                const reader = err.body.getReader()
+                reader.read().then(resp => { 
+                    console.log(new TextDecoder().decode(resp.value))
+                })
+            })
     }
 
     update(field) {
@@ -57,6 +77,10 @@ class PinForm extends React.Component {
                 ))}
             </ul>
         )
+    }
+
+    handleFileInput(e){
+        this.setState({ imageFile: e.target.files[0] });
     }
 
     render() {
@@ -83,7 +107,10 @@ class PinForm extends React.Component {
                                 onChange={this.update('description')}
                                 className='form-textarea'
                             />
-                            <button className="form-submit">REPORT</button>
+
+                        <input type="file" onChange={this.handleFileInput} />
+
+                        <button className="form-submit">REPORT</button>
                     </div>
                 </form>
             </div>

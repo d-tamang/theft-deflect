@@ -11,16 +11,6 @@ router.get('/', (req, res) => {
         .catch(err => res.status(404).json({ nopinsfound: 'No pins found' }));
 });
 
-// router.get('/user/:user_id', (req, res) => {
-//     Pin.find({ user: req.params.user_id })
-//         .sort({ date: -1 })
-//         .then(pins => res.json(pins))
-//         .catch(err =>
-//             res.status(404).json({ nopinsfound: 'No pins found from that user' }
-//             )
-//         );
-// });
-
 router.delete('/:id',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
@@ -57,7 +47,7 @@ router.patch('/:id',
                 if (err) {
                     console.log(err);
                 } else {
-                    return success
+                    return res.json(success)
                 }
             }
         )

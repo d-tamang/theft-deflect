@@ -68,8 +68,8 @@ class PinShow extends React.Component {
     )
     this.setState({
       editMode: false,
-      category: '',
-      description: '',
+      category: this.state.category,
+      description: this.state.description
     });
   }
 
@@ -88,26 +88,26 @@ class PinShow extends React.Component {
   categoryImage() {
     if (this.props.pin.category === 'Break In') {
       return (
-        <img src='/images/deleteicon.png' width='100' height='100'></img>
+        <img src='/images/break_in.jpeg' width='300' height='200'></img>
       )
     } else if (this.props.pin.category === 'Parts Theft') {
       return (
-        <img src='/images/deleteicon.png' width='100' height='100'></img>
+        <img src='/images/parts_theft.jpeg' width='300' height='200'></img>
       )
     } else if (this.props.pin.category === 'Vandalism') {
       return (
-        <img src='/images/deleteicon.png' width='100' height='100'></img>
+        <img src='/images/vandalism.jpg' width='300' height='200'></img>
       )
     } else {
       return (
-        <img src='/images/deleteicon.png' width='100' height='100'></img>
+        <img src='/images/stolen_vehicle.jpeg' width='300' height='200'></img>
       )
     }
   }
 
   render() {
     const pin = this.props.pin;
-
+    
     return (
       <div ref={this.showContainer}>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
@@ -147,6 +147,7 @@ class PinShow extends React.Component {
           comments={this.props.comments}
           fetchPinComments={this.props.fetchPinComments}
           destroyComment={this.props.destroyComment}
+          updateComment={this.props.updateComment}
         />
         <div>Leave a Comment</div>
         <CommentForm
