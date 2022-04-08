@@ -24,7 +24,7 @@ class Account extends React.Component {
     }
     if (userPins.length === 0) {
       return (
-        <div>You have not made any reports.</div>
+        <div id="no-reports">You have not made any reports.</div>
       )
     } else {
       return userPins.map((pin, i) => (

@@ -7,9 +7,9 @@ class CommentIndex extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.fetchPinComments(this.props.pin._id);
-  }
+  // componentDidMount() {
+  //   this.props.fetchPinComments(this.props.pin._id);
+  // }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.pin._id !== this.props.pin._id) {
@@ -25,7 +25,13 @@ class CommentIndex extends React.Component {
   showComments() {
     let comments = Object.values(this.props.comments);
     if (comments.length === 0) return <div>No Comments</div>;
-    return comments.map((comment, i) => {
+    let pinComments = [];
+    for (let comment of comments) {
+      if (comment.pin === this.props.pin._id) {
+        pinComments.push(comment);
+      }
+    }
+    return pinComments.map((comment, i) => {
       return <div key={i + Math.random()}>
         <div>{comment.text}</div>
         <button onClick={(e) => this.deleteComment(e, comment._id)}><FaTrash /></button>

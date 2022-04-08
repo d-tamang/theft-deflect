@@ -45,9 +45,9 @@ class PinShow extends React.Component {
 
   handleClickOutsideForm = (event) => {
     if (this.showContainer.current && !this.showContainer.current.contains(event.target)) {
-        this.setState({
-            editMode: false,
-        });
+      this.setState({
+        editMode: false,
+      });
     }
   }
 
@@ -142,6 +142,7 @@ class PinShow extends React.Component {
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
         </div> : <div className="hidden-div"></div>}
         <CommentIndex
+          currentUser={this.props.currentUser}
           pin={this.props.pin}
           comments={this.props.comments}
           fetchPinComments={this.props.fetchPinComments}
