@@ -5,11 +5,27 @@ import { FaTrash } from 'react-icons/fa';
 class CommentShow extends React.Component {
     constructor(props) {
         super(props)
+        this.showContainer = React.createRef();
 
         this.state = ({
             editMode: false,
             text: this.props.comment.text
         })
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleClickOutsideForm = (event) => {
+        if (this.showContainer.current && !this.showContainer.current.contains(event.target)) {
+            this.setState({
+                editMode: false,
+            });
+        }
+    }
+
+    deleteComment(e, id) {
+        e.preventDefault();
+        this.props.destroyComment(id);
     }
 
     update(field) {
@@ -22,14 +38,34 @@ class CommentShow extends React.Component {
         this.setState({
             editMode: true
         })
+        document.addEventListener("mousedown", this.handleClickOutsideForm);
     }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const comment = this.props.comment
+        let newComment = {
+            _id: comment._id,
+            text: this.state.text
+        };
+        this.props.updateComment(newComment)
+        
+
+        this.setState({
+            editMode: false,
+        })
+    }
+    
     render() {
         const comment = this.props.comment;
 
         return (
-            <div>
+            <div ref={this.showContainer}>
                 {this.state.editMode && (
-                    <input value={this.state.text} onChange={this.update('description')}></input>
+                    <form onSubmit={this.handleSubmit}>
+                        <input value={this.state.text} onChange={this.update('text')}></input>
+                        <button className="form-submit">SUBMIT CHANGES</button>
+                    </form>
                 )}
                 {!this.state.editMode && (
                     <div>

@@ -68,8 +68,8 @@ class PinShow extends React.Component {
     )
     this.setState({
       editMode: false,
-      category: '',
-      description: '',
+      category: this.state.category,
+      description: this.state.description
     });
   }
 
@@ -147,6 +147,7 @@ class PinShow extends React.Component {
           comments={this.props.comments}
           fetchPinComments={this.props.fetchPinComments}
           destroyComment={this.props.destroyComment}
+          updateComment={this.props.updateComment}
         />
         <div>Leave a Comment</div>
         <CommentForm

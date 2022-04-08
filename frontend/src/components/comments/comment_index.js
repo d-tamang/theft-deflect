@@ -20,17 +20,14 @@ class CommentIndex extends React.Component {
     }
   }
 
-  deleteComment(e, id) {
-    e.preventDefault();
-    this.props.destroyComment(id);
-  }
+  
 
   showComments() {
     let comments = Object.values(this.props.comments);
     if (comments.length === 0) return <div>No Comments</div>;
     return comments.map((comment, i) => {
       return <div key={comment._id}>
-        <CommentShow comment={comment} currentUser={this.props.currentUser}/>
+        <CommentShow comment={comment} currentUser={this.props.currentUser} destroyComment={this.props.destroyComment} updateComment={this.props.updateComment}/>
       </div>
     })
   }

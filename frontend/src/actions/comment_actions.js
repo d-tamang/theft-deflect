@@ -25,12 +25,6 @@ const removeComment = comment => ({
     comment
 });
 
-// export const fetchComments = () => dispatch => (
-//     getComments()
-//         .then(comments => dispatch(receiveComments(comments)))
-//         .catch(err => console.log(err))
-// );
-
 export const fetchPinComments = id => dispatch => (
     getPinComments(id)
         .then(comments => dispatch(receivePinComments(comments)))
