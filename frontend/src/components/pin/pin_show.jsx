@@ -107,7 +107,7 @@ class PinShow extends React.Component {
 
   render() {
     const pin = this.props.pin;
-
+    
     return (
       <div ref={this.showContainer}>
         <button className="close-btn" onClick={this.closeShow}><img id="close-icon" src="images/arrow.png" /></button>
@@ -142,6 +142,7 @@ class PinShow extends React.Component {
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
         </div> : <div className="hidden-div"></div>}
         <CommentIndex
+          currentUser={this.props.currentUser}
           pin={this.props.pin}
           comments={this.props.comments}
           fetchPinComments={this.props.fetchPinComments}
