@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore({});
   }
 
+  window.Buffer = window.Buffer || require('buffer').Buffer;
+
+
   window.getState = store.getState;
 
   const root = document.getElementById('root');
