@@ -1,6 +1,7 @@
 #map {
     width: 99.99vw;
-    height: 96vh;
+    height: 89.5vh;
+    overflow-y: hidden;
 }
 
 #add-incident {

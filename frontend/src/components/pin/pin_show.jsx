@@ -125,7 +125,7 @@ class PinShow extends React.Component {
         {this.state.editMode && (
           <form className="edit-pin-form" onSubmit={this.handleSubmit}>
             <div className="edit-pin-category">Category</div>
-            <select onChange={this.changeCategory} category={this.state.category} value={this.state.category}>
+            <select onChange={this.changeCategory} category={this.state.category} value={this.state.category} className='formDrop'>
               <option value={'Break In'} >Break In</option>
               <option value={'Vandalism'} >Vandalism</option>
               <option value={'Parts Theft'} >Parts Theft</option>

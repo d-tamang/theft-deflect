@@ -1,5 +1,5 @@
 .account-btn {
-  background-color: #fff;
+  background-color: transparent;
   border: none;
   margin-top: 7%;
   font-size: 5vh;
@@ -18,6 +18,7 @@
   text-align: center;
   margin-left: 5%;
   margin-right: 5%;
+  padding-bottom: 15vh;
 }
 
 #account-header {
