@@ -13,7 +13,7 @@ const AboutPage = () => {
           <div>Disnee is a Bay Area native and worked in tech sales post college. Her favorite past time is hanging out with her two chihuahua-terrior dogs.</div>
           <ul className='social-media'>
             <li>
-              <a href=""><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/disneetamang/"><FaLinkedin /></a>
             </li>
             <li>
               <a href=""><FaGithub /></a>
@@ -26,9 +26,10 @@ const AboutPage = () => {
         <div className="dev-item">
           <div className="dev-name">Justin Nguyen</div>
           <div><img className="dev-pic" src="/images/justin2.png" /></div>
+          <div>Justin currently resides in Sacramento with a Bachelor’s Degree in Applied Mathematics. In his free time, he enjoys dance, traveling, and going out with friends.</div>
           <ul className='social-media'>
             <li>
-              <a href=""><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/justin-nguyen-b851461b2/"><FaLinkedin /></a>
             </li>
             <li>
               <a href=""><FaGithub/></a>
@@ -44,7 +45,7 @@ const AboutPage = () => {
           <div>Kenneth is a Southern California native with a bachelor's degree in Business Administration. His hobbies include surfing and reading.</div>
           <ul className='social-media'>
             <li>
-              <a href=""><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/kennethquach/"><FaLinkedin /></a>
             </li>
             <li>
               <a href=""><FaGithub /></a>
@@ -59,7 +60,7 @@ const AboutPage = () => {
           <div><img className="dev-pic" src="/images/phillip2.png" /></div>
           <ul className='social-media'>
             <li>
-              <a href=""><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/philliplai/"><FaLinkedin /></a>
             </li>
             <li>
               <a href=""><FaGithub/></a>
