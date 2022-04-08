@@ -1,5 +1,4 @@
 import React from "react";
-import './pin.css';
 import S3 from 'react-aws-s3';
 
 class PinForm extends React.Component {
@@ -15,14 +14,14 @@ class PinForm extends React.Component {
 
         this.changeCategory = this.changeCategory.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFileInput = this.handleFileInput.bind(this);
-        this.uploadImage = this.uploadImage.bind(this);
+        // this.handleFileInput = this.handleFileInput.bind(this);
+        // this.uploadImage = this.uploadImage.bind(this);
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        this.uploadImage();
+        // this.uploadImage();
         this.props.createPin(this.state).then(
             () => { this.setState({ errors: this.props.errors }) }
         )
@@ -33,28 +32,28 @@ class PinForm extends React.Component {
         });
     }
 
-    uploadImage(){
-        const config = {
-            bucketName: 'mern-project-pro',
-            dirName: 'testing',
-            region: 'us-west-1',
-            accessKeyId: 'AKIA2WGTCYBOSLZKTE44',
-            secretAccessKey: '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',
-        }
-        const ReactS3Client = new S3(config);
-        ReactS3Client
-            .uploadFile(this.state.imageFile, this.state.imageFile.name)
-            .then(data => {
-                this.setState({ imageUrl: data.location })
-                console.log(data)
-            })
-            .catch(err => {
-                const reader = err.body.getReader()
-                reader.read().then(resp => { 
-                    console.log(new TextDecoder().decode(resp.value))
-                })
-            })
-    }
+    // uploadImage(){
+    //     const config = {
+    //         bucketName: 'mern-project-pro',
+    //         dirName: 'testing',
+    //         region: 'us-west-1',
+    //         accessKeyId: 'AKIA2WGTCYBOSLZKTE44',
+    //         secretAccessKey: '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',
+    //     }
+    //     const ReactS3Client = new S3(config);
+    //     ReactS3Client
+    //         .uploadFile(this.state.imageFile, this.state.imageFile.name)
+    //         .then(data => {
+    //             this.setState({ imageUrl: data.location })
+    //             console.log(data)
+    //         })
+    //         .catch(err => {
+    //             const reader = err.body.getReader()
+    //             reader.read().then(resp => { 
+    //                 console.log(new TextDecoder().decode(resp.value))
+    //             })
+    //         })
+    // }
 
     update(field) {
         return e => this.setState({
@@ -79,9 +78,9 @@ class PinForm extends React.Component {
         )
     }
 
-    handleFileInput(e){
-        this.setState({ imageFile: e.target.files[0] });
-    }
+    // handleFileInput(e){
+    //     this.setState({ imageFile: e.target.files[0] });
+    // }
 
     render() {
         return (
@@ -108,7 +107,7 @@ class PinForm extends React.Component {
                                 className='form-textarea'
                             />
 
-                        <input type="file" onChange={this.handleFileInput} />
+                        {/* <input type="file" onChange={this.handleFileInput} /> */}
 
                         <button className="form-submit">REPORT</button>
                     </div>

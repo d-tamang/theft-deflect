@@ -30,10 +30,10 @@ class CommentForm extends React.Component {
       <div className="review-form">
         <form onSubmit={this.handleSubmit}>
           <div>
-            <textarea type="text" value={this.state.text} onChange={this.updateText}></textarea>
+            <textarea type="text" value={this.state.text} onChange={this.updateText} rows="5" cols="30"></textarea>
           </div>
           <div>
-            <button onClick={this.handleSubmit}>SUBMIT</button>
+            <button className="add-comment" onClick={this.handleSubmit}>ADD COMMENT</button>
           </div>
         </form>
       </div>

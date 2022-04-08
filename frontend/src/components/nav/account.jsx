@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
 import './account.css'
 
 class Account extends React.Component {
@@ -32,7 +33,7 @@ class Account extends React.Component {
           <div id='report-date'>{this.getDate(pin._id)}</div>
           <div id='report-category'>{pin.category}</div>
           <div id="report-description">{pin.description}</div>
-          <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><img id="delete-icon"src="/images/deleteicon.png"/></button>
+          <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><FaTrashAlt /></button>
         </div>
       ))
     }

@@ -1,7 +1,8 @@
 .account-btn {
   background-color: #fff;
   border: none;
-  margin-top: 10%;
+  margin-top: 7%;
+  font-size: 5vh;
 }
 
 #delete-icon {
@@ -34,7 +35,7 @@
 }
 
 #report-description {
-  text-align: center;
+  text-align: left;
 }
 
 #report-date {

@@ -4,6 +4,10 @@ export const getPins = () => {
   return axios.get('/api/pins')
 };
 
+export const getPin = (id) => {
+  return axios.get(`/api/pins/${id}`)
+};
+
 // export const getUserPins = id => {
 //   return axios.get(`/api/pins/user/${id}`)
 // };
