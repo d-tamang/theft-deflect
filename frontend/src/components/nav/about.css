@@ -15,8 +15,8 @@
 .dev-pic {
   width: 200px;
   height: 200px;
-  padding-bottom: 6%;
-  border-radius: 30%;
+  margin-bottom: 7%;
+  border-radius: 50%;
 }
 
 .dev-container {
