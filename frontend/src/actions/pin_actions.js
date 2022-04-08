@@ -1,4 +1,4 @@
-import { getPins, getUserPins, postPin, editPin, deletePin } from '../util/pin_api_util';
+import { getPin, getPins, getUserPins, postPin, editPin, deletePin } from '../util/pin_api_util';
 
 export const RECEIVE_PINS= "RECEIVE_PINS";
 export const RECEIVE_USER_PINS = "RECEIVE_USER_PINS";
@@ -34,6 +34,12 @@ const receivePinErrors = errors => ({
 export const fetchPins = () => dispatch => (
   getPins()
     .then(pins => dispatch(receivePins(pins)))
+    .catch(err => dispatch(receivePinErrors(err)))
+);
+
+export const fetchPin = (id) => dispatch => (
+  getPin(id)
+    .then(pin => dispatch(receiveNewPin(pin)))
     .catch(err => dispatch(receivePinErrors(err)))
 );
 

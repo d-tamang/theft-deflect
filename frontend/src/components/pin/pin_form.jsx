@@ -1,5 +1,4 @@
 import React from "react";
-import './pin.css';
 import S3 from 'react-aws-s3';
 
 class PinForm extends React.Component {
@@ -79,9 +78,9 @@ class PinForm extends React.Component {
         )
     }
 
-    handleFileInput(e){
-        this.setState({ imageFile: e.target.files[0] });
-    }
+    // handleFileInput(e){
+    //     this.setState({ imageFile: e.target.files[0] });
+    // }
 
     render() {
         return (

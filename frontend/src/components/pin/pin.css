@@ -1,8 +1,8 @@
 .pin-form-container {
-    background: rgb(135, 170, 180);
+    background: rgb(111, 148, 159);
     position: absolute;
     padding: 5vh;
-    height: 35vh;
+    height: 38vh;
     width: 20vw;
     top: 20vh;
     left: 35vw;
@@ -12,11 +12,11 @@
     color: white;
 }
 
-.pin-form-container > h2 {
+.pin-form-container>h2 {
     font-size: 3vh;
 }
 
-.pin-form-container > select {
+.pin-form-container>select {
     width: 20vw;
     padding: 0.5vh;
 }
@@ -33,15 +33,14 @@
     margin-top: 3vh;
 }
 
-#form-submit {
-    margin-top: 3vh;
+.form-submit {
     padding: 1.5vh;
-    width: 8vw;
-    font-size: 1.5vh;
-    background-color: #334988;
+    width: 7vw;
+    background-color: #3c4e82;
     color: #fff;
     border: none;
     border-radius: 10px;
+    margin-top: 6%;
 }
 
 .pin-form-error-list {
@@ -70,9 +69,87 @@
     background-color: #fff;
     border: none;
     float: right;
+    font-size: 6vh;
 }
 
 #close-icon {
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
+}
+
+.show-pic {
+    width: 300px;
+    height: 200px;
+    box-shadow: 4px 4px 15px 8px rgb(185, 185, 185);
+}
+
+.pic-box {
+    margin: 2%;
+}
+
+.pin-show-container div {
+    padding: 1%;
+}
+
+.pin-show-container {
+    padding: 3%;
+    text-align: center;
+    align-items: center;
+}
+
+#pin-show-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10%;
+    margin-top: 4%;
+}
+
+#show-date {
+    font-weight: bold;
+}
+
+#pin-description {
+    text-align: left;
+    line-height: 20px;
+}
+
+.show-category {
+    font-style: italic;
+}
+
+.add-comment {
+    padding: 1.5vh;
+    width: 9vw;
+    font-size: 1.5vh;
+    background-color: #334988;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-top: 2%;
+}
+
+#discussion {
+    font-weight: bold;
+    margin-top: 4%;
+}
+
+.fa-icon-box {
+    background-color: #fff;
+    border: none;
+    font-size: 3vh;
+}
+
+.edit-comment-icon {
+    background-color: #fff;
+    border: none;
+    font-size: 4.5vh;
+}
+
+.edit-pin-form {
+    margin: 2%;
+}
+
+.edit-pin-category {
+    font-style: italic;
+    margin: 1.5%;
 }

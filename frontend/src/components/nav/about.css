@@ -4,7 +4,7 @@
   margin-top: 3vh;
   display: flex;
   justify-content: space-evenly;
-  font-size: 4vh;
+  font-size: 5vh;
 }
 
 #about-page {
@@ -33,10 +33,10 @@
   letter-spacing: 1px;
   text-align: center;
   font-size: 6vh;
-  height: 20vh;
+  height: 15vh;
   color: rgb(238, 230, 230);
   text-shadow: 2px 2px 1px rgb(17, 17, 17);
-  padding-top: 7%;
+  padding-top: 5%;
   margin-bottom: 4%;
   background-image: url('https://images.unsplash.com/photo-1608391355752-9e13c87c8d71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3871&q=80');
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import './comment.css';
 import CommentShow from './comment_show';
 
 class CommentIndex extends React.Component {
@@ -19,12 +18,11 @@ class CommentIndex extends React.Component {
       this.props.fetchPinComments(nextProps.pin._id);
     }
   }
-
   
 
   showComments() {
     let comments = Object.values(this.props.comments);
-    if (comments.length === 0) return <div>No Comments</div>;
+    if (comments.length === 0) return <div>Be the first to leave a comment.</div>;
     return comments.map((comment, i) => {
       return <div key={comment._id}>
         <CommentShow comment={comment} currentUser={this.props.currentUser} destroyComment={this.props.destroyComment} updateComment={this.props.updateComment}/>

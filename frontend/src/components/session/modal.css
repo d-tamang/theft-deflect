@@ -15,7 +15,7 @@
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 25px;
-  min-width: 30%;
+  min-width: 25%;
   min-height: 50%;
   border-radius: 15px;
 }
@@ -33,13 +33,13 @@
   border-bottom: 1px solid black;
   padding: 4%;
   margin: 2%;
-  background-color: #e1eff3;
+  background-color: #dfecf1;
 }
 
 .session-btn {
   width: 65%;
   padding: 4%;
-  background-color: #38877a;
+  background-color: #3d757a;
   color: white;
   border-style: hidden;
   margin: 2%;
@@ -48,6 +48,7 @@
 
 .session-question {
   margin-top: 5%;
+  margin-bottom: 1.5%;
 }
 
 #login-email-box {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiEdit } from 'react-icons/fi';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
+import { BiMessageAdd } from 'react-icons/bi';
 
 class CommentShow extends React.Component {
     constructor(props) {
@@ -63,8 +64,8 @@ class CommentShow extends React.Component {
             <div ref={this.showContainer}>
                 {this.state.editMode && (
                     <form onSubmit={this.handleSubmit}>
-                        <input value={this.state.text} onChange={this.update('text')}></input>
-                        <button className="form-submit">SUBMIT CHANGES</button>
+                        <textarea value={this.state.text} onChange={this.update('text')}></textarea>
+                        <button className="edit-comment-icon"><BiMessageAdd /></button>
                     </form>
                 )}
                 {!this.state.editMode && (
@@ -73,8 +74,8 @@ class CommentShow extends React.Component {
                     </div>
                 )}
                 {this.props.currentUser && this.props.currentUser.id === comment.user ? <div>
-                    <button onClick={() => this.editComment()}><FiEdit /></button>    
-                    <button onClick={(e) => this.deleteComment(e, comment._id)}><FaTrash /></button>
+                    <button className="fa-icon-box" onClick={() => this.editComment()}><FiEdit /></button>    
+                    <button className="fa-icon-box" onClick={(e) => this.deleteComment(e, comment._id)}><FaTrashAlt /></button>
                     </div> : <div className="hidden-div">
                 </div>}
             </div>
