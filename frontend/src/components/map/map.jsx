@@ -238,7 +238,6 @@ class Map extends React.Component {
 
         let clickedPin;
         if(this.state.clickedPin){
-            console.log(this.state.clickedPin)
             clickedPin = <div>
                 <PinShowContainer pin={this.state.clickedPin} />
             </div>
