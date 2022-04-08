@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updatePin, destroyPin } from '../../actions/pin_actions';
-import { fetchPinComments, createComment } from '../../actions/comment_actions';
+import { fetchPinComments, createComment, destroyComment } from '../../actions/comment_actions';
 import { openModal } from '../../actions/modal_actions';
 import PinShow from './pin_show';
 
@@ -18,6 +18,7 @@ const mapDispatchToProps = dispatch => {
     destroyPin: id => dispatch(destroyPin(id)),
     fetchPinComments: id => dispatch(fetchPinComments(id)),
     createComment: comment => dispatch(createComment(comment)),
+    destroyComment: id => dispatch(destroyComment(id)),
     openModal: modal => dispatch(openModal(modal))
   }
 }

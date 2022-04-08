@@ -1,4 +1,6 @@
 import React from 'react';
+import './comment.css';
+import { FaTrash } from 'react-icons/fa';
 
 class CommentIndex extends React.Component {
   constructor(props) {
@@ -15,20 +17,26 @@ class CommentIndex extends React.Component {
     }
   }
 
+  deleteComment(e, id) {
+    e.preventDefault();
+    this.props.destroyComment(id);
+  }
+
   showComments() {
     let comments = Object.values(this.props.comments);
     if (comments.length === 0) return <div>No Comments</div>;
-    return (
-      <div>
-        {comments.map((comment, i) => (
-          <div key={i}>{comment.text}</div>
-        ))}
+    return comments.map((comment, i) => {
+      return <div key={i + Math.random()}>
+        <div>{comment.text}</div>
+        <button onClick={(e) => this.deleteComment(e, comment._id)}><FaTrash /></button>
+        {/* {this.props.currentUser && this.props.currentUser.id === comment.user ? <div>
+          <button><img id="delete-comment" src="deleteicon.png"/></button>
+        </div> : <div className="hidden-div"></div>} */}
       </div>
-    )
+    })
   }
 
   render() {
-    // if (!this.props.comments) return null;
     return (
       <div>
         {this.showComments()}

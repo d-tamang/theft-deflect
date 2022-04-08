@@ -140,11 +140,12 @@ class PinShow extends React.Component {
             <button onClick={(e) => this.editPin(e, pin)}>EDIT PIN</button>
           )}
           <button onClick={(e) => this.deletePin(e, pin._id)}>DELETE PIN</button>
-        </div> : <div id="hidden-div"></div>}
+        </div> : <div className="hidden-div"></div>}
         <CommentIndex
           pin={this.props.pin}
           comments={this.props.comments}
           fetchPinComments={this.props.fetchPinComments}
+          destroyComment={this.props.destroyComment}
         />
         <div>Leave a Comment</div>
         <CommentForm
