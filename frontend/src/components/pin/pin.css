@@ -62,7 +62,7 @@
     border: 1px solid #333;
 }
 
-#hidden-div {
+.hidden-div {
     display: none;
 }
 

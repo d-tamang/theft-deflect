@@ -44,4 +44,20 @@ router.post('/',
     }
 );
 
+router.delete('/:id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        const commentId = req.params.id
+        Comment.findByIdAndDelete(commentId)
+            .then((err, comment) =>{
+                if (err) {
+                    return res.json(err)
+                } else {
+                    return res.json({msg: 'Comment deleted'})
+                }
+            }
+        ) 
+    }
+)
+
 module.exports = router;
