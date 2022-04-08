@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
 .social-media {
   margin-top: 3vh;
   display: flex;
@@ -5,10 +7,16 @@
   font-size: 4vh;
 }
 
+#about-page {
+  /* display: none; */
+  background: rgb(236, 234, 234);
+}
+
 .dev-pic {
   width: 200px;
   height: 200px;
   padding-bottom: 6%;
+  border-radius: 30%;
 }
 
 .dev-container {
@@ -16,20 +24,31 @@
   flex-direction: row;
   justify-content: space-evenly;
   text-align: center;
+  padding-bottom: 20vh;
 }
 
 #about-header {
+  font-family: 'Quicksand';
+  font-weight: 700;
+  letter-spacing: 1px;
   text-align: center;
-  font-size: 4vh;
-  margin-top: 3%;
+  font-size: 6vh;
+  height: 20vh;
+  color: rgb(238, 230, 230);
+  text-shadow: 2px 2px 1px rgb(17, 17, 17);
+  padding-top: 7%;
   margin-bottom: 4%;
+  background-image: url('https://images.unsplash.com/photo-1608391355752-9e13c87c8d71?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3871&q=80');
 }
 
 .dev-item {
   width: 15%;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid lightgray;
 }
 
 .dev-name {
-  font-size: 25px;
-  padding-bottom: 5%;
+  font-size: 30px;
+  padding-bottom: 7%;
+  font-weight: 400;
 }

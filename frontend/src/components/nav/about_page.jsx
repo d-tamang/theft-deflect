@@ -4,7 +4,7 @@ import { FaLinkedin, FaGithub, FaAngellist } from 'react-icons/fa';
 
 const AboutPage = () => {
   return (
-    <div>
+    <div id='about-page'>
       <div id="about-header">Meet the Developers</div>
       <div className="dev-container">
         <div className="dev-item">
@@ -58,6 +58,7 @@ const AboutPage = () => {
         <div className="dev-item">
           <div className="dev-name">Phillip Lai</div>
           <div><img className="dev-pic" src="/images/phillip2.png" /></div>
+          <div>Phillip is a graduate from UC Irvine with a degree in Electrical Engineering. After long coding sessions, he enjoys playing tennis and running.</div>
           <ul className='social-media'>
             <li>
               <a href="https://www.linkedin.com/in/philliplai/"><FaLinkedin /></a>

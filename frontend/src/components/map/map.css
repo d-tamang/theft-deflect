@@ -20,7 +20,7 @@
     z-index: 11;
     border-radius: 10px;
     font-weight: 400;
-    box-shadow: 1px 1px 15px 5px rgb(255, 121, 130);
+    box-shadow: 1px 1px 10px 2px rgb(221, 78, 87);
 }
 
 #add-incident:hover {
