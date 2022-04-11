@@ -13,9 +13,9 @@ TheftDeflect renders a "heat-map" view by converting marked pins into bright red
 Users can view individual reports, depicted as dropped pins on the map, by zooming in twice to a chosen area. The map responds by switching to pin view, and users can now click on any marker to view incident details. 
 The details are shown on a left drop-down bar containing an image/description of the crime, as well as the ability to add/edit/delete discussion comments. If the current logged in user is the creator of the pin, they have the ability to edit/remove the report. 
 
-![](./frontend/public/images/mapview.gif)
+![](./frontend/public/images/mapview.png)
 
-![](./frontend/public/images/pinview.gif)
+![](./frontend/public/images/pinview.png)
 
 Reports can be made by users by clicking on the "Report Incident" button on the top right of the screen. Doing so will instruct the user to click wherever on the map the crime occurred, pulling up an report form modal when done so. 
 Once the user has entered the form's details and pressed submit, the pin will be immediately available for view on the map.
