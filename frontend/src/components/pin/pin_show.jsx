@@ -9,6 +9,7 @@ import './pin.css';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
+    this.showContainer = React.createRef();
 
     this.state = {
       editMode: false,
@@ -138,9 +139,9 @@ class PinShow extends React.Component {
 
         {!this.state.editMode && (
           <div>
-            <div><span className="show-category">Category:</span> {this.state.category}</div>
+            <div><span className="show-category">Category:</span> {pin.category}</div>
             <div className="show-category">Description</div>
-            <div id="pin-description">{this.state.description}</div>
+            <div id="pin-description">{pin.description}</div>
           </div>
         )}
         {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>

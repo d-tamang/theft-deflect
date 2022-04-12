@@ -4,8 +4,6 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.currentUser ? this.props.currentUser.id : '',
-      pin: this.props.pin._id,
       text: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +17,7 @@ class CommentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.props.loggedIn) return this.props.openModal('login');
-    this.props.createComment(this.state);
+    this.props.createComment({ user: this.props.currentUser.id, pin: this.props.pin._id, text: this.state.text});
     this.setState({
       text: ''
     })

@@ -88,7 +88,7 @@ class Map extends React.Component {
         if (this.props.pins.length === this.markers.length) return;
         let newPins = this.props.pins;
         let length = this.markers.length;
-        if(newPins.length < length){
+        if (newPins.length < length) {
             this.clearMarkers();
             this.markers = [];
             newPins.forEach(newPin => {
@@ -102,7 +102,7 @@ class Map extends React.Component {
         }
     }
 
-    createPin(newPin){
+    createPin(newPin) {
         let marker = new window.google.maps.Marker({
             position: { lat: newPin.lat, lng: newPin.long },
             title: newPin.category
@@ -117,7 +117,7 @@ class Map extends React.Component {
             //     map: this.map,
             //     shouldFocus: false,
             // })
-            this.setState({ clickedPin : newPin});
+            this.setState({ clickedPin: newPin });
             document.getElementById('pin-show-id').style.height = "100%";
         })
         this.markers.push(marker);
@@ -147,9 +147,9 @@ class Map extends React.Component {
 
         let newPins = this.props.pins;
         let length = this.heatMarkers.length;
-        if (newPins.length < length){
+        if (newPins.length < length) {
             this.heatMarkers = [];
-            newPins.forEach( newPin => {
+            newPins.forEach(newPin => {
                 this.heatMarkers.push(new window.google.maps.LatLng(newPin.lat, newPin.long))
             })
         } else {
@@ -237,7 +237,7 @@ class Map extends React.Component {
         this.generateNewSeeds();
 
         let clickedPin;
-        if(this.state.clickedPin){
+        if (this.state.clickedPin) {
             clickedPin = <div>
                 <PinShowContainer pin={this.state.clickedPin} />
             </div>
@@ -277,7 +277,7 @@ class Map extends React.Component {
                         <button onClick={() => this.changeOpacity(0.05)}>+</button>
                     </div>
                 </div> */}
-                    {incidentButton}
+                {incidentButton}
                 <div id="map" />
                 <div id="pin-show-id">{clickedPin}</div>
             </div>
