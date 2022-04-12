@@ -9,7 +9,6 @@ import './pin.css';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
-    this.showContainer = React.createRef();
 
     this.state = {
       editMode: false,
