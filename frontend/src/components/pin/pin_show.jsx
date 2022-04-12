@@ -18,6 +18,8 @@ class PinShow extends React.Component {
       category: this.props.pin.category,
       description: this.props.pin.description,
     }
+
+    this.showContainer = React.createRef();
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.closeShow = this.closeShow.bind(this);
@@ -26,6 +28,14 @@ class PinShow extends React.Component {
 
   componentDidMount() {
     this.props.fetchPin(this.props.pin._id);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.pin._id !== this.props.pin._id) {
+      this.props.fetchPin(this.props.pin._id)
+    }
+    // console.log(this.state.description); pin description changes but state does not
+    // console.log(this.props.pin.description);
   }
 
   showDate() {
@@ -75,8 +85,8 @@ class PinShow extends React.Component {
     
     this.setState({
       editMode: false,
-      // category: this.state.category,
-      // description: this.state.description
+      category: this.state.category,
+      description: this.state.description
     });
   }
 
