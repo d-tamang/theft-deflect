@@ -20,6 +20,11 @@ The details are shown on a left drop-down bar containing an image/description of
 Reports can be made by users by clicking on the "Report Incident" button on the top right of the screen. Doing so will instruct the user to click wherever on the map the crime occurred, pulling up an report form modal when done so. 
 Once the user has entered the form's details and pressed submit, the pin will be immediately available for view on the map.
 
+## Code Snippet
+The core of the app is an interactive map rendered using Google Maps API integration. The map is instantiated in the componentDidMount function inside of the main map file, with latitude/longitude values set to center San Francisco in screen view upon render.
+
+![](./frontend/public/images/mapcode.png)
+
 ## Technologies Implemented
 * MongoDB
 * Express.js
