@@ -29,13 +29,13 @@ const AboutPage = () => {
           <div>Justin currently resides in Sacramento and loves to dance. He'll steal your spotlight at the club, and your drink, when you're not looking.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/justin-nguyen-b851461b2/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/justin-nguyen-dev/"><FaLinkedin /></a>
             </li>
             <li>
               <a href="https://github.com/justinneyugn"><FaGithub/></a>
             </li>
             <li>
-              <a href=""><FaAngellist /></a>
+              <a href="https://angel.co/u/justin-nguyen-dev"><FaAngellist /></a>
             </li>
           </ul>
         </div>
