@@ -22,6 +22,12 @@ class Map extends React.Component {
 
     }
 
+    // componentDidUpdate(prevState, prevProps) {
+    //     if (prevProps.pins !== this.props.pins) {
+    //         this.props.fetchPins()
+    //     }   
+    // }
+
     componentDidMount() {
         // Center is San Francisco
         const center = { lat: 37.777652, lng: -122.437503 };

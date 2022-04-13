@@ -13,6 +13,7 @@ class PinShow extends React.Component {
 
     this.state = {
       editMode: false,
+      id: this.props.pin._id,
       lat: this.props.pin.lat,
       long: this.props.pin.long,
       category: this.props.pin.category,
@@ -33,9 +34,9 @@ class PinShow extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.pin._id !== this.props.pin._id) {
       this.props.fetchPin(this.props.pin._id)
+      this.setState({description: this.props.pin.description})
+      this.setState({category: this.props.pin.category})
     }
-    // console.log(this.state.description); pin description changes but state does not
-    // console.log(this.props.pin.description);
   }
 
   showDate() {
@@ -149,9 +150,9 @@ class PinShow extends React.Component {
 
         {!this.state.editMode && (
           <div>
-            <div><span className="show-category">Category:</span> {pin.category}</div>
+            <div><span className="show-category">Category:</span> {this.state.category}</div>
             <div className="show-category">Description</div>
-            <div id="pin-description">{pin.description}</div>
+            <div id="pin-description">{this.state.description}</div>
           </div>
         )}
         {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>
