@@ -18,7 +18,6 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
-        this.changePin = this.changePin.bind(this);
         // this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
@@ -86,11 +85,10 @@ class Map extends React.Component {
 
     generateMarkers() {
         if (!this.props.pins) return;
-        // if (this.props.pins.length === this.markers.length) return;
+        if (this.props.pins.length === this.markers.length) return;
         let newPins = this.props.pins;
         let length = this.markers.length;
-        // if (newPins.length < length) {
-            if (true) {
+        if (newPins.length < length) {
             this.clearMarkers();
             this.markers = [];
             newPins.forEach(newPin => {
@@ -98,9 +96,9 @@ class Map extends React.Component {
             })
             return;
         }
-        // for (let i = newPins.length - 1; i >= length; i--) {
-        //     this.createPin(newPins[i]);
-        // }
+        for (let i = newPins.length - 1; i >= length; i--) {
+            this.createPin(newPins[i]);
+        }
     }
 
     createPin(newPin) {
@@ -118,8 +116,7 @@ class Map extends React.Component {
             //     map: this.map,
             //     shouldFocus: false,
             // })
-            this.setState({ clickedPin: newPin });
-            // window.pin = newPin;
+            this.setState({ clickedPinId: newPin._id });
             document.getElementById('pin-show-id').style.height = "100%";
         })
         this.markers.push(marker);
@@ -235,21 +232,19 @@ class Map extends React.Component {
         this.heatmap.set("opacity", this.opacity);
     }
 
-    changePin() {
-        this.generateMarkers();
-        this.generateHeatMap();
-        this.changeMapType();
-    }
-
     render() {
         this.generateNewSeeds();
 
         let clickedPin;
-        if (this.state.clickedPin) {
-            console.log(this.state.clickedPin, "render")
-            clickedPin = <div>
-                <PinShowContainer pin={this.state.clickedPin} changePin={this.changePin}/>
-            </div>
+        if (this.state.clickedPinId) {
+            for(let i = 0; i < this.props.pins.length; i++){
+                if (this.props.pins[i]._id === this.state.clickedPinId){
+                    clickedPin = <div>
+                        <PinShowContainer pin={this.props.pins[i]} />
+                    </div>
+                    break;
+                }
+            }
         } else {
             clickedPin = <div></div>
         }

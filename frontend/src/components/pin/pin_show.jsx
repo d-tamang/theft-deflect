@@ -77,12 +77,10 @@ class PinShow extends React.Component {
     };
 
     this.props.updatePin(pin).then(
-      // () => {
-      //   this.setState({ errors: this.props.errors })
-      // }
-      () => this.props.changePin()
+      () => {
+        this.setState({ errors: this.props.errors })
+      }
     )
-
     
     this.setState({
       editMode: false,
