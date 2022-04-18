@@ -20,11 +20,9 @@ class PinShow extends React.Component {
       description: this.props.pin.description,
     }
 
-    this.showContainer = React.createRef();
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.closeShow = this.closeShow.bind(this);
-
   }
 
   componentDidMount() {
@@ -79,10 +77,12 @@ class PinShow extends React.Component {
     };
 
     this.props.updatePin(pin).then(
-      () => {
-        this.setState({ errors: this.props.errors })
-      }
+      // () => {
+      //   this.setState({ errors: this.props.errors })
+      // }
+      () => this.props.changePin()
     )
+
     
     this.setState({
       editMode: false,

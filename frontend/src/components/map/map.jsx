@@ -18,15 +18,10 @@ class Map extends React.Component {
         this.placeMarker = this.placeMarker.bind(this);
         this.setMarkers = this.setMarkers.bind(this);
         this.clearMarkers = this.clearMarkers.bind(this);
+        this.changePin = this.changePin.bind(this);
         // this.closeAllInfoWindows = this.closeAllInfoWindows.bind(this);
 
     }
-
-    // componentDidUpdate(prevState, prevProps) {
-    //     if (prevProps.pins !== this.props.pins) {
-    //         this.props.fetchPins()
-    //     }   
-    // }
 
     componentDidMount() {
         // Center is San Francisco
@@ -91,10 +86,11 @@ class Map extends React.Component {
 
     generateMarkers() {
         if (!this.props.pins) return;
-        if (this.props.pins.length === this.markers.length) return;
+        // if (this.props.pins.length === this.markers.length) return;
         let newPins = this.props.pins;
         let length = this.markers.length;
-        if (newPins.length < length) {
+        // if (newPins.length < length) {
+            if (true) {
             this.clearMarkers();
             this.markers = [];
             newPins.forEach(newPin => {
@@ -102,10 +98,9 @@ class Map extends React.Component {
             })
             return;
         }
-
-        for (let i = newPins.length - 1; i >= length; i--) {
-            this.createPin(newPins[i]);
-        }
+        // for (let i = newPins.length - 1; i >= length; i--) {
+        //     this.createPin(newPins[i]);
+        // }
     }
 
     createPin(newPin) {
@@ -124,6 +119,7 @@ class Map extends React.Component {
             //     shouldFocus: false,
             // })
             this.setState({ clickedPin: newPin });
+            // window.pin = newPin;
             document.getElementById('pin-show-id').style.height = "100%";
         })
         this.markers.push(marker);
@@ -239,13 +235,20 @@ class Map extends React.Component {
         this.heatmap.set("opacity", this.opacity);
     }
 
+    changePin() {
+        this.generateMarkers();
+        this.generateHeatMap();
+        this.changeMapType();
+    }
+
     render() {
         this.generateNewSeeds();
 
         let clickedPin;
         if (this.state.clickedPin) {
+            console.log(this.state.clickedPin, "render")
             clickedPin = <div>
-                <PinShowContainer pin={this.state.clickedPin} />
+                <PinShowContainer pin={this.state.clickedPin} changePin={this.changePin}/>
             </div>
         } else {
             clickedPin = <div></div>
