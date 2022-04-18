@@ -78,9 +78,9 @@ class PinForm extends React.Component {
         )
     }
 
-    // handleFileInput(e){
-    //     this.setState({ imageFile: e.target.files[0] });
-    // }
+    handleFileInput(e){
+        this.setState({ imageFile: e.target.files[0] });
+    }
 
     render() {
         return (
@@ -107,7 +107,7 @@ class PinForm extends React.Component {
                                 className='form-textarea'
                             />
 
-                        {/* <input type="file" onChange={this.handleFileInput} /> */}
+                        <input type="file" onChange={this.handleFileInput} />
 
                         <button className="form-submit">REPORT</button>
                     </div>
