@@ -26,7 +26,7 @@ const AboutPage = () => {
         <div className="dev-item">
           <div className="dev-name">Justin Nguyen</div>
           <div><img className="dev-pic" src="/images/justin.png" /></div>
-          <div></div>
+          <div>Justin currently resides in Sacramento, CA and has a bachelor's in Applied Mathematics. In his free time, he enjoys dance, travel, and exploring new foods.</div>
           <ul className='social-media'>
             <li>
               <a href="https://www.linkedin.com/in/justin-nguyen-dev/"><FaLinkedin /></a>
