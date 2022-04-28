@@ -13,13 +13,13 @@ const AboutPage = () => {
           <div>Disnee is a Berkeley, CA native who loves big cities and beaches. She went to college at UCSB and previously worked in tech sales.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/disneetamang/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/disneetamang/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/d-tamang"><FaGithub /></a>
+              <a href="https://github.com/d-tamang" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
             </li>
             <li>
-              <a href="https://angel.co/u/disnee-tamang"><FaAngellist /></a>
+              <a href="https://angel.co/u/disnee-tamang" target="_blank" rel="noopener noreferrer"><FaAngellist /></a>
             </li>
           </ul>
         </div>
@@ -29,13 +29,13 @@ const AboutPage = () => {
           <div>Justin currently resides in Sacramento, CA and has a bachelor's in Applied Mathematics. In his free time, he enjoys dance, travel, and exploring new foods.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/justin-nguyen-dev/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/justin-nguyen-dev/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/justinneyugn"><FaGithub/></a>
+              <a href="https://github.com/justinneyugn" target="_blank" rel="noopener noreferrer"><FaGithub/></a>
             </li>
             <li>
-              <a href="https://angel.co/u/justin-nguyen-dev"><FaAngellist /></a>
+              <a href="https://angel.co/u/justin-nguyen-dev" target="_blank" rel="noopener noreferrer"><FaAngellist /></a>
             </li>
           </ul>
         </div>
@@ -45,13 +45,13 @@ const AboutPage = () => {
           <div>Kenneth is a SoCal native and has a bachelor's in Business Administration. When he's not coding, he enjoys surfing and napping.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/kennethquach/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/kennethquach/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/kenquack"><FaGithub /></a>
+              <a href="https://github.com/kenquack" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
             </li>
             <li>
-              <a href="https://angel.co/u/kenneth-quach"><FaAngellist /></a>
+              <a href="https://angel.co/u/kenneth-quach" target="_blank" rel="noopener noreferrer"><FaAngellist /></a>
             </li>
           </ul>
         </div>
@@ -61,10 +61,10 @@ const AboutPage = () => {
           <div>Phillip is a former engineer. He enjoys playing tennis and trying new foods.</div>
           <ul className='social-media'>
             <li>
-              <a href="https://www.linkedin.com/in/philliplai/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/in/philliplai/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
             </li>
             <li>
-              <a href="https://github.com/pdlai"><FaGithub/></a>
+              <a href="https://github.com/pdlai" target="_blank" rel="noopener noreferrer"><FaGithub/></a>
             </li>
             <li>
               <a href=""><FaAngellist /></a>
