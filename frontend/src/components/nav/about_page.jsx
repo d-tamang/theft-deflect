@@ -67,7 +67,7 @@ const AboutPage = () => {
               <a href="https://github.com/pdlai" target="_blank" rel="noopener noreferrer"><FaGithub/></a>
             </li>
             <li>
-              <a href=""><FaAngellist /></a>
+              <a href="https://angel.co/u/phillip-lai-1" target="_blank" rel="noopener noreferrer"><FaAngellist /></a>
             </li>
           </ul>
         </div>
