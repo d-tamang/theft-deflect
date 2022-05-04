@@ -16,20 +16,20 @@ class NavBar extends React.Component {
     if (this.props.loggedIn) {
       return <header className="nav-bar">
         <div className="left-nav">
-          <div><button className='nav-btn'><Link className="nav-link" to="/">MAP</Link></button></div>
-          <div><button className='nav-btn'><Link className="nav-link" to="/account">ACCOUNT</Link></button></div>
+          <div><Link className="nav-link" to="/"><button className='nav-btn'>MAP</button></Link></div>
+          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT</button></Link></div>
         </div>
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">
-          <div><button className='nav-btn'><Link className="nav-link" to="/about">ABOUT</Link></button></div>
+          <div><Link className="nav-link" to="/account"><button className='nav-btn'>ACCOUNT</button></Link></div>
           <div><button className='nav-btn' onClick={(e) => this.logoutUser(e)} >LOG OUT</button></div>
         </div>
       </header>
     } else {
       return <header className="nav-bar">
         <div className="left-nav">
-          <div><button className='nav-btn'><Link className="nav-link" to="/">MAP</Link></button></div>
-          <div><button className='nav-btn'><Link className="nav-link" to="/about">ABOUT</Link></button></div>
+          <div><Link className="nav-link" to="/"><button className='nav-btn'>MAP</button></Link></div>
+          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT</button></Link></div>
         </div>
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">

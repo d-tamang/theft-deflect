@@ -50,7 +50,24 @@ class LoginForm extends React.Component {
 
   demoLogin(e) {
     e.preventDefault();
-    this.props.login({ email: "demo@demo.com", password: "demodemo" }).then(this.props.closeModal());
+    if (!this.demoTimer){
+      let count = 0;
+      let key;
+      let demoUser = 'demo@demo.comdemodemo'
+      this.demoTimer = setInterval(() => {
+        if (count < 13){
+            key = 'email';
+        } else if (count < 21) {
+            key = 'password';
+        }
+        this.setState({ [key] : this.state[key] + demoUser[count]})
+        count++;
+        if (count === 21) {
+            clearInterval(this.demoTimer);
+            this.props.login(this.state).then(this.props.closeModal());
+        }
+      }, 100)
+    }
   }
 
   render() {

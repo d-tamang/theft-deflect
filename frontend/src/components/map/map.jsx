@@ -25,7 +25,7 @@ class Map extends React.Component {
     componentDidMount() {
         // Center is San Francisco
         const center = { lat: 37.777652, lng: -122.437503 };
-        const zoom = 12;
+        const zoom = 13;
         this.map = new window.google.maps.Map(document.getElementById("map"), {
             center,
             zoom,
