@@ -163,6 +163,7 @@ class Map extends React.Component {
             this.heatmap = new window.google.maps.visualization.HeatmapLayer({
                 data: this.heatMarkers
             });
+            this.heatmap.set("radius", 13);
             this.heatmap.set("gradient", gradient);
         }
     }
