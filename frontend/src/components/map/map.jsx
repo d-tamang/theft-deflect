@@ -51,7 +51,9 @@ class Map extends React.Component {
             .then(() => this.generateMarkers())
             .then(() => this.generateHeatMap())
             .then(() => this.heatmap.setMap(this.map))
-            .then(() => this.heatmap.set("gradient", gradient));
+            .then(() => this.heatmap.set("gradient", gradient))
+            .then(() => this.heatmap.set("opacity", 0.65))
+
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -163,7 +165,7 @@ class Map extends React.Component {
             this.heatmap = new window.google.maps.visualization.HeatmapLayer({
                 data: this.heatMarkers
             });
-            this.heatmap.set("radius", 13);
+            this.heatmap.set("radius", 16);
             this.heatmap.set("gradient", gradient);
         }
     }
