@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const Pin = require('../../models/Pin');
 const validatePinInput = require('../../validation/pins');
+const S3 = require('react-aws-s3');
 
 router.get('/', (req, res) => {
     Pin.find()
@@ -71,15 +72,39 @@ router.post('/',
             return res.status(400).json(errors);
         }
 
-        const newPin = new Pin({
-            user: req.user.id,
-            lat: req.body.lat,
-            long: req.body.long,
-            category: req.body.category,
-            description: req.body.description,
-        });
+        const config = {
+            bucketName: 'mern-project-pro',
+            dirName: 'testing',
+            region: 'us-west-1',
+            accessKeyId: '',
+            secretAccessKey: '',
+        }
+        const ReactS3Client = new S3(config);
+        ReactS3Client
+            .uploadFile(req.body.imageFile, req.body.imageFile.name)
+            .then(data => {
+                console.log("data")
 
-        newPin.save().then(pin => res.json(pin));
+                const newPin = new Pin({
+                    user: req.user.id,
+                    lat: req.body.lat,
+                    long: req.body.long,
+                    category: req.body.category,
+                    description: req.body.description,
+                    imageUrl: data.location
+                });
+                return newPin.save().then(pin => res.json(pin));
+            })
+            .catch(err => {
+                console.log("err")
+                return res.json({ err: "errors" })
+                // const reader = err.body.getReader()
+                // reader.read().then(resp => { 
+                //     return res.json(typeof S3)
+                //     return new TextDecoder().decode(resp.value)
+                // })
+            })
+
     }
 );
 

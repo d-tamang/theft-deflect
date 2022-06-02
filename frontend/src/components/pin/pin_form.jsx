@@ -1,5 +1,6 @@
 import React from "react";
 import S3 from 'react-aws-s3';
+import './pin.css';
 
 class PinForm extends React.Component {
     constructor(props) {
@@ -37,8 +38,8 @@ class PinForm extends React.Component {
     //         bucketName: 'mern-project-pro',
     //         dirName: 'testing',
     //         region: 'us-west-1',
-    //         accessKeyId: 'AKIA2WGTCYBOSLZKTE44',
-    //         secretAccessKey: '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',
+    //         accessKeyId: '',
+    //         secretAccessKey: '',
     //     }
     //     const ReactS3Client = new S3(config);
     //     ReactS3Client
@@ -79,7 +80,11 @@ class PinForm extends React.Component {
     }
 
     handleFileInput(e){
-        this.setState({ imageFile: e.target.files[0] });
+        const reader = new FileReader()
+        reader.onload = async (e) => { 
+        this.setState( { imageFile: e.target.result } )
+        };
+        reader.readAsDataURL(e.target.files[0])
     }
 
     render() {
