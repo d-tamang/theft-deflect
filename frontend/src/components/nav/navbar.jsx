@@ -22,7 +22,7 @@ class NavBar extends React.Component {
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">
           <div><Link className="nav-link" to="/account"><button className='nav-btn'>ACCOUNT</button></Link></div>
-          <div><button className='nav-btn' onClick={(e) => this.logoutUser(e)} >LOG OUT</button></div>
+          <div><button className='nav-btn' onClick={(e) => this.logoutUser(e)} >LOG&nbsp;OUT</button></div>
         </div>
       </header>
     } else {
@@ -33,8 +33,8 @@ class NavBar extends React.Component {
         </div>
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">
-          <div><button className='nav-btn' onClick={() => this.props.openModal('login')}>LOG IN</button></div>
-          <div><button className='nav-btn' onClick={() => this.props.openModal('signup')}>SIGN UP</button></div>
+          <div><button className='nav-btn' onClick={() => this.props.openModal('login')}>LOG&nbsp;IN</button></div>
+          <div><button className='nav-btn' onClick={() => this.props.openModal('signup')}>SIGN&nbsp;UP</button></div>
         </div>
       </header>
     }

@@ -8,8 +8,10 @@
     align-items: center;
     font-size: 15px;
     background-color: rgb(29, 23, 68);
-    padding: 1.5%;
+    /* padding: 1.5%; */
+    height: 10.5vh;
     /* position: fixed; */
+    text-align: center;
     top: 0;
     left: 0;
     right: 0;
@@ -46,7 +48,7 @@
 
 .nav-btn {
     padding: 1.5vh;
-    width: 7vw;
+    min-width: 7vw;
     background-color: #3c4e82;
     color: #fff;
     border: none;

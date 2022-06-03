@@ -2,6 +2,7 @@
     width: 99.99vw;
     height: 89.5vh;
     overflow-y: hidden;
+    flex-grow: 2;
 }
 
 #add-incident {
@@ -10,9 +11,10 @@
     border: none;
     position: absolute;
     margin-top: 5vh;
-    left: 86vw;
+    right: 0;
+    margin-right: 2vw;
     height: 5vh;
-    width: 10vw;
+    min-width: 10vw;
     font-size: 1.7vh;
     padding-left: 1.5vh;
     padding-right: 1.5vh;

@@ -3,6 +3,9 @@
 .app {
   font-family: 'Inter';
   background: rgb(236, 234, 234);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 button {
