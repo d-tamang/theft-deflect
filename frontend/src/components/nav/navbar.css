@@ -47,7 +47,10 @@
 }
 
 .nav-btn {
-    padding: 1.5vh;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
     min-width: 7vw;
     background-color: #3c4e82;
     color: #fff;

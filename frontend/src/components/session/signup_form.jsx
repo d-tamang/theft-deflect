@@ -45,14 +45,15 @@ class SignupForm extends React.Component {
   }
 
   renderErrors() {
+    if (!this.state.errors) return;
     return (
-      <div>
+      <ul className='session-error-list'>
         {Object.keys(this.state.errors).map((error, i) => (
-          <div key={`error-${i}`}>
+          <li key={`error-${i}`}>
             {this.state.errors[error]}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     );
   }
 
@@ -85,7 +86,6 @@ class SignupForm extends React.Component {
               onChange={this.update('password2')}
               placeholder="Confirm Password"
             /></div>
-            <br />
             {this.renderErrors()}
             <button className="session-btn">REGISTER</button>
             <div className="session-question">Already have an account?</div>

@@ -2,7 +2,7 @@
     background: rgb(111, 148, 159);
     position: absolute;
     padding: 5vh;
-    height: 38vh;
+    min-height: 38vh;
     width: 20vw;
     top: 20vh;
     left: 35vw;
@@ -10,10 +10,11 @@
     text-align: center;
     border-radius: 10px;
     color: white;
+    overflow: hidden;
 }
 
 .pin-form-container>h2 {
-    font-size: 3vh;
+    font-size: 1.2em;
 }
 
 .pin-form-container>select {
@@ -35,7 +36,7 @@
 
 .form-submit {
     padding: 1.5vh;
-    width: 7vw;
+    min-width: 7vw;
     background-color: #3c4e82;
     color: #fff;
     border: none;
@@ -44,13 +45,16 @@
 }
 
 .pin-form-error-list {
-    list-style-type: none;
-    color: rgb(255, 255, 255);
+    margin-top: 10px;
+    font-size: 0.8em;
+    list-style-type: circle;
+    color: rgb(194, 39, 39);
 }
 
 #pin-show-id {
     height: 0;
     width: 40%;
+    min-width: 360px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -123,8 +127,11 @@
 }
 
 .add-comment {
-    padding: 1.5vh;
-    width: 9vw;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    min-width: 9vw;
     font-size: 1.5vh;
     background-color: #334988;
     color: #fff;
@@ -164,6 +171,9 @@
     padding: 0.4vh;
 }
 
-#add-image {
-    margin-top: 1.5vh;
+input[type='file'] {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    display: flex;
+    flex-wrap: wrap;
 }

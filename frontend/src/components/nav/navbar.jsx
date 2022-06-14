@@ -17,7 +17,7 @@ class NavBar extends React.Component {
       return <header className="nav-bar">
         <div className="left-nav">
           <div><Link className="nav-link" to="/"><button className='nav-btn'>MAP</button></Link></div>
-          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT</button></Link></div>
+          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT US</button></Link></div>
         </div>
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">
@@ -29,7 +29,7 @@ class NavBar extends React.Component {
       return <header className="nav-bar">
         <div className="left-nav">
           <div><Link className="nav-link" to="/"><button className='nav-btn'>MAP</button></Link></div>
-          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT</button></Link></div>
+          <div><Link className="nav-link" to="/about"><button className='nav-btn'>ABOUT US</button></Link></div>
         </div>
         <div id="nav-logo"><Link className="nav-link" to="/">Theft Deflect</Link></div>
         <div className="right-nav">

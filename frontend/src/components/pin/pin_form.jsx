@@ -15,7 +15,7 @@ class PinForm extends React.Component {
 
         this.changeCategory = this.changeCategory.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleFileInput = this.handleFileInput.bind(this);
+        this.handleFileInput = this.handleFileInput.bind(this);
         // this.uploadImage = this.uploadImage.bind(this);
     }
 
@@ -95,7 +95,7 @@ class PinForm extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="pin-form-container">
                         <h2>Describe Your Incident</h2>
-                        {this.renderErrors()}
+                        <div>{this.renderErrors()}</div>
 
                         <label className="formLabel">Category</label>
                         <select onChange={this.changeCategory} category={this.state.category}>   
@@ -112,7 +112,8 @@ class PinForm extends React.Component {
                                 className='form-textarea'
                             />
 
-                        <input id="add-image" type="file" onChange={this.handleFileInput} />
+                        <label className="formLabel">Upload an image (optional)</label>
+                        <input type="file" onChange={this.handleFileInput} />
 
                         <button className="form-submit">REPORT</button>
                     </div>

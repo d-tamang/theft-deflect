@@ -106,7 +106,8 @@ class Map extends React.Component {
     createPin(newPin) {
         let marker = new window.google.maps.Marker({
             position: { lat: newPin.lat, lng: newPin.long },
-            title: newPin.category
+            title: newPin.category,
+            // label: "B"
         })
         marker.infoWindow = new window.google.maps.InfoWindow({
             content: newPin.category
