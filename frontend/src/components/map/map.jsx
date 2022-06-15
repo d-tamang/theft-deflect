@@ -104,10 +104,36 @@ class Map extends React.Component {
     }
 
     createPin(newPin) {
+
+        // example
+        // const iconBase =
+        //     "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+        // const icons = {
+        //         parking: {
+        //             icon: iconBase + "parking_lot_maps.png",
+        //     },
+        //         library: {
+        //             icon: iconBase + "library_maps.png",
+        //     },
+        //         info: {
+        //             icon: iconBase + "info-i_maps.png",
+        //     },
+        // };
+
         let marker = new window.google.maps.Marker({
             position: { lat: newPin.lat, lng: newPin.long },
             title: newPin.category,
-            // label: "B"
+            icon: {
+                url: "/images/vandalism_icon.png",
+                // size: new window.google.maps.Size(6, 6),
+                scaledSize: new window.google.maps.Size(40, 40),
+                origin: new window.google.maps.Point(0, 0), // origin
+                anchor: new window.google.maps.Point(20, 20) // anchor
+            },
+            shape: {
+                coords: [0, 0, 0, 40, 40, 40, 40, 0],
+                type: "poly",
+            }
         })
         marker.infoWindow = new window.google.maps.InfoWindow({
             content: newPin.category

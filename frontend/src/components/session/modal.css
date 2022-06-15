@@ -46,6 +46,11 @@
   padding: 4%;
   margin: 2%;
   background-color: #222D30;
+  color: whitesmoke;
+}
+
+.session-form input:focus {
+  outline: none;
 }
 
 .session-btn {
