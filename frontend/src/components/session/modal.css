@@ -47,6 +47,7 @@
   margin: 2%;
   background-color: #222D30;
   color: whitesmoke;
+  letter-spacing: 0.04em;
 }
 
 .session-form input:focus {

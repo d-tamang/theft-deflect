@@ -94,7 +94,8 @@ class PinForm extends React.Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="pin-form-container">
-                        <h2>Describe Your Incident</h2>
+                        <h2>Report Your Incident</h2>
+                        <br/>
                         <div>{this.renderErrors()}</div>
 
                         <label className="formLabel">Category</label>
@@ -106,7 +107,7 @@ class PinForm extends React.Component {
                         </select>
                         
                         <label className="formLabel">Description</label>
-                            <input type="textarea"
+                            <textarea
                                 value={this.state.description}
                                 onChange={this.update('description')}
                                 className='form-textarea'
