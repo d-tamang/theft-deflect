@@ -61,19 +61,20 @@ class CommentShow extends React.Component {
         const comment = this.props.comment;
 
         return (
-            <div ref={this.showContainer}>
+            <div className='comment-show-container' ref={this.showContainer}>
                 {this.state.editMode && (
                     <form onSubmit={this.handleSubmit}>
-                        <textarea value={this.state.text} onChange={this.update('text')}></textarea>
+                        <textarea className='comment-show-edit-text' value={this.state.text} onChange={this.update('text')} rows="4"></textarea>
                         <button className="edit-comment-icon"><BiMessageAdd /></button>
                     </form>
                 )}
                 {!this.state.editMode && (
-                    <div>
-                        {comment.text}
+                    <div className='comment-show-text'>
+                        <div>Anonymous said:</div>
+                        <div>{comment.text}</div>
                     </div>
                 )}
-                {this.props.currentUser && this.props.currentUser.id === comment.user ? <div>
+                {!this.state.editMode && this.props.currentUser && this.props.currentUser.id === comment.user ? <div className='comment-show-buttons'>
                     <button className="fa-icon-box" onClick={() => this.editComment()}><FiEdit /></button>    
                     <button className="fa-icon-box" onClick={(e) => this.deleteComment(e, comment._id)}><FaTrashAlt /></button>
                     </div> : <div className="hidden-div">

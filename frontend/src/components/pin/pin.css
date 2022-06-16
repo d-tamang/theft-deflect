@@ -35,6 +35,7 @@
     letter-spacing: 0.04em;
     word-wrap: break-word;
     resize: none;
+    font-size: 1.4em;
 }
 
 .form-textarea:focus {
@@ -69,6 +70,7 @@
     height: 0;
     width: 40%;
     min-width: 360px;
+    max-width: 720px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -84,10 +86,11 @@
 }
 
 .close-btn {
+    position: relative;
     background-color: transparent;
     border: none;
     float: right;
-    font-size: 6vh;
+    font-size: 40px;
 }
 
 #close-icon {
@@ -95,49 +98,66 @@
     height: 40px;
 }
 
+.show-section {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid grey;
+}
+
 .show-pic {
-    width: 300px;
-    height: 200px;
+    width: 86%;
+    height: 86%;
     box-shadow: 4px 4px 15px 8px rgb(185, 185, 185);
 }
 
 .pic-box {
-    margin: 2%;
-}
-
-.pin-show-container div {
-    padding: 1%;
+    margin-top: 4%;
+    margin-left: 0%;
+    margin-bottom: 4%;
+    /* text-align: center; */
 }
 
 .pin-show-container {
-    padding: 3%;
-    text-align: center;
-    align-items: center;
-    background: rgb(230, 227, 227);
+    margin: 4%;
+    /* text-align: center; */
+    /* align-items: center; */
+    background: rgb(210, 205, 205);
 }
 
 #pin-show-id {
-    background: rgb(231, 227, 227);
+    background: rgb(210, 205, 205);
 }
 
 #pin-show-header {
-    font-size: 20px;
+    font-size: 2vh;
+    text-align: center;
     font-weight: bold;
     margin-left: 10%;
     margin-top: 4%;
 }
 
-#show-date {
+#date-container {
+    display: flex;
+}
+
+#date-title {
     font-weight: bold;
+}
+
+#show-date {
+    /* font-weight: bold; */
 }
 
 #pin-description {
     text-align: left;
     line-height: 20px;
+    margin-top: 4px;
 }
 
 .show-category {
-    font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
 }
 
 .add-comment {
@@ -145,30 +165,38 @@
     padding-bottom: 1.5vh;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
-    min-width: 9vw;
-    font-size: 1.5vh;
+    min-width: 160px;
+    font-size: 1em;
     background-color: #334988;
     color: #fff;
     border: none;
     border-radius: 10px;
     margin-top: 2%;
+    letter-spacing: 0.04em;
 }
 
 #discussion {
     font-weight: bold;
     margin-top: 4%;
+    margin-bottom: 10px;
+    /* text-align: center; */
+}
+
+.edit-incident-buttons {
+    display: flex;
+    justify-content: center;
 }
 
 .fa-icon-box {
     background-color: transparent;
     border: none;
-    font-size: 3vh;
+    font-size: 2.4vh;
 }
 
 .edit-comment-icon {
     background-color: transparent;
     border: none;
-    font-size: 4.5vh;
+    font-size: 3.6vh;
 }
 
 .edit-pin-form {
@@ -176,13 +204,79 @@
 }
 
 .edit-pin-category {
-    font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
     margin: 1.5%;
+}
+
+.edit-pin-form-description {
+    display: flex;
+}
+
+.edit-pin-form-description > textarea {
+    flex: 8;
+}
+
+.edit-pin-form-description > button {
+    flex: 1;
 }
 
 .formDrop {
     width: 10vw;
     padding: 0.4vh;
+}
+
+.no-comments-message {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.comments-textarea, .add-comment-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.comments-textarea > textarea {
+    resize: none;
+    word-wrap: break-word;
+    width: 80%;
+}
+
+.comment-show-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-top: 12px;
+    border-top: 1px solid grey;
+}
+
+.comment-show-container > form {
+    width: 100%;
+}
+
+.comment-show-text {
+    flex: 8;
+}
+
+.comment-show-text > div:first-child {
+    font-style: italic;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+.comment-show-buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.comment-show-edit-text {
+    width: 80%;
+}
+
+.review-form {
+    margin-top: 16px;
 }
 
 input[type='file'] {

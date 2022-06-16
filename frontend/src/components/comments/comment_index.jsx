@@ -22,7 +22,7 @@ class CommentIndex extends React.Component {
 
   showComments() {
     let comments = Object.values(this.props.comments);
-    if (comments.length === 0) return <div>Be the first to leave a comment.</div>;
+    if (comments.length === 0) return <div className='no-comments-message'>Be the first to leave a comment.</div>;
     return comments.map((comment, i) => {
       return <div key={comment._id}>
         <CommentShow comment={comment} currentUser={this.props.currentUser} destroyComment={this.props.destroyComment} updateComment={this.props.updateComment}/>

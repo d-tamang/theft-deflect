@@ -38,8 +38,7 @@ class PinShow extends React.Component {
   }
 
   showDate() {
-    let date = new Date(parseInt(this.props.pin._id.substring(0, 8), 16) * 1000);
-    return date.toString().slice(3, 15);
+    return new Date(parseInt(this.props.pin._id.substring(0, 8), 16) * 1000).toUTCString();
   }
 
   closeShow(e) {
@@ -102,22 +101,17 @@ class PinShow extends React.Component {
   }
 
   categoryImage() {
-    if (this.props.pin.category === 'Break In') {
-      return (
-        <div className="pic-box"><img className="show-pic" src='/images/break_in.jpeg'></img></div>
-      )
-    } else if (this.props.pin.category === 'Parts Theft') {
-      return (
-        <div className="pic-box"><img className="show-pic" src='/images/parts_theft.jpeg'></img></div>
-      )
-    } else if (this.props.pin.category === 'Vandalism') {
-      return (
-        <div className="pic-box"><img className="show-pic" src='/images/vandalism.jpg'></img></div>
-      )
-    } else {
-      return (
-        <div className="pic-box"><img className="show-pic" src='/images/stolen_vehicle.jpeg'></img></div>
-      )
+    switch(this.props.pin.category){
+      case 'Break In':
+        return <div className="pic-box"><img className="show-pic" src='/images/break_in.jpeg'></img></div>;
+      case 'Parts Theft':
+        return <div className="pic-box"><img className="show-pic" src='/images/parts_theft.jpeg'></img></div>;
+      case 'Vandalism':
+        return <div className="pic-box"><img className="show-pic" src='/images/vandalism.jpg'></img></div>;
+      case 'Stolen Vehicle':
+        return <div className="pic-box"><img className="show-pic" src='/images/stolen_vehicle.jpeg'></img></div>;
+      default:
+        return <div className="pic-box"><img className="show-pic" src='/images/stolen_vehicle.jpeg'></img></div>;
     }
   }
 
@@ -129,7 +123,20 @@ class PinShow extends React.Component {
         <button className="close-btn" onClick={this.closeShow}><FaAngleDoubleUp /></button>
         <div id="pin-show-header">INCIDENT DETAILS</div>
         {this.categoryImage()}
-        <div id="show-date">{this.showDate()}</div>
+
+        <div>
+          {this.props.currentUser && this.props.currentUser.id === pin.user ? <div className='edit-incident-buttons'>
+            {!this.state.editMode && (
+              <button className="fa-icon-box" onClick={(e) => this.editPin(e, pin)}><FiEdit /></button>
+            )}
+            <button className="fa-icon-box" onClick={(e) => this.deletePin(e, pin._id)}><FaTrashAlt /></button>
+          </div> : <div className="hidden-div"></div>}
+        </div>
+
+        <div id="date-container" className='show-section'>
+          <div id="date-title">DATE:&nbsp;</div>
+          <div id="show-date">{this.showDate()}</div>
+        </div>
 
         {this.state.editMode && (
           <form className="edit-pin-form" onSubmit={this.handleSubmit}>
@@ -141,25 +148,24 @@ class PinShow extends React.Component {
               <option value={'Stolen Vehicle'} >Stolen Vehicle</option>
             </select> <br />
             <div className="edit-pin-category">Description</div>
-            <textarea type="text" value={this.state.description} onChange={this.update('description')} rows="8" cols="35"/>
-            <button className="edit-comment-icon"><BiMessageAdd /></button>
+            <div className='edit-pin-form-description'>
+              <textarea type="text" value={this.state.description} onChange={this.update('description')} rows="8" cols="35"/>
+              <button className="edit-comment-icon"><BiMessageAdd /></button>
+            </div>
           </form>
         )}
 
         {!this.state.editMode && (
           <div>
-            <div><span className="show-category">Category:</span> {this.state.category}</div>
-            <div className="show-category">Description</div>
-            <div id="pin-description">{this.state.description}</div>
+            <div className='show-section'><span className="show-category">Category:</span> {this.state.category}</div>
+            <div>
+              <div className="show-category">Description:</div>
+              <div id="pin-description">{this.state.description}</div>
+            </div>
           </div>
         )}
-        {this.props.currentUser && this.props.currentUser.id === pin.user ? <div>
-          {!this.state.editMode && (
-            <button className="fa-icon-box" onClick={(e) => this.editPin(e, pin)}><FiEdit /></button>
-          )}
-          <button className="fa-icon-box" onClick={(e) => this.deletePin(e, pin._id)}><FaTrashAlt /></button>
-        </div> : <div className="hidden-div"></div>}
-        <div id="discussion">DISCUSSION</div>
+        
+        <div id="discussion">DISCUSSION:</div>
         <CommentIndex
           currentUser={this.props.currentUser}
           pin={this.props.pin}
