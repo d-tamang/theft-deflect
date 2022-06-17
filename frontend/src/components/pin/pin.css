@@ -107,7 +107,7 @@
 .show-pic {
     width: 86%;
     height: 86%;
-    box-shadow: 4px 4px 15px 8px rgb(185, 185, 185);
+    box-shadow: 0px 0px 14px 4px rgb(185, 185, 185);
 }
 
 .pic-box {
@@ -121,19 +121,36 @@
     margin: 4%;
     /* text-align: center; */
     /* align-items: center; */
-    background: rgb(210, 205, 205);
+    background: #262626;
 }
 
 #pin-show-id {
-    background: rgb(210, 205, 205);
+    background: #262626;
+    color: whitesmoke;
+}
+
+#pin-show-id textarea {
+    background-color: #2a4046;
+    border: 1px solid #698a95;
+    color: white;
+    font-size: 1.2em;
+}
+
+#pin-show-id svg {
+    color: whitesmoke;
+}
+
+#pin-show-id textarea:focus {
+    outline: none;
 }
 
 #pin-show-header {
-    font-size: 2vh;
+    font-size: 1.8em;
     text-align: center;
     font-weight: bold;
     margin-left: 10%;
     margin-top: 4%;
+    letter-spacing: 0.04em;
 }
 
 #date-container, #location-container {
@@ -277,7 +294,7 @@
 }
 
 .review-form {
-    margin-top: 16px;
+    margin-top: 32px;
 }
 
 input[type='file'] {

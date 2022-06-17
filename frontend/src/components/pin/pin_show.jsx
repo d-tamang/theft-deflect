@@ -9,7 +9,7 @@ import './pin.css';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
-
+    this.showContainer = React.createRef();
     this.state = {
       editMode: false,
       id: this.props.pin._id,
@@ -135,7 +135,7 @@ class PinShow extends React.Component {
     window.scrollTo({ top: 0 })
     
     return (
-      <div className="pin-show-container">
+      <div className="pin-show-container" ref={this.showContainer}>
         <button className="close-btn" onClick={this.closeShow}><FaAngleDoubleUp /></button>
         <div id="pin-show-header">INCIDENT DETAILS</div>
         {this.categoryImage()}
