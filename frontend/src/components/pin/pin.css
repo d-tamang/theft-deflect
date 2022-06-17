@@ -257,6 +257,7 @@
 
 .comment-show-text {
     flex: 8;
+    line-height: 1.2em;
 }
 
 .comment-show-text > div:first-child {
