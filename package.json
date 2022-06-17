@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "engines": {
-    "node": "16.14.0"
-  },
   "scripts": {
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --save --legacy-peer-deps --prefix frontend && npm run build --prefix frontend",
     "server": "nodemon app.js",
     "start": "node app.js",
     "frontend-install": "npm install --prefix frontend",
