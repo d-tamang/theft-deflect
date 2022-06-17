@@ -35,7 +35,7 @@
     letter-spacing: 0.04em;
     word-wrap: break-word;
     resize: none;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 .form-textarea:focus {
@@ -136,16 +136,16 @@
     margin-top: 4%;
 }
 
-#date-container {
+#date-container, #location-container {
     display: flex;
 }
 
-#date-title {
+#date-title, #location-title {
     font-weight: bold;
 }
 
-#show-date {
-    /* font-weight: bold; */
+#location-title {
+    margin-bottom: 4px;
 }
 
 #pin-description {

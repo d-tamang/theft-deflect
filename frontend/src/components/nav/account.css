@@ -5,6 +5,10 @@
   font-size: 5vh;
 }
 
+.account-btn-container {
+  text-align: center;
+}
+
 #delete-icon {
   width: 30px;
   height: 35px;
@@ -15,7 +19,6 @@
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 4%;
   grid-column-gap: 2%;
-  text-align: center;
   margin-left: 5%;
   margin-right: 5%;
   padding-bottom: 15vh;
@@ -39,19 +42,40 @@
   text-align: left;
 }
 
-#report-date {
-  font-size: 150%;
-  font-weight: 700;
-  margin-top: 3%;
+#report-date-container, 
+#report-category-container,
+#report-description-container {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+#report-date-container, #report-category-container {
+  display: flex;
+  align-items: center;
+}
+
+#report-description-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#report-description-title {
+  margin-bottom: 4px;
+}
+
+#report-description {
+  line-height: 1.2em;
+}
+
+#report-date-title, #report-category-title,
+#report-description-title {
+  font-size: 120%;
+  font-weight: 600;
 }
 
 #report-category {
   font-size: 120%;
   margin-top: 3%;
-}
-
-#report-description {
-  margin-top: 4%;
 }
 
 #no-reports {

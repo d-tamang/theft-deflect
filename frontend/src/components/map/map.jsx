@@ -8,6 +8,7 @@ class Map extends React.Component {
     constructor(props) {
         super(props);
         this.logContainer = React.createRef();
+        this.pinShow = React.createRef();
         this.markers = [];
         this.heatMarkers = [];
         this.zoom = 13;
@@ -263,9 +264,8 @@ class Map extends React.Component {
         if (this.state.clickedPinId) {
             for(let i = 0; i < this.props.pins.length; i++){
                 if (this.props.pins[i]._id === this.state.clickedPinId){
-                    clickedPin = <div>
-                        <PinShowContainer pin={this.props.pins[i]} />
-                    </div>
+                    clickedPin = <PinShowContainer pin={this.props.pins[i]} />
+                    this.pinShow.current.scrollTo(0,0)
                     break;
                 }
             }
@@ -307,7 +307,7 @@ class Map extends React.Component {
                 </div> */}
                 {incidentButton}
                 <div id="map" />
-                <div id="pin-show-id">{clickedPin}</div>
+                <div id="pin-show-id" ref={this.pinShow}>{clickedPin}</div>
             </div>
         )
     }

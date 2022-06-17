@@ -28,7 +28,13 @@ class CommentForm extends React.Component {
       <div className="review-form">
         <form onSubmit={this.handleSubmit}>
           <div className='comments-textarea'>
-            <textarea type="text" value={this.state.text} onChange={this.updateText} rows="5" cols="30"></textarea>
+            <textarea 
+              type="text" 
+              value={this.state.text} 
+              onChange={this.updateText} 
+              rows="5" cols="30"
+              placeholder='Join the Conversation'
+            ></textarea>
           </div>
           <div className='add-comment-container'>
             <button className="add-comment" onClick={this.handleSubmit}>ADD COMMENT</button>

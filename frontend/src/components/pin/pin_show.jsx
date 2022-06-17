@@ -9,7 +9,6 @@ import './pin.css';
 class PinShow extends React.Component {
   constructor(props) {
     super(props);
-    this.showContainer = React.createRef();
 
     this.state = {
       editMode: false,
@@ -18,23 +17,38 @@ class PinShow extends React.Component {
       long: this.props.pin.long,
       category: this.props.pin.category,
       description: this.props.pin.description,
+      location: ""
     }
 
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.closeShow = this.closeShow.bind(this);
+    this.fetchLocation = this.fetchLocation.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchPin(this.props.pin._id);
+    this.fetchLocation();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.pin._id !== this.props.pin._id) {
-      this.props.fetchPin(this.props.pin._id)
-      this.setState({description: this.props.pin.description})
-      this.setState({category: this.props.pin.category})
+      this.fetchLocation();
+      this.props.fetchPin(this.props.pin._id);
+      this.setState({description: this.props.pin.description});
+      this.setState({category: this.props.pin.category});
     }
+  }
+
+  fetchLocation(){
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.props.pin.lat},${this.props.pin.long}&key=AIzaSyDhm27MhVA89tLn0zM3WdLTl06Yt3FZZWI`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.results.length > 1){
+          this.setState({ location: data.results[0].formatted_address})
+        }
+      })
   }
 
   showDate() {
@@ -117,9 +131,11 @@ class PinShow extends React.Component {
 
   render() {
     const pin = this.props.pin;
+
+    window.scrollTo({ top: 0 })
     
     return (
-      <div className="pin-show-container" ref={this.showContainer}>
+      <div className="pin-show-container">
         <button className="close-btn" onClick={this.closeShow}><FaAngleDoubleUp /></button>
         <div id="pin-show-header">INCIDENT DETAILS</div>
         {this.categoryImage()}
@@ -134,8 +150,13 @@ class PinShow extends React.Component {
         </div>
 
         <div id="date-container" className='show-section'>
-          <div id="date-title">DATE:&nbsp;</div>
+          <div id="date-title">DATE:&nbsp;&nbsp;</div>
           <div id="show-date">{this.showDate()}</div>
+        </div>
+
+        <div id="location-container" className='show-section'>
+          <div id="location-title">LOCATION:&nbsp;&nbsp;</div>
+          <div id="location-address">{this.state.location}</div>
         </div>
 
         {this.state.editMode && (
@@ -157,7 +178,7 @@ class PinShow extends React.Component {
 
         {!this.state.editMode && (
           <div>
-            <div className='show-section'><span className="show-category">Category:</span> {this.state.category}</div>
+            <div className='show-section'><span className="show-category">Category:&nbsp;</span> {this.state.category}</div>
             <div>
               <div className="show-category">Description:</div>
               <div id="pin-description">{this.state.description}</div>

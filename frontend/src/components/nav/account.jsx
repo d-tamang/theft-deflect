@@ -12,8 +12,7 @@ class Account extends React.Component {
   }
 
   getDate(objectId) {
-    let pinDate = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
-    return pinDate.toString().slice(3, 15);
+    return new Date(parseInt(objectId.substring(0, 8), 16) * 1000).toUTCString();
   }
 
   showUserPins() {
@@ -30,10 +29,21 @@ class Account extends React.Component {
     } else {
       return userPins.map((pin, i) => (
         <div key={i} className="report">
-          <div id='report-date'>{this.getDate(pin._id)}</div>
-          <div id='report-category'>{pin.category}</div>
-          <div id="report-description">{pin.description}</div>
-          <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><FaTrashAlt /></button>
+          <div id='report-date-container'>
+            <div id='report-date-title'>Date:&nbsp;</div>
+            <div id='report-date'>{this.getDate(pin._id)}</div>
+          </div>
+          <div id='report-category-container'>
+            <div id='report-category-title'>Category:&nbsp;</div>
+            <div>{pin.category}</div>
+          </div>
+          <div id="report-description-container">
+            <div id='report-description-title'>Description:&nbsp;</div>
+            <div id='report-description'>{pin.description}</div>
+          </div>
+          <div className="account-btn-container">  
+            <button className="account-btn" onClick={() => this.props.destroyPin(pin._id)}><FaTrashAlt /></button>
+          </div>
         </div>
       ))
     }
@@ -43,7 +53,7 @@ class Account extends React.Component {
     if (!this.props.pins) return null;
     return (
       <div className='account-show'>
-        <div id="account-header">{this.props.currentUser.username}: Your Reports</div>
+        <div id="account-header">Hi {this.props.currentUser.username}, Here Are Your Reports</div>
         <div className="reports-grid">{this.showUserPins()}</div>
       </div>
     )
