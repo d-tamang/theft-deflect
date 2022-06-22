@@ -3,7 +3,11 @@ const router = express.Router();
 const passport = require('passport');
 const Pin = require('../../models/Pin');
 const validatePinInput = require('../../validation/pins');
-const S3 = require('react-aws-s3');
+// const S3 = require('react-aws-s3');
+const keys = require('../../config/keys');
+const AWS = require('aws-sdk');
+const fs = require('fs');
+const uuidv4 = require ('uuid').v4;
 
 router.get('/', (req, res) => {
     Pin.find()
@@ -65,11 +69,29 @@ router.get('/:id', (req, res) => {
 
 router.post('/',
     passport.authenticate('jwt', { session: false }),
-    (req, res) => {
+    async (req, res) => {
         const { errors, isValid } = validatePinInput(req.body);
 
         if (!isValid) {
             return res.status(400).json(errors);
+        }
+        
+        let awsURL = '';
+
+        if (req.body.imageFile) {
+            const buffer = Buffer.from(req.body.imageFile.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+            const s3 = new AWS.S3({
+                accessKeyId: keys.S3accessKeyId,
+                secretAccessKey: keys.S3secretAccessKey,
+              })
+            const uploadedImage = await s3.upload({
+                Bucket: "theft-deflect-pro",
+                Key: uuidv4(),
+                Body: buffer,
+                ContentEncoding: 'base64',
+                ContentType: 'image/jpeg'
+            }).promise()
+            awsURL = uploadedImage.Location;
         }
 
         const newPin = new Pin({
@@ -78,40 +100,10 @@ router.post('/',
             long: req.body.long,
             category: req.body.category,
             description: req.body.description,
+            imageUrl: awsURL
         });
+
         return newPin.save().then(pin => res.json(pin));
-
-        // const config = {
-        //     bucketName: 'mern-project-pro',
-        //     dirName: 'testing',
-        //     region: 'us-west-1',
-        //     accessKeyId: '',
-        //     secretAccessKey: '',
-        // }
-        // const ReactS3Client = new S3(config);
-        // ReactS3Client
-        //     .uploadFile(req.body.imageFile, req.body.imageFile.name)
-        //     .then(data => {
-        //         console.log("data")
-
-        //     const newPin = new Pin({
-        //         user: req.user.id,
-        //         lat: req.body.lat,
-        //         long: req.body.long,
-        //         category: req.body.category,
-        //         description: req.body.description,
-        //     });
-        //     return newPin.save().then(pin => res.json(pin));
-        // })
-        // .catch(err => {
-        //     console.log("err")
-        //     return res.json({ err: "errors" })
-            // const reader = err.body.getReader()
-            // reader.read().then(resp => { 
-            //     return res.json(typeof S3)
-            //     return new TextDecoder().decode(resp.value)
-            // })
-        // })
 
     }
 );

@@ -115,6 +115,10 @@ class PinShow extends React.Component {
   }
 
   categoryImage() {
+    if(this.props.pin.imageUrl){
+      return <div className="pic-box"><img className="show-pic" src={this.props.pin.imageUrl}></img></div>;
+    }
+
     switch(this.props.pin.category){
       case 'Break In':
         return <div className="pic-box"><img className="show-pic" src='/images/break_in.jpeg'></img></div>;

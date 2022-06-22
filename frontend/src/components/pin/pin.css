@@ -106,7 +106,8 @@
 
 .show-pic {
     width: 86%;
-    height: 86%;
+    /* height: 86%; */
+    max-height: 400px;
     box-shadow: 0px 0px 14px 4px rgb(185, 185, 185);
 }
 
